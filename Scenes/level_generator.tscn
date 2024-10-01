@@ -1,3 +1,13 @@
-[gd_scene format=3 uid="uid://brwhlm8vwrm57"]
+[gd_scene load_steps=3 format=3 uid="uid://brwhlm8vwrm57"]
+
+[ext_resource type="Script" path="res://Scripts/LevelGenerator.cs" id="1_dwtof"]
+[ext_resource type="TileSet" uid="uid://cpdu7gs6jn763" path="res://Assets/Sprites/TileMaps/PeacefulNightField.tres" id="2_ptn1k"]
 
 [node name="LevelGenerator" type="Node2D"]
+script = ExtResource("1_dwtof")
+
+[node name="FrameTileMap" type="TileMapLayer" parent="."]
+tile_set = ExtResource("2_ptn1k")
+
+[node name="PlatformTileMap" type="TileMapLayer" parent="."]
+tile_set = ExtResource("2_ptn1k")
