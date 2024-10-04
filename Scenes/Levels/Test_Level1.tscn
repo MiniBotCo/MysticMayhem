@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0k1fetkg24s7"]
+
+[ext_resource type="PackedScene" uid="uid://brwhlm8vwrm57" path="res://Scenes/level_generator.tscn" id="1_1tt1b"]
+[ext_resource type="PackedScene" uid="uid://b71wwwq6jo2yi" path="res://Scenes/Characters/Player/Player.tscn" id="3_dt5aj"]
+
+[node name="TestLevel1" type="Node2D"]
+
+[node name="LevelGenerator" parent="." instance=ExtResource("1_1tt1b")]
+position = Vector2(33.5612, 45.3741)
+LevelSize = Vector2(200, 200)
+PlatformCount = 10
+
+[node name="Player" parent="." instance=ExtResource("3_dt5aj")]
+position = Vector2(313, 162)

@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://b71wwwq6jo2yi"]
+
+[ext_resource type="Script" path="res://Scripts/Character/Player/Player.cs" id="1_l2rlm"]
+[ext_resource type="Texture2D" uid="uid://8v2sscnynrkn" path="res://Assets/Sprites/Character/Player/Warrior.png" id="2_v4iwn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vk60u"]
+size = Vector2(32, 32)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_l2rlm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_v4iwn")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_vk60u")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+scale = Vector2(0.5, 0.5)
+zoom = Vector2(8, 8)
