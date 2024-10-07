@@ -5,7 +5,6 @@
 
 [node name="LevelGenerator" type="Node2D"]
 script = ExtResource("1_dwtof")
-LevelSize = Vector2(60, 40)
 PlatformCount = 30
 PlatformGaps = 15
 Smoothness = 2

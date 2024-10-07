@@ -5,7 +5,7 @@ public partial class LevelGenerator : Node2D
 {
     [ExportGroup("Level Properties")]
     [Export]
-    public Vector2 LevelSize { get; set; } = new Vector2(40, 40);
+    public Vector2I LevelSize { get; set; } = new Vector2I(60, 40);
     [Export]
     public int PlatformCount { get; set; } = 20;
     [Export]
@@ -15,14 +15,14 @@ public partial class LevelGenerator : Node2D
     [Export]
     public int Blobs { get; set; } = 2;
     [Export]
-    public Vector2 FrameBlockMinSize { get; set; } = new Vector2(5, 5);
+    public Vector2I FrameBlockMinSize { get; set; } = new Vector2I(5, 5);
     [Export]
-    public Vector2 FrameBlockMaxSize { get; set; } = new Vector2(15, 10);
+    public Vector2I FrameBlockMaxSize { get; set; } = new Vector2I(15, 10);
     [ExportGroup("Blob Properties")]
     [Export]
-    public Vector2 BlobMaxSize { get; set; } = new Vector2(7, 7);
+    public Vector2I BlobMaxSize { get; set; } = new Vector2I(7, 7);
     [Export]
-    public Vector2 BlobMinSize { get; set; } = new Vector2(5, 5);
+    public Vector2I BlobMinSize { get; set; } = new Vector2I(5, 5);
 
     private TileMapLayer _frameTileMap;
     private TileMapLayer _platformTileMap;
@@ -70,62 +70,69 @@ public partial class LevelGenerator : Node2D
         int n = 0;
         while (n <= LevelSize.Y)
         {
-            n += (int)GenerateBlock(new Vector2(0, n), FrameBlockMinSize, FrameBlockMaxSize).Y/2;
+            n += GenerateBlock(new Vector2I(0, n), FrameBlockMinSize, FrameBlockMaxSize).Y/2;
         }
         n = 0;
         while (n <= LevelSize.Y)
         {
-            n += (int)GenerateBlock(new Vector2(LevelSize.X, n), FrameBlockMinSize, FrameBlockMaxSize).Y/2;
+            n += GenerateBlock(new Vector2I(LevelSize.X, n), FrameBlockMinSize, FrameBlockMaxSize).Y/2;
         }
         n = 0;
         while (n <= LevelSize.X)
         {
-            n += (int)GenerateBlock(new Vector2(n, 0), FrameBlockMinSize, FrameBlockMaxSize).X/2;
+            n += GenerateBlock(new Vector2I(n, 0), FrameBlockMinSize, FrameBlockMaxSize).X/2;
         }
         n = 0;
         while (n <= LevelSize.X)
         {
-            n += (int)GenerateBlock(new Vector2(n, LevelSize.Y), FrameBlockMinSize, FrameBlockMaxSize).X/2;
+            n += GenerateBlock(new Vector2I(n, LevelSize.Y), FrameBlockMinSize, FrameBlockMaxSize).X/2;
         }
     }
 
     private void GenerateBlob()
     {
-        Vector2 position = LevelSize/2 + new Vector2((float)GD.RandRange(-LevelSize.X/3, LevelSize.X/3), (float)GD.RandRange(-LevelSize.Y/3, LevelSize.Y/3));
+        Vector2I position = LevelSize/2 + new Vector2I(GD.RandRange(-LevelSize.X/3, LevelSize.X/3), GD.RandRange(-LevelSize.Y/3, LevelSize.Y/3));
         for(int i = 0; i < 5; i++)
         {
-            GenerateBlock(new Vector2(position.X + GD.RandRange(-3, 3), position.Y + GD.RandRange(-3, 3)), BlobMinSize, BlobMaxSize);
+            GenerateBlock(new Vector2I(position.X + GD.RandRange(-3, 3), position.Y + GD.RandRange(-3, 3)), BlobMinSize, BlobMaxSize);
         }
     }
 
-    private Vector2 GenerateBlock(Vector2 pos, Vector2 min, Vector2 max)
+    private Vector2I GenerateBlock(Vector2I pos, Vector2I min, Vector2I max)
     {
-        Vector2 size = new Vector2((float)GD.RandRange(min.X, max.X), (float)GD.RandRange(min.Y, max.Y));
+        Vector2I size = new Vector2I(GD.RandRange(min.X, max.X), GD.RandRange(min.Y, max.Y));
 
         for(int i = 0; i < Smoothness; i++) {
-            size = new Vector2(Math.Min(size.X, (float)GD.RandRange(min.X, max.X)), Math.Min(size.Y, (float)GD.RandRange(min.Y, max.Y)));
+            size = new Vector2I(Math.Min(size.X, GD.RandRange(min.X, max.X)), Math.Min(size.Y, GD.RandRange(min.Y, max.Y)));
         }
 
-        for (int x = 0; x <= size.X; x++)
+        Rect2I block = new Rect2I(pos, size);
+
+        DrawBlock(block);
+
+        return size;
+    }
+
+    private void DrawBlock(Rect2I block)
+    {
+        for (int x = 0; x <= block.Size.X; x++)
         {
-            for (int y = 0; y <= size.Y; y++)
+            for (int y = 0; y <= block.Size.Y; y++)
             {
-                Vector2I position = new Vector2I(x + (int)(pos.X-size.X/2), y + (int)(pos.Y-size.Y/2));
-                if (position.X < LevelSize.X && position.Y < LevelSize.Y)
+                Vector2I position = new Vector2I(block.Position.X + x - block.Size.X/2, block.Position.Y + y - block.Size.Y/2);
+                if (position.X < LevelSize.X && position.Y < LevelSize.Y && position.X > 0 && position.Y > 0)
                 {
                     _frameTileMap.SetCell(position, 0, new Vector2I(2, 2));
                 }
             }
         }
-        return size;
     }
-
     /// <summary>
     /// Creates the random platforms and fills the level with them
     /// </summary>
     private void PlacePlatforms()
     {
-        int row = (int)LevelSize.Y;
+        int row = LevelSize.Y;
         int platforms = 0;
 
         while(platforms < PlatformCount)
