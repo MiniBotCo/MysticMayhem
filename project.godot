@@ -11,7 +11,11 @@ config_version=5
 [application]
 
 config/name="Mystic Mayhem"
+<<<<<<< Updated upstream
 run/main_scene="res://Scenes/Levels/Test_Level1.tscn"
+=======
+run/main_scene="res://Scenes/level_generator.tscn"
+>>>>>>> Stashed changes
 config/features=PackedStringArray("4.3", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 

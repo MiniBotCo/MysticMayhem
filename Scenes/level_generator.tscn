@@ -5,6 +5,10 @@
 
 [node name="LevelGenerator" type="Node2D"]
 script = ExtResource("1_dwtof")
+LevelSize = Vector2(60, 40)
+PlatformCount = 30
+PlatformGaps = 15
+Smoothness = 2
 
 [node name="FrameTileMap" type="TileMapLayer" parent="."]
 tile_set = ExtResource("2_ptn1k")
