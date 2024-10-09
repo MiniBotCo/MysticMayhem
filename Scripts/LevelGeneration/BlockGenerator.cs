@@ -5,8 +5,8 @@ public class Block
 {
     [Export]
     public int Smoothness { get; set; } = 3;
-
     private Rect2I block;
+
     /// <summary>
     /// Creates a random block given a position and a maximum and minumum size, returns the block size
     /// </summary>

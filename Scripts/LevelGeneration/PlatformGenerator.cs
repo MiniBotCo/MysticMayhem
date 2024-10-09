@@ -1,11 +1,10 @@
 using Godot;
 using Godot.Collections;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 public partial class PlatformGenerator : Node2D
 {
+    [Export]
+    public Vector2I PlatformBounds { get; set; } = new Vector2I(40, 60);
 	[Export]
     public int PlatformCount { get; set; } = 20;
     [Export]
@@ -14,10 +13,15 @@ public partial class PlatformGenerator : Node2D
     private TileMapLayer _platformTileMap;
 	private Array<TileMapLayer> _checkLayers = new Array<TileMapLayer>();
 
-    public override async void _Ready()
+    public override void _Ready()
     {
         _platformTileMap = GetNode<TileMapLayer>("PlatformTileMapLayer");
 		AddCheckLayer(_platformTileMap);
+    }
+
+    public void SetBounds(Vector2I bounds)
+    {
+        PlatformBounds = bounds;
     }
 
 	public void AddCheckLayer(TileMapLayer layer)
@@ -33,16 +37,16 @@ public partial class PlatformGenerator : Node2D
     /// <summary>
     /// Creates the random platforms and fills the level with them
     /// </summary>
-    public void GeneratePlatforms(Vector2I levelSize)
+    public void GeneratePlatforms()
     {
-        int row = levelSize.Y;
+        int row = PlatformBounds.Y;
         int platforms = 0;
 
         while(platforms < PlatformCount)
         {
             BasicPlatform platform = new BasicPlatform();
 
-           Array<Vector2I> validPositions = GetValidPlatformPositions(platform.GetBuffer(), row, levelSize);
+           Array<Vector2I> validPositions = GetValidPlatformPositions(platform.GetBuffer(), row);
 
             if (validPositions.Count < PlatformGaps) // Use valid platform positions until there are only PlatformGaps amount left
             {
@@ -96,12 +100,12 @@ public partial class PlatformGenerator : Node2D
     /// <param name="buffer"></param> The platform buffer to be checking with
     /// <param name="row"></param> The row to be cecking on
     /// <returns></returns>
-    private Array<Vector2I> GetValidPlatformPositions(Rect2I buffer, int row, Vector2I levelSize)
+    private Array<Vector2I> GetValidPlatformPositions(Rect2I buffer, int row)
     {
         Array<Vector2I> validPositions = new Array<Vector2I>();
 
         // Loops through all the x position along the row and check if they are valid. If so they are added to the list
-        for (int x = 1; x < levelSize.X  - (buffer.Size.X - 1); x++)
+        for (int x = 1; x < PlatformBounds.X  - (buffer.Size.X - 1); x++)
         {
             Vector2I position = new Vector2I(x, row - buffer.Size.Y);
 

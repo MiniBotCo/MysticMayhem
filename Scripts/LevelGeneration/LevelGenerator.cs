@@ -19,13 +19,13 @@ public partial class LevelGenerator : Node2D
         _frameGenerator = GetNode<FrameGenerator>("FrameGenerator");
         _platformGenerator = GetNode<PlatformGenerator>("PlatformGenerator");
 
-        _frameGenerator.GenerateFrame(LevelSize);
+        _frameGenerator.SetFrameSize(LevelSize);
+        _frameGenerator.GenerateFrame();
 
 
         _platformGenerator.AddCheckLayer(_frameGenerator.GetTileMapLayer());
 
-        _platformGenerator.GeneratePlatforms(LevelSize);
-
-
+        _platformGenerator.SetBounds(LevelSize);
+        _platformGenerator.GeneratePlatforms();
     }
 }
