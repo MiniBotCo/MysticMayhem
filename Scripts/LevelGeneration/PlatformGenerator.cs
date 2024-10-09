@@ -19,16 +19,28 @@ public partial class PlatformGenerator : Node2D
 		AddCheckLayer(_platformTileMap);
     }
 
+    /// <summary>
+    /// Set the bounds in which platforms can spawn
+    /// </summary>
+    /// <param name="bounds">The bounds</param>
     public void SetBounds(Vector2I bounds)
     {
         PlatformBounds = bounds;
     }
 
+    /// <summary>
+    /// Adds a layer to check for platform collisions with
+    /// </summary>
+    /// <param name="layer">The layer to check</param>
 	public void AddCheckLayer(TileMapLayer layer)
 	{
 		_checkLayers.Add(layer);
 	}
 
+    /// <summary>
+    /// Adds an array of layers to check for platform collisions with
+    /// </summary>
+    /// <param name="layer">The array of layers</param>
 	public void AddCheckLayer(Array<TileMapLayer> layer)
 	{
 		_checkLayers.AddRange(layer);

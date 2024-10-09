@@ -1,7 +1,4 @@
 using Godot;
-using System;
-using System.Runtime.CompilerServices;
-using System.Security.AccessControl;
 
 public class BasicPlatform
 {
@@ -22,11 +19,19 @@ public class BasicPlatform
 		_tiles = new Rect2I(new Vector2I(0, 0), size);
 	}
 
+	/// <summary>
+	/// Returns the platform buffer
+	/// </summary>
+	/// <returns>The platform buffer</returns>
 	public Rect2I GetBuffer() 
 	{
 		return _buffer;
 	}
 
+	/// <summary>
+	/// Gets the platform tiles size
+	/// </summary>
+	/// <returns>Tiles size</returns>
 	public Rect2I GetTiles()
 	{
 		return _tiles;

@@ -3,8 +3,7 @@ using System;
 
 public class Block
 {
-    [Export]
-    public int Smoothness { get; set; } = 3;
+    int Smoothness = 3;
     private Rect2I block;
 
     /// <summary>
@@ -28,9 +27,10 @@ public class Block
     }
 
     /// <summary>
-    /// Draws the given block onto the tilemap
+    /// Draws a block within the levelSize on the given tilemap layer
     /// </summary>
-    /// <param name="block">The block to be drawn</param>
+    /// <param name="blockTileMap">The tilemap to draw to</param>
+    /// <param name="levelSize">The bounds to draw within</param>
     public void DrawBlock(TileMapLayer blockTileMap, Vector2I levelSize)
     {
         for (int x = 0; x <= block.Size.X; x++)

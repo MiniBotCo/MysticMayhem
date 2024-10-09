@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class FrameGenerator : Node2D
 {
@@ -21,16 +20,25 @@ public partial class FrameGenerator : Node2D
 
     private TileMapLayer _frameTileMap;
 
+
     public override void _Ready()
     {
         _frameTileMap = GetNode<TileMapLayer>("FrameTileMapLayer");
     }
 
+    /// <summary>
+    /// Gets the TileMapLayer
+    /// </summary>
+    /// <returns>TileMapLayer</returns>
     public TileMapLayer GetTileMapLayer()
     {
         return _frameTileMap;
     }
 
+    /// <summary>
+    /// Sets the frame size
+    /// </summary>
+    /// <param name="size">Size to eb set to</param>
     public void SetFrameSize(Vector2I size)
     {
         FrameSize = size;
@@ -57,7 +65,7 @@ public partial class FrameGenerator : Node2D
             }
         }
         GenerateSides();
-        for (int i = 0; i < Blobs; i++) GenerateBlob(FrameSize);
+        for (int i = 0; i < Blobs; i++) GenerateBlob();
     }
 
     /// <summary>
@@ -98,7 +106,7 @@ public partial class FrameGenerator : Node2D
     /// <summary>
     /// Creates a blob out of blocks using the predefined blob size
     /// </summary>
-    private void GenerateBlob(Vector2I FrameSize)
+    private void GenerateBlob()
     {
         Vector2I position = FrameSize/2 + new Vector2I(GD.RandRange(-FrameSize.X/3, FrameSize.X/3), GD.RandRange(-FrameSize.Y/3, FrameSize.Y/3));
         for(int i = 0; i < 5; i++)
