@@ -10,6 +10,7 @@ PlatformGaps = 15
 Smoothness = 2
 
 [node name="FrameTileMap" type="TileMapLayer" parent="."]
+position = Vector2(0, 11)
 tile_set = ExtResource("2_ptn1k")
 
 [node name="PlatformTileMap" type="TileMapLayer" parent="."]

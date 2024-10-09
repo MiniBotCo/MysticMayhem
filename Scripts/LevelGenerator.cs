@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 public partial class LevelGenerator : Node2D
 {
     [ExportGroup("Level Properties")]
@@ -58,13 +59,16 @@ public partial class LevelGenerator : Node2D
             else // Sides
             {
                 _frameTileMap.SetCell(new Vector2I(0, y), 0, new Vector2I(2, 2));
-                _frameTileMap.SetCell(new Vector2I((int)LevelSize.X, y), 0, new Vector2I(2, 2));
+                _frameTileMap.SetCell(new Vector2I(LevelSize.X, y), 0, new Vector2I(2, 2));
             }
         }
         GenerateSides();
         for (int i=0; i < Blobs; i++) GenerateBlob();
     }
 
+    /// <summary>
+    /// Generates the sides of the level out of blocks
+    /// </summary>
     private void GenerateSides()
     {
         int n = 0;
@@ -89,6 +93,9 @@ public partial class LevelGenerator : Node2D
         }
     }
 
+    /// <summary>
+    /// Creates a blob out of blocks using the predefined blob size
+    /// </summary>
     private void GenerateBlob()
     {
         Vector2I position = LevelSize/2 + new Vector2I(GD.RandRange(-LevelSize.X/3, LevelSize.X/3), GD.RandRange(-LevelSize.Y/3, LevelSize.Y/3));
@@ -98,6 +105,13 @@ public partial class LevelGenerator : Node2D
         }
     }
 
+    /// <summary>
+    /// Creates a random block given a position and a maximum and minumum size, returns the block size
+    /// </summary>
+    /// <param name="pos">The block position</param>
+    /// <param name="min">The minimum size for the block</param>
+    /// <param name="max">The maximum size for the block</param>
+    /// <returns>The size of the block</returns>
     private Vector2I GenerateBlock(Vector2I pos, Vector2I min, Vector2I max)
     {
         Vector2I size = new Vector2I(GD.RandRange(min.X, max.X), GD.RandRange(min.Y, max.Y));
@@ -113,6 +127,10 @@ public partial class LevelGenerator : Node2D
         return size;
     }
 
+    /// <summary>
+    /// Draws the given block onto the tilemap
+    /// </summary>
+    /// <param name="block">The block to be drawn</param>
     private void DrawBlock(Rect2I block)
     {
         for (int x = 0; x <= block.Size.X; x++)
@@ -127,6 +145,7 @@ public partial class LevelGenerator : Node2D
             }
         }
     }
+    
     /// <summary>
     /// Creates the random platforms and fills the level with them
     /// </summary>
@@ -214,5 +233,4 @@ public partial class LevelGenerator : Node2D
 
         return validPositions;
     }
-
 }
