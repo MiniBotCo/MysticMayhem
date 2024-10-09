@@ -1,73 +1,64 @@
 using Godot;
-using System;
-using System.Runtime.CompilerServices;
-using System.Security.AccessControl;
-using System.Collections.Generic;
-using System.Net.Http.Headers;
-using System.Linq;
+using Godot.Collections;
 
-public partial class LevelGenerator : Node2D
+public partial class PlatformGenerator : Node2D
 {
-    [ExportGroup("Level Properties")]
     [Export]
-    public Vector2 LevelSize { get; set; } = new Vector2(20, 20);
-    [Export]
+    public Vector2I PlatformBounds { get; set; } = new Vector2I(40, 60);
+	[Export]
     public int PlatformCount { get; set; } = 20;
     [Export]
     public int PlatformGaps { get; set; } = 6;
 
-    private TileMapLayer _frameTileMap;
     private TileMapLayer _platformTileMap;
+	private Array<TileMapLayer> _checkLayers = new Array<TileMapLayer>();
 
-    // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        base._Ready();
-
-        GD.Randomize();
-        
-        _frameTileMap = GetNode<TileMapLayer>("FrameTileMap");
-        _platformTileMap = GetNode<TileMapLayer>("PlatformTileMap");
-
-        GenerateFrame();
-        PlacePlatforms();
+        _platformTileMap = GetNode<TileMapLayer>("PlatformTileMapLayer");
+		AddCheckLayer(_platformTileMap);
     }
 
     /// <summary>
-    /// Draws the frame with the size given in LevelSize
+    /// Set the bounds in which platforms can spawn
     /// </summary>
-    private void GenerateFrame()
+    /// <param name="bounds">The bounds</param>
+    public void SetBounds(Vector2I bounds)
     {
-        for (int y = 0; y <= LevelSize.Y; y++)
-        {
-            if (y == 0 || y == LevelSize.Y) //Top and bottom
-            {
-                for (int x = 0; x <= LevelSize.X; x++)
-                {
-                    _frameTileMap.SetCell(new Vector2I(x, y), 0, new Vector2I(2, 2));
-                }
-            }
-            else // Sides
-            {
-                _frameTileMap.SetCell(new Vector2I(0, y), 0, new Vector2I(2, 2));
-                _frameTileMap.SetCell(new Vector2I((int)LevelSize.X, y), 0, new Vector2I(2, 2));
-            }
-        }
+        PlatformBounds = bounds;
     }
+
+    /// <summary>
+    /// Adds a layer to check for platform collisions with
+    /// </summary>
+    /// <param name="layer">The layer to check</param>
+	public void AddCheckLayer(TileMapLayer layer)
+	{
+		_checkLayers.Add(layer);
+	}
+
+    /// <summary>
+    /// Adds an array of layers to check for platform collisions with
+    /// </summary>
+    /// <param name="layer">The array of layers</param>
+	public void AddCheckLayer(Array<TileMapLayer> layer)
+	{
+		_checkLayers.AddRange(layer);
+	}
 
     /// <summary>
     /// Creates the random platforms and fills the level with them
     /// </summary>
-    private void PlacePlatforms()
+    public void GeneratePlatforms()
     {
-        int row = (int)LevelSize.Y;
+        int row = PlatformBounds.Y;
         int platforms = 0;
 
         while(platforms < PlatformCount)
         {
             BasicPlatform platform = new BasicPlatform();
 
-            List<Vector2I> validPositions = GetValidPlatformPositions(platform.GetBuffer(), row);
+           Array<Vector2I> validPositions = GetValidPlatformPositions(platform.GetBuffer(), row);
 
             if (validPositions.Count < PlatformGaps) // Use valid platform positions until there are only PlatformGaps amount left
             {
@@ -82,7 +73,7 @@ public partial class LevelGenerator : Node2D
             }
             else // Create the platform
             {
-                platform.SetPosition(validPositions[(int)(GD.Randi() % validPositions.Count)]); // Get a random valid position from the list
+                platform.SetPosition(validPositions.PickRandom()); // Get a random valid position from the list
                 platform.DrawPlaftform(_platformTileMap); // Draw the platform
                 platforms++; // Increment the platform counter
             }
@@ -100,12 +91,16 @@ public partial class LevelGenerator : Node2D
         {
             for (int y = 0; y < buffer.Size.Y; y++)
             {
-                TileData tile = _platformTileMap.GetCellTileData(new Vector2I(x, y) + buffer.Position); // Get the tile information at x, y
+				for (int layer = 0; layer < _checkLayers.Count; layer++)
+				{
+					TileData tile = _checkLayers[layer].GetCellTileData(new Vector2I(x, y) + buffer.Position); // Get the tile information at x, y
 
-                if(tile != null) // If the tile exists
-                {
-                    return false;
-                }
+                	if(tile != null) // If the tile exists
+                	{
+                   		return false;
+                	}
+				}
+                
             }
         }
         return true; // If no tile exists
@@ -117,12 +112,12 @@ public partial class LevelGenerator : Node2D
     /// <param name="buffer"></param> The platform buffer to be checking with
     /// <param name="row"></param> The row to be cecking on
     /// <returns></returns>
-    private List<Vector2I> GetValidPlatformPositions(Rect2I buffer, int row)
+    private Array<Vector2I> GetValidPlatformPositions(Rect2I buffer, int row)
     {
-        List<Vector2I> validPositions = new List<Vector2I>();
+        Array<Vector2I> validPositions = new Array<Vector2I>();
 
         // Loops through all the x position along the row and check if they are valid. If so they are added to the list
-        for (int x = 1; x < LevelSize.X  - (buffer.Size.X - 1); x++)
+        for (int x = 1; x < PlatformBounds.X  - (buffer.Size.X - 1); x++)
         {
             Vector2I position = new Vector2I(x, row - buffer.Size.Y);
 
@@ -135,5 +130,4 @@ public partial class LevelGenerator : Node2D
 
         return validPositions;
     }
-
 }

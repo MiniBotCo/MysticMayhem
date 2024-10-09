@@ -5,10 +5,8 @@
 
 [node name="TestLevel1" type="Node2D"]
 
-[node name="LevelGenerator" parent="." instance=ExtResource("1_1tt1b")]
-position = Vector2(33.5612, 45.3741)
-LevelSize = Vector2(200, 200)
-PlatformCount = 10
-
 [node name="Player" parent="." instance=ExtResource("3_dt5aj")]
 position = Vector2(313, 162)
+scale = Vector2(0.3, 0.3)
+
+[node name="LevelGenerator" parent="." instance=ExtResource("1_1tt1b")]

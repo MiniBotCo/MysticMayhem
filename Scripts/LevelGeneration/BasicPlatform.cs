@@ -1,7 +1,4 @@
 using Godot;
-using System;
-using System.Runtime.CompilerServices;
-using System.Security.AccessControl;
 
 public class BasicPlatform
 {
@@ -9,7 +6,7 @@ public class BasicPlatform
 	private Vector2I _minSize = new Vector2I(3, 1);
 
 	// NOT the size of the total buffer, this is how much the buffer extends outside of the platform
-	private Vector2I _bufferSize = new Vector2I(2, 3); 
+	private Vector2I _bufferSize = new Vector2I(3, 7); 
 
 	private Rect2I _buffer;
 	private Rect2I _tiles;
@@ -22,11 +19,19 @@ public class BasicPlatform
 		_tiles = new Rect2I(new Vector2I(0, 0), size);
 	}
 
+	/// <summary>
+	/// Returns the platform buffer
+	/// </summary>
+	/// <returns>The platform buffer</returns>
 	public Rect2I GetBuffer() 
 	{
 		return _buffer;
 	}
 
+	/// <summary>
+	/// Gets the platform tiles size
+	/// </summary>
+	/// <returns>Tiles size</returns>
 	public Rect2I GetTiles()
 	{
 		return _tiles;
@@ -47,12 +52,27 @@ public class BasicPlatform
 	/// <param name="tileMap"></param> TileMapLayer to draw on
 	public void DrawPlaftform(TileMapLayer tileMap)
 	{
-		_tiles.Position = _buffer.Position + new Vector2I(1, 1); // The tile is set in 1, 1 from the top left corner of the buffer
-		for (int x = 0; x < _tiles.Size.X; x++)
+		_tiles.Position = _buffer.GetCenter();
+
+		// Runs differently from center depending on if the size is even or odd
+		if (_tiles.Size.X % 2 == 1)
 		{
-			for (int y = 0; y < _tiles.Size.Y; y++)
+			for (int x = -_tiles.Size.X/2; x <= _tiles.Size.X/2; x++)
 			{
-				tileMap.SetCell(_tiles.Position + new Vector2I(x, y), 0, new Vector2I(10,3));
+				for (int y = 0; y < _tiles.Size.Y; y++)
+				{
+					tileMap.SetCell(_tiles.Position + new Vector2I(x, y), 0, new Vector2I(10,3));
+				}
+			}
+		}
+		else
+		{
+			for (int x = -_tiles.Size.X/2; x < _tiles.Size.X/2; x++)
+			{
+				for (int y = 0; y < _tiles.Size.Y; y++)
+				{
+					tileMap.SetCell(_tiles.Position + new Vector2I(x, y), 0, new Vector2I(10,3));
+				}
 			}
 		}
 	}
