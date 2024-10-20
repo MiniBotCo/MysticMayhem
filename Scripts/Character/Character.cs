@@ -23,5 +23,6 @@ public partial class Character : CharacterBody2D
 
         // Move and slide the character using its velocity
         MoveAndSlide();
+        Velocity = velocity;
     }
 }
