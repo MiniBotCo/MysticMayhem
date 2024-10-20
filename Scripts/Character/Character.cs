@@ -21,6 +21,7 @@ public partial class Character : CharacterBody2D
             velocity.Y = MaxFallSpeed;
         }
 
+        Velocity = velocity;
         // Move and slide the character using its velocity
         MoveAndSlide();
         Velocity = velocity;
