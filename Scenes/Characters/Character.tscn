@@ -1,15 +1,18 @@
 [gd_scene load_steps=5 format=3 uid="uid://b5a27fq0q8733"]
 
 [ext_resource type="Texture2D" uid="uid://dhpcksctgtsnf" path="res://icon.svg" id="1_jqkpa"]
-[ext_resource type="Script" path="res://Scripts/Character/Character.cs" id="1_x4wl1"]
+[ext_resource type="Script" path="res://Scripts/Character/Character.cs" id="1_lbh1h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_63rla"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_tcvaw"]
-size = Vector2(267, 167)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1m3ii"]
+size = Vector2(140, 160)
 
 [node name="Character" type="CharacterBody2D"]
-script = ExtResource("1_x4wl1")
+scale = Vector2(0.1, 0.1)
+collision_layer = 2
+script = ExtResource("1_lbh1h")
+Gravity = 700.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(6.44, 6.44)
@@ -18,8 +21,8 @@ shape = SubResource("RectangleShape2D_63rla")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_jqkpa")
 
-[node name="SpawnBuffer" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnBuffer"]
-position = Vector2(0, -19)
-shape = SubResource("RectangleShape2D_tcvaw")
+[node name="SpawnBuffer" type="ShapeCast2D" parent="."]
+position = Vector2(0, -20)
+shape = SubResource("RectangleShape2D_1m3ii")
+target_position = Vector2(0, 0)
+collision_mask = 3

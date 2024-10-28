@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://brwhlm8vwrm57"]
+[gd_scene load_steps=5 format=3 uid="uid://brwhlm8vwrm57"]
 
 [ext_resource type="Script" path="res://Scripts/LevelGeneration/LevelGenerator.cs" id="1_dwtof"]
 [ext_resource type="PackedScene" uid="uid://bul6nsjowvbwh" path="res://Scenes/frame_generator.tscn" id="3_875ce"]
 [ext_resource type="PackedScene" uid="uid://bvbun1n5dbhka" path="res://Scenes/platform_generator.tscn" id="3_yfxaf"]
+[ext_resource type="PackedScene" uid="uid://b4ugxyvbx8pak" path="res://Scenes/enemy_spawner.tscn" id="4_vanfr"]
 
 [node name="LevelGenerator" type="Node2D"]
 script = ExtResource("1_dwtof")
@@ -10,3 +11,9 @@ script = ExtResource("1_dwtof")
 [node name="FrameGenerator" parent="." instance=ExtResource("3_875ce")]
 
 [node name="PlatformGenerator" parent="." instance=ExtResource("3_yfxaf")]
+
+[node name="EnemySpawner" parent="." instance=ExtResource("4_vanfr")]
+
+[editable path="FrameGenerator"]
+[editable path="PlatformGenerator"]
+[editable path="EnemySpawner"]

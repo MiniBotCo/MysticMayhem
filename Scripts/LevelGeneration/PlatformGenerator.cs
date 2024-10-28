@@ -19,6 +19,11 @@ public partial class PlatformGenerator : Node2D
 		AddCheckLayer(_platformTileMap);
     }
 
+    public TileMapLayer GetTileMapLayer()
+    {
+        return _platformTileMap;
+    }
+
     /// <summary>
     /// Set the bounds in which platforms can spawn
     /// </summary>
