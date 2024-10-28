@@ -9,7 +9,7 @@ public partial class Spawner : Node2D
 	public Vector2I levelSize { get; set; } = new Vector2I(60, 40);
 
 	private PackedScene _spawnScene = GD.Load<PackedScene>("res://Scenes/Characters/Character.tscn");
-	private Array<Node2D> _spawnList = new Array<Node2D>();
+	private Array<Node2D> _spawnList = new Array<Node2D>(); // To be implemented when multiple spawnable types exist
 
 	/// <summary>
 	/// Spawns the spawnable on the tilemap passed. Currently intended only for use with the platform tilemap
