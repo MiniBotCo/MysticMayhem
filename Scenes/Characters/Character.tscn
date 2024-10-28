@@ -8,11 +8,10 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1m3ii"]
 size = Vector2(140, 160)
 
-[node name="Character" type="CharacterBody2D"]
+[node name="Character" type="CharacterBody2D" groups=["Spawnable"]]
 scale = Vector2(0.1, 0.1)
 collision_layer = 2
 script = ExtResource("1_lbh1h")
-Gravity = 700.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(6.44, 6.44)
