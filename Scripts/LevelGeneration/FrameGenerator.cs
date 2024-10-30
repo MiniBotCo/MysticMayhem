@@ -2,6 +2,9 @@ using Godot;
 
 public partial class FrameGenerator : Node2D
 {
+    [Signal]
+    public delegate void GenerationCompleteEventHandler();
+
     [ExportGroup("Frame Properties")]
     [Export]
     public Vector2I FrameSize { get; set; } = new Vector2I(40, 60);
@@ -66,6 +69,8 @@ public partial class FrameGenerator : Node2D
         }
         GenerateSides();
         for (int i = 0; i < Blobs; i++) GenerateBlob();
+
+        EmitSignal(SignalName.GenerationComplete);
     }
 
     /// <summary>

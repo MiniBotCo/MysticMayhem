@@ -18,3 +18,4 @@ rendering_quadrant_size = 17
 
 [node name="Character" parent="." instance=ExtResource("3_8rdg5")]
 position = Vector2(18, -95)
+script = null
