@@ -6,6 +6,9 @@ public partial class Player : CharacterBody2D
 	[ExportGroup("Required Nodes")]
 	[Export] public AnimationPlayer animationPlayerNode;
 	[Export] public Sprite2D sprite2DNode;
+	[Export] public StateMachine stateMachineNode;
+
+	public Vector2 direction = new();
 	public const float Speed = 300.0f;
 	public const float JumpVelocity = -400.0f;
 
@@ -38,7 +41,7 @@ public partial class Player : CharacterBody2D
 
 		// Get the input direction and handle the movement/deceleration.
 		// As good practice, you should replace UI actions with custom gameplay actions.
-		Vector2 direction = Input.GetVector(GameConstants.INPUT_MOVE_LEFT, GameConstants.INPUT_MOVE_RIGHT, GameConstants.INPUT_JUMP, "ui_down");
+		direction = Input.GetVector(GameConstants.INPUT_MOVE_LEFT, GameConstants.INPUT_MOVE_RIGHT, GameConstants.INPUT_JUMP, "ui_down");
 		if (direction != Vector2.Zero)
 		{
 			velocity.X = direction.X * Speed;

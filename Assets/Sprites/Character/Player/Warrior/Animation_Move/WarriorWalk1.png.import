@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dipp57fd6icpo"
-path="res://.godot/imported/GigaWarriorShield.png-37383c24f87779ac22375d93912ae9c8.ctex"
+uid="uid://c0c8wsf7sh3v6"
+path="res://.godot/imported/WarriorWalk1.png-dbe8eb668f065eb7a576abb79f72513c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Character/Player/Warrior/Animation_Move/GigaWarriorShield.png"
-dest_files=["res://.godot/imported/GigaWarriorShield.png-37383c24f87779ac22375d93912ae9c8.ctex"]
+source_file="res://Assets/Sprites/Character/Player/Warrior/Animation_Move/WarriorWalk1.png"
+dest_files=["res://.godot/imported/WarriorWalk1.png-dbe8eb668f065eb7a576abb79f72513c.ctex"]
 
 [params]
 
