@@ -7,4 +7,5 @@
 script = ExtResource("1_hetsq")
 
 [node name="PlatformTileMapLayer" type="TileMapLayer" parent="."]
+z_index = 1
 tile_set = ExtResource("1_iodu1")

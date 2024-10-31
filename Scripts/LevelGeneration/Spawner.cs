@@ -8,8 +8,11 @@ public partial class Spawner : Node2D
 	[Export]
 	public Vector2I levelSize { get; set; } = new Vector2I(60, 40);
 
-	private PackedScene _spawnScene = GD.Load<PackedScene>("res://Scenes/Characters/Character.tscn");
-	private Array<Node2D> _spawnList = new Array<Node2D>(); // To be implemented when multiple spawnable types exist
+	[Export]
+	public PackedScene spawnScene {get; set; } = GD.Load<PackedScene>("res://Scenes/Characters/Character.tscn");
+
+	[Export]
+	public int yOffset{ get; set; } = 0;
 
 	/// <summary>
 	/// Spawns the spawnable on the tilemap passed. Currently intended only for use with the platform tilemap
@@ -19,12 +22,24 @@ public partial class Spawner : Node2D
 	{
 		for(int i = 0; i < spawnCount; i++)
 		{
-			Node2D spawn = _spawnScene.Instantiate<Node2D>();
+			Node2D spawn = spawnScene.Instantiate<Node2D>();
 			if (spawn.IsInGroup("Spawnable"))
 			{
 				GetTree().Root.CallDeferred(Node.MethodName.AddChild, spawn);
 				await ToSignal(spawn, Node.SignalName.Ready);
 				PlaceSpawn(tileMap, spawn);
+			}
+		}
+	}
+
+	public void Spawn(Array<Node2D> spawnables, TileMapLayer tileMap)
+	{
+		for(int i = 0; i < spawnables.Count; i++)
+		{
+
+			if (spawnables[i].IsInGroup("Spawnable"))
+			{
+				PlaceSpawn(tileMap, spawnables[i]);
 			}
 		}
 	}
@@ -64,7 +79,7 @@ public partial class Spawner : Node2D
 		for (int i=0; i < tiles.Count; i++)
 		{
 			//Gives a position slightly above the tile
-			spawnBuffer.Position = tileMap.MapToLocal(new Vector2I(tiles[i].X, tiles[i].Y-1)) + new Vector2(0, 2); 
+			spawnBuffer.Position = tileMap.MapToLocal(new Vector2I(tiles[i].X, tiles[i].Y-1)); 
 
 			// Force the spawnBuffer to update
 			spawnBuffer.ForceUpdateTransform();
@@ -72,7 +87,7 @@ public partial class Spawner : Node2D
 
 			if (!spawnBuffer.IsColliding())
 			{
-				validPositions.Add(spawnBuffer.Position);
+				validPositions.Add(spawnBuffer.Position + new Vector2(0, yOffset));
 			}
 			
 		}

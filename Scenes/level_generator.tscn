@@ -1,18 +1,28 @@
-[gd_scene load_steps=5 format=3 uid="uid://brwhlm8vwrm57"]
+[gd_scene load_steps=6 format=3 uid="uid://brwhlm8vwrm57"]
 
 [ext_resource type="Script" path="res://Scripts/LevelGeneration/LevelGenerator.cs" id="1_dwtof"]
 [ext_resource type="PackedScene" uid="uid://bul6nsjowvbwh" path="res://Scenes/frame_generator.tscn" id="3_875ce"]
 [ext_resource type="PackedScene" uid="uid://bvbun1n5dbhka" path="res://Scenes/platform_generator.tscn" id="3_yfxaf"]
 [ext_resource type="PackedScene" uid="uid://b4ugxyvbx8pak" path="res://Scenes/spawner.tscn" id="4_vanfr"]
+[ext_resource type="PackedScene" uid="uid://tck21y72cs44" path="res://Scenes/Objects/door.tscn" id="5_p3as8"]
 
-[node name="LevelGenerator" type="Node2D"]
+[node name="LevelGenerator" type="Node2D" node_paths=PackedStringArray("Entrance", "Exit")]
 script = ExtResource("1_dwtof")
+Entrance = NodePath("Entrance")
+Exit = NodePath("Exit")
 
 [node name="FrameGenerator" parent="." instance=ExtResource("3_875ce")]
 
 [node name="PlatformGenerator" parent="." instance=ExtResource("3_yfxaf")]
 
 [node name="EnemySpawner" parent="." instance=ExtResource("4_vanfr")]
+
+[node name="DoorSpawner" parent="." instance=ExtResource("4_vanfr")]
+yOffset = -10
+
+[node name="Entrance" parent="." instance=ExtResource("5_p3as8")]
+
+[node name="Exit" parent="." instance=ExtResource("5_p3as8")]
 
 [editable path="FrameGenerator"]
 [editable path="PlatformGenerator"]
