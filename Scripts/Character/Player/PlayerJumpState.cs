@@ -7,13 +7,15 @@ public partial class PlayerJumpState : Node
     public override void _Ready()
     {
         characterNode = GetOwner<Player>();
+        SetPhysicsProcess(false);
     }
 
     public override void _PhysicsProcess(double delta)
     {
+        GD.Print("Jump state enabled!");
         if (characterNode.Velocity.Y == 0)
         {
-            GD.Print("Switching to the idle state");
+            characterNode.stateMachineNode.SwitchState<PlayerIdleState>();
         }
 
     }
@@ -25,6 +27,11 @@ public partial class PlayerJumpState : Node
         if (what == 5001)
         {
             GD.Print("SHould be player the jump animation right now.  WIll update the jump animation soon!");
+            SetPhysicsProcess(true);
+        }
+        else if (what == 5002)
+        {
+            SetPhysicsProcess(false);
         }
     }
 }

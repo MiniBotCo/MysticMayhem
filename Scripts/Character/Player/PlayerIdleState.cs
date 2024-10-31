@@ -7,16 +7,18 @@ public partial class PlayerIdleState : Node
     public override void _Ready()
     {
         characterNode = GetOwner<Player>();
+        SetPhysicsProcess(false);
     }
 
     public override void _PhysicsProcess(double delta)
     {
+        GD.Print("Idle State");
         if (characterNode.direction != Vector2.Zero)
         {
             characterNode.stateMachineNode.SwitchState<PlayerMoveState>();
         }
 
-        if (characterNode.isJumping == true)
+        if (characterNode.Velocity.Y < 0)
         {
             characterNode.stateMachineNode.SwitchState<PlayerJumpState>();
             GD.Print("Switched to jump state");
@@ -31,6 +33,11 @@ public partial class PlayerIdleState : Node
         if (what == 5001)
         {
             characterNode.animationPlayerNode.Play(GameConstants.ANIM_IDLE);
+            SetPhysicsProcess(true);
+        }
+        else if (what == 5002)
+        {
+            SetPhysicsProcess(false);
         }
     }
 }
