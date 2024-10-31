@@ -15,6 +15,13 @@ public partial class PlayerIdleState : Node
         {
             characterNode.stateMachineNode.SwitchState<PlayerMoveState>();
         }
+
+        if (characterNode.isJumping == true)
+        {
+            characterNode.stateMachineNode.SwitchState<PlayerJumpState>();
+            GD.Print("Switched to jump state");
+        }
+
     }
 
     public override void _Notification(int what)
