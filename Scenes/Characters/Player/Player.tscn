@@ -1,17 +1,22 @@
-[gd_scene load_steps=20 format=3 uid="uid://b71wwwq6jo2yi"]
+[gd_scene load_steps=25 format=3 uid="uid://b71wwwq6jo2yi"]
 
 [ext_resource type="Script" path="res://Scripts/Character/Player/Player.cs" id="1_l2rlm"]
 [ext_resource type="Texture2D" uid="uid://cyc43rprs7fij" path="res://Assets/Sprites/Character/Player/Warrior/Animation_Attack/GigaWarriorStandingAttack1.png" id="5_yrhql"]
 [ext_resource type="Texture2D" uid="uid://bd3upfojwluw1" path="res://Assets/Sprites/Character/Player/Warrior/Animation_Attack/GigaWarriorStandingAttack2.png" id="6_x6ucm"]
 [ext_resource type="Texture2D" uid="uid://c0c8wsf7sh3v6" path="res://Assets/Sprites/Character/Player/Warrior/Animation_Move/WarriorWalk1.png" id="7_2jrpj"]
+[ext_resource type="Texture2D" uid="uid://c0b8yp3ibdflq" path="res://Assets/Sprites/Character/Player/Warrior/Animation_Idle/WarriorIdle1.png" id="7_fsoa7"]
 [ext_resource type="Texture2D" uid="uid://bg308eqqrmfjk" path="res://Assets/Sprites/Character/Player/Warrior/Animation_Attack/GigaWarriorStandingAttack3.png" id="7_t07e8"]
 [ext_resource type="Texture2D" uid="uid://b0sn3s8ftnm1m" path="res://Assets/Sprites/Character/Player/Warrior/Animation_Move/WarriorWalk2.png" id="8_5fev3"]
 [ext_resource type="Texture2D" uid="uid://bbn3d63oucg1e" path="res://Assets/Sprites/Character/Player/Warrior/Animation_Attack/GigaWarriorStandingAttack4.png" id="8_bndxu"]
+[ext_resource type="Texture2D" uid="uid://s4k6rsw0vxdb" path="res://Assets/Sprites/Character/Player/Warrior/Animation_Idle/WarriorIdle2.png" id="8_xo0l2"]
+[ext_resource type="Texture2D" uid="uid://dji7ohdnfro4c" path="res://Assets/Sprites/Character/Player/Warrior/Animation_Idle/WarriorIdle3.png" id="9_gf370"]
 [ext_resource type="Texture2D" uid="uid://chwicauhv5ebd" path="res://Assets/Sprites/Character/Player/Warrior/Animation_Move/WarriorWalk3.png" id="9_kp5gq"]
 [ext_resource type="Script" path="res://Scripts/Character/Player/PlayerIdleState.cs" id="9_slpt1"]
 [ext_resource type="Script" path="res://Scripts/Character/Player/PlayerMoveState.cs" id="10_82i2q"]
+[ext_resource type="Texture2D" uid="uid://5liof810tlt5" path="res://Assets/Sprites/Character/Player/Warrior/Animation_Idle/WarriorIdle4.png" id="10_j8dv8"]
 [ext_resource type="Script" path="res://Scripts/Character/Player/PlayerJumpState.cs" id="11_3sg2n"]
 [ext_resource type="Script" path="res://Scripts/Character/StateMachine.cs" id="11_tod2f"]
+[ext_resource type="Script" path="res://Scripts/Character/Player/PlayerAttackState.cs" id="12_b17sf"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_scoyt"]
 
@@ -36,7 +41,8 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_5k773"]
 resource_name = "Idle"
-step = 0.166667
+loop_mode = 1
+step = 0.0833333
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -44,10 +50,10 @@ tracks/0/path = NodePath("Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.0833333, 0.166667, 0.25, 0.333333, 0.416667, 0.5, 0.583333, 0.666667, 0.75, 0.833333, 0.916667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("7_2jrpj")]
+"values": [ExtResource("7_fsoa7"), ExtResource("7_fsoa7"), ExtResource("8_xo0l2"), ExtResource("8_xo0l2"), ExtResource("7_fsoa7"), ExtResource("7_fsoa7"), ExtResource("8_xo0l2"), ExtResource("8_xo0l2"), ExtResource("9_gf370"), ExtResource("9_gf370"), ExtResource("10_j8dv8"), ExtResource("10_j8dv8")]
 }
 
 [sub_resource type="Animation" id="Animation_t35jx"]
@@ -115,16 +121,19 @@ libraries = {
 scale = Vector2(0.5, 0.5)
 zoom = Vector2(2, 2)
 
-[node name="IdleState" type="Node" parent="."]
-script = ExtResource("9_slpt1")
-
-[node name="MoveState" type="Node" parent="."]
-script = ExtResource("10_82i2q")
-
-[node name="JumpState" type="Node" parent="."]
-script = ExtResource("11_3sg2n")
-
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("currentState", "states")]
 script = ExtResource("11_tod2f")
-currentState = NodePath("../IdleState")
-states = [NodePath("../IdleState"), NodePath("../MoveState"), NodePath("../JumpState")]
+currentState = NodePath("IdleState")
+states = [NodePath("IdleState"), NodePath("MoveState"), NodePath("JumpState")]
+
+[node name="IdleState" type="Node" parent="StateMachine"]
+script = ExtResource("9_slpt1")
+
+[node name="MoveState" type="Node" parent="StateMachine"]
+script = ExtResource("10_82i2q")
+
+[node name="JumpState" type="Node" parent="StateMachine"]
+script = ExtResource("11_3sg2n")
+
+[node name="AttackState" type="Node" parent="StateMachine"]
+script = ExtResource("12_b17sf")

@@ -27,6 +27,7 @@ public partial class PlayerJumpState : Node
         if (what == 5001)
         {
             GD.Print("SHould be player the jump animation right now.  WIll update the jump animation soon!");
+            characterNode.animationPlayerNode.Play(GameConstants.ANIM_IDLE);
             SetPhysicsProcess(true);
         }
         else if (what == 5002)
