@@ -58,13 +58,13 @@ public partial class FrameGenerator : Node2D
             {
                 for (int x = 0; x <= FrameSize.X; x++)
                 {
-                    _frameTileMap.SetCell(new Vector2I(x, y), 0, new Vector2I(2, 2));
+                    _frameTileMap.SetCell(new Vector2I(x, y), 0, new Vector2I(4, 0));
                 }
             }
             else // Sides
             {
-                _frameTileMap.SetCell(new Vector2I(0, y), 0, new Vector2I(2, 2));
-                _frameTileMap.SetCell(new Vector2I(FrameSize.X, y), 0, new Vector2I(2, 2));
+                _frameTileMap.SetCell(new Vector2I(0, y), 0, new Vector2I(4, 0));
+                _frameTileMap.SetCell(new Vector2I(FrameSize.X, y), 0, new Vector2I(4, 0));
             }
         }
         GenerateSides();

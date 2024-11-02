@@ -1,15 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://b5a27fq0q8733"]
+[gd_scene load_steps=6 format=3 uid="uid://b5a27fq0q8733"]
 
 [ext_resource type="Texture2D" uid="uid://dhpcksctgtsnf" path="res://icon.svg" id="1_jqkpa"]
 [ext_resource type="Script" path="res://Scripts/Character/Character.cs" id="1_lbh1h"]
+[ext_resource type="PackedScene" uid="uid://quchqw8qhhoi" path="res://Scenes/Spawnables/spawn_algorithm.tscn" id="3_05ntu"]
+[ext_resource type="PackedScene" uid="uid://klwgqq6rpd4o" path="res://Scenes/Spawnables/spawner_algorithm.tscn" id="4_k3302"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_63rla"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1m3ii"]
-size = Vector2(140, 160)
-
 [node name="Character" type="CharacterBody2D" groups=["Spawnable"]]
-scale = Vector2(0.1, 0.1)
+scale = Vector2(0.25, 0.25)
 collision_layer = 2
 script = ExtResource("1_lbh1h")
 
@@ -20,8 +19,7 @@ shape = SubResource("RectangleShape2D_63rla")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_jqkpa")
 
-[node name="SpawnBuffer" type="ShapeCast2D" parent="."]
-position = Vector2(0, -20)
-shape = SubResource("RectangleShape2D_1m3ii")
-target_position = Vector2(0, 0)
-collision_mask = 3
+[node name="SpawnAlgorithm" parent="." node_paths=PackedStringArray("spawnerAlgorithm") instance=ExtResource("3_05ntu")]
+spawnerAlgorithm = NodePath("SpawnerAlgorithm")
+
+[node name="SpawnerAlgorithm" parent="SpawnAlgorithm" instance=ExtResource("4_k3302")]

@@ -1,12 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://d0k1fetkg24s7"]
+[gd_scene load_steps=2 format=3 uid="uid://d0k1fetkg24s7"]
 
 [ext_resource type="PackedScene" uid="uid://brwhlm8vwrm57" path="res://Scenes/level_generator.tscn" id="1_1tt1b"]
-[ext_resource type="PackedScene" uid="uid://b71wwwq6jo2yi" path="res://Scenes/Characters/Player/Player.tscn" id="3_dt5aj"]
 
 [node name="TestLevel1" type="Node2D"]
 
 [node name="LevelGenerator" parent="." instance=ExtResource("1_1tt1b")]
-PlayerScene = ExtResource("3_dt5aj")
 
 [node name="PlatformGenerator" parent="LevelGenerator" index="1"]
 PlatformCount = 40

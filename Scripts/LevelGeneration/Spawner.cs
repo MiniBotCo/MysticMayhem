@@ -9,91 +9,66 @@ public partial class Spawner : Node2D
 	public Vector2I levelSize { get; set; } = new Vector2I(60, 40);
 
 	[Export]
-	public PackedScene spawnScene {get; set; } = GD.Load<PackedScene>("res://Scenes/Characters/Character.tscn");
-
-	[Export]
 	public int yOffset{ get; set; } = 0;
 
 	/// <summary>
-	/// Spawns the spawnable on the tilemap passed. Currently intended only for use with the platform tilemap
+	/// Spawns the spawnable nodes from and array of spawnable nodes on an unused tile that meets the spawning requirements for that node
 	/// </summary>
-	/// <param name="tileMap">The tilemap to spawn spawnables on</param>
-    public async void Spawn(TileMapLayer tileMap)
+	/// <param name="spawnables">An array of spawnable nodes</param>
+	/// <param name="unusedTiles">The tiles that are not used</param>
+	/// <param name="tileMaps">An array of used TileMapLayers</param>
+	/// <returns>The uptades unusedTiles array</returns>
+	public Array<Vector2I> Spawn(Array<Node2D> spawnables, Array<Vector2I> unusedTiles, Array<TileMapLayer> tileMaps)
 	{
-		for(int i = 0; i < spawnCount; i++)
-		{
-			Node2D spawn = spawnScene.Instantiate<Node2D>();
-			if (spawn.IsInGroup("Spawnable"))
-			{
-				GetTree().Root.CallDeferred(Node.MethodName.AddChild, spawn);
-				await ToSignal(spawn, Node.SignalName.Ready);
-				PlaceSpawn(tileMap, spawn);
-			}
-		}
-	}
+		Array<Vector2I> usedTiles = new Array<Vector2I>();
 
-	public void Spawn(Array<Node2D> spawnables, TileMapLayer tileMap)
-	{
 		for(int i = 0; i < spawnables.Count; i++)
 		{
+			SpawnAlgorithm spawnAlgorithm;
 
-			if (spawnables[i].IsInGroup("Spawnable"))
+			if (spawnables[i].IsInGroup("Spawnable") && (spawnAlgorithm = spawnables[i].GetNodeOrNull<SpawnAlgorithm>("SpawnAlgorithm")) != null)
 			{
-				PlaceSpawn(tileMap, spawnables[i]);
+				Vector2I spawnTile = GetValidTile(spawnAlgorithm, unusedTiles, tileMaps);
+				spawnables[i].Position = tileMaps[0].MapToLocal(spawnTile);
+
+				Array<Vector2I> spawnTiles = spawnAlgorithm.spawnerAlgorithm.CheckSpawnValidity(tileMaps, spawnTile);
+
+				for(int j = 0; j < spawnTiles.Count; j++)
+				{
+					usedTiles.Add(spawnTiles[j]);
+				}
+
 			}
 		}
+
+		for (int i = 0; i < usedTiles.Count; i++)
+		{
+			unusedTiles.Remove(usedTiles[i]);
+		}
+
+		return unusedTiles;
 	}
 
 	/// <summary>
-	/// Places a spawnable at a valid position on the given tilemap
+	/// Returns a valid spawning tile to be used
 	/// </summary>
-	/// <param name="tileMap">The tilemap to place on</param>
-	/// <param name="spawn">The spawnable to be placed</param>
-	private void PlaceSpawn(TileMapLayer tileMap, Node2D spawn)
+	/// <param name="spawnableNode">The node to be spawned</param>
+	/// <param name="unusedTiles">An array of unused tiles</param>
+	/// <param name="tileMaps">An array of tilemaps</param>
+	/// <returns>A random cell</returns>
+	private Vector2I GetValidTile(SpawnAlgorithm spawnableNode,  Array<Vector2I> unusedTiles, Array<TileMapLayer> tileMaps)
 	{
-		Array<Vector2> spawnPositions = GetValidSpawnPositions(tileMap, spawn);
+		Array<Vector2I> validTiles = new Array<Vector2I>();
 
-		if (spawnPositions.Count > 0)
+		for(int i = 0; i < unusedTiles.Count; i++)
 		{
-			spawn.GlobalPosition = GetValidSpawnPositions(tileMap, spawn).PickRandom();
-		}
-		else
-		{
-			spawn.QueueFree();
-		}
-		
-	}
-
-	/// <summary>
-	/// Returns an array of valid spawn positions as Vector2s
-	/// </summary>
-	/// <param name="tileMap">The tilemap to check for valid positions on</param>
-	/// <param name="spawn">The spawn to be placed</param>
-	/// <returns>Array of Vector2 valid spawn positions</returns>
-	private Array<Vector2> GetValidSpawnPositions(TileMapLayer tileMap, Node2D spawn)
-	{
-		Array<Vector2I> tiles = tileMap.GetUsedCells();
-		Array<Vector2> validPositions = new Array<Vector2>();
-		ShapeCast2D spawnBuffer = spawn.GetNode<ShapeCast2D>("SpawnBuffer");
-
-		for (int i=0; i < tiles.Count; i++)
-		{
-			//Gives a position slightly above the tile
-			spawnBuffer.Position = tileMap.MapToLocal(new Vector2I(tiles[i].X, tiles[i].Y-1)); 
-
-			// Force the spawnBuffer to update
-			spawnBuffer.ForceUpdateTransform();
-			spawnBuffer.ForceShapecastUpdate();
-
-			if (!spawnBuffer.IsColliding())
+			Array<Vector2I> usableTiles = spawnableNode.spawnerAlgorithm.CheckSpawnValidity(tileMaps, unusedTiles[i]);
+			if (usableTiles.Count != 0)
 			{
-				validPositions.Add(spawnBuffer.Position + new Vector2(0, yOffset));
+				validTiles.Add(unusedTiles[i]);
 			}
-			
 		}
 
-		spawnBuffer.Position = Vector2.Zero; // Reset the spawnBuffer position
-
-		return validPositions;
+		return validTiles.PickRandom();
 	}
 }
