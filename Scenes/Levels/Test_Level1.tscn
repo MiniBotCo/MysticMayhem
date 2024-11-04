@@ -11,13 +11,9 @@
 PlatformCount = 40
 
 [node name="Player" parent="." instance=ExtResource("3_dt5aj")]
-position = Vector2(287, 109)
-scale = Vector2(0.3, 0.3)
-
-[node name="Camera2D" parent="Player" index="3"]
-zoom = Vector2(1, 1)
+position = Vector2(348, 273)
+scale = Vector2(0.25, 0.25)
 
 [editable path="LevelGenerator"]
 [editable path="LevelGenerator/FrameGenerator"]
 [editable path="LevelGenerator/PlatformGenerator"]
-[editable path="Player"]
