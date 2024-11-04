@@ -8,11 +8,11 @@ public partial class PlayerIdleState : Node
     {
         characterNode = GetOwner<Player>();
         SetPhysicsProcess(false);
+        SetProcessInput(false);
     }
 
     public override void _PhysicsProcess(double delta)
     {
-        GD.Print("Idle State");
         if (characterNode.direction != Vector2.Zero)
         {
             characterNode.stateMachineNode.SwitchState<PlayerMoveState>();
@@ -23,7 +23,6 @@ public partial class PlayerIdleState : Node
             characterNode.stateMachineNode.SwitchState<PlayerJumpState>();
             GD.Print("Switched to jump state");
         }
-
     }
 
     public override void _Notification(int what)
@@ -34,10 +33,21 @@ public partial class PlayerIdleState : Node
         {
             characterNode.animationPlayerNode.Play(GameConstants.ANIM_IDLE);
             SetPhysicsProcess(true);
+            SetProcessInput(true);
         }
         else if (what == 5002)
         {
             SetPhysicsProcess(false);
+            SetProcessInput(false);
+        }
+    }
+
+    public override void _Input(InputEvent @event)
+    {
+        if (Input.IsActionJustPressed(GameConstants.INPUT_ATTACK))
+        {
+            //GD.Print("Player attack state - input detected");
+            characterNode.stateMachineNode.SwitchState<PlayerAttackState>();
         }
     }
 }

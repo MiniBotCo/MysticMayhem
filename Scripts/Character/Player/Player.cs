@@ -8,8 +8,6 @@ public partial class Player : CharacterBody2D
 	[Export] public Sprite2D sprite2DNode;
 	[Export] public StateMachine stateMachineNode;
 
-	public bool isJumping = false;
-
 	public Vector2 direction = new();
 	public const float Speed = 300.0f;
 	public const float JumpVelocity = -400.0f;
@@ -33,17 +31,6 @@ public partial class Player : CharacterBody2D
 		if (Input.IsActionJustPressed("Jump") && IsOnFloor())
 		{
 			velocity.Y = JumpVelocity;
-			isJumping = true;
-		}
-		else
-		{
-			isJumping = false;
-		}
-
-		if (Input.IsActionJustPressed(GameConstants.INPUT_ATTACK))
-		{
-			GD.Print("The player attacked");
-			animationPlayerNode.Play(GameConstants.ANIM_ATTACK);
 		}
 
 		// Get the input direction and handle the movement/deceleration.
