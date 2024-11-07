@@ -14,16 +14,38 @@ public partial class PlayerMoveState : Node
     public override void _PhysicsProcess(double delta)
     {
         GD.Print("MOVE STATE");
+
+        characterNode.velocity = characterNode.Velocity;
+
+        // Get the input direction and handle the movement/deceleration.
+        characterNode.direction = Input.GetVector(GameConstants.INPUT_MOVE_LEFT, GameConstants.INPUT_MOVE_RIGHT, GameConstants.INPUT_JUMP, "ui_down");
+        if (characterNode.direction != Vector2.Zero)
+        {
+            characterNode.velocity.X = characterNode.direction.X * characterNode.Speed;
+        }
+        else
+        {
+            characterNode.velocity.X = Mathf.MoveToward(characterNode.Velocity.X, 0, characterNode.Speed);
+        }
+
+
         if (characterNode.direction == Vector2.Zero)
         {
             characterNode.stateMachineNode.SwitchState<PlayerIdleState>();
+            return;
         }
 
-        if (characterNode.Velocity.Y < 0)
+        //Switch to the Jump State
+        if (Input.IsActionJustPressed(GameConstants.INPUT_JUMP))
         {
             characterNode.stateMachineNode.SwitchState<PlayerJumpState>();
-            GD.Print("Switched to jump state");
         }
+
+        characterNode.Velocity = characterNode.velocity;
+
+        characterNode.MoveAndSlide();
+        characterNode.Flip();
+
     }
 
     public override void _Notification(int what)

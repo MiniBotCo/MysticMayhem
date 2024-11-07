@@ -9,8 +9,9 @@ public partial class Player : CharacterBody2D
 	[Export] public StateMachine stateMachineNode;
 
 	public Vector2 direction = new();
-	public const float Speed = 300.0f;
-	public const float JumpVelocity = -400.0f;
+	public Vector2 velocity = new();
+	public float Speed = 200.0f;
+	public float JumpVelocity = -300.0f;
 
 	public override void _Ready()
 	{
@@ -19,22 +20,27 @@ public partial class Player : CharacterBody2D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		Vector2 velocity = Velocity;
+		//velocity = Velocity;
 
+		/*
 		// Add the gravity.
 		if (!IsOnFloor())
 		{
 			velocity += GetGravity() * (float)delta;
 		}
 
+		
 		// Handle Jump.
 		if (Input.IsActionJustPressed("Jump") && IsOnFloor())
 		{
 			velocity.Y = JumpVelocity;
 		}
+		*/
 
+
+
+		/*
 		// Get the input direction and handle the movement/deceleration.
-		// As good practice, you should replace UI actions with custom gameplay actions.
 		direction = Input.GetVector(GameConstants.INPUT_MOVE_LEFT, GameConstants.INPUT_MOVE_RIGHT, GameConstants.INPUT_JUMP, "ui_down");
 		if (direction != Vector2.Zero)
 		{
@@ -44,14 +50,17 @@ public partial class Player : CharacterBody2D
 		{
 			velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
 		}
+		*/
 
+		/*
 		Velocity = velocity;
 
 		MoveAndSlide();
 		Flip();
+		*/
 	}
 
-	private void Flip()
+	public void Flip()
 	{
 		bool isNotMovingHorizontally = Velocity.X == 0;
 

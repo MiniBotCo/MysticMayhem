@@ -13,16 +13,38 @@ public partial class PlayerIdleState : Node
 
     public override void _PhysicsProcess(double delta)
     {
+        characterNode.velocity = characterNode.Velocity;
+
+        // Add the gravity.
+        if (!characterNode.IsOnFloor())
+        {
+            characterNode.velocity += characterNode.GetGravity() * (float)delta;
+        }
+
+        characterNode.direction = Input.GetVector(GameConstants.INPUT_MOVE_LEFT, GameConstants.INPUT_MOVE_RIGHT, GameConstants.INPUT_JUMP, "ui_down");
+        GD.Print("The direction is: " + characterNode.direction);
         if (characterNode.direction != Vector2.Zero)
         {
             characterNode.stateMachineNode.SwitchState<PlayerMoveState>();
         }
 
-        if (characterNode.Velocity.Y < 0)
+        /*
+        if (characterNode.direction != Vector2.Zero)
+        {
+            characterNode.stateMachineNode.SwitchState<PlayerMoveState>();
+        }
+        */
+
+        //Switch to the Jump State
+        if (Input.IsActionJustPressed(GameConstants.INPUT_JUMP))
         {
             characterNode.stateMachineNode.SwitchState<PlayerJumpState>();
-            GD.Print("Switched to jump state");
         }
+
+        characterNode.Velocity = characterNode.velocity;
+
+        characterNode.MoveAndSlide();
+        characterNode.Flip();
     }
 
     public override void _Notification(int what)

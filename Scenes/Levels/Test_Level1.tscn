@@ -10,9 +10,6 @@
 [node name="PlatformGenerator" parent="LevelGenerator" index="1"]
 PlatformCount = 40
 
-[node name="PlatformGenerator" parent="LevelGenerator" index="1"]
-PlatformCount = 40
-
 [node name="Player" parent="." instance=ExtResource("3_dt5aj")]
 position = Vector2(348, 273)
 scale = Vector2(0.25, 0.25)
@@ -20,3 +17,4 @@ scale = Vector2(0.25, 0.25)
 [editable path="LevelGenerator"]
 [editable path="LevelGenerator/FrameGenerator"]
 [editable path="LevelGenerator/PlatformGenerator"]
+[editable path="LevelGenerator/EnemySpawner"]
