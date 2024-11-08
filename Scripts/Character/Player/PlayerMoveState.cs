@@ -13,9 +13,13 @@ public partial class PlayerMoveState : Node
 
     public override void _PhysicsProcess(double delta)
     {
-        GD.Print("MOVE STATE");
-
         characterNode.velocity = characterNode.Velocity;
+
+        // Add the gravity.
+        if (!characterNode.IsOnFloor())
+        {
+            characterNode.velocity += characterNode.GetGravity() * (float)delta;
+        }
 
         // Get the input direction and handle the movement/deceleration.
         characterNode.direction = Input.GetVector(GameConstants.INPUT_MOVE_LEFT, GameConstants.INPUT_MOVE_RIGHT, GameConstants.INPUT_JUMP, "ui_down");
@@ -27,7 +31,6 @@ public partial class PlayerMoveState : Node
         {
             characterNode.velocity.X = Mathf.MoveToward(characterNode.Velocity.X, 0, characterNode.Speed);
         }
-
 
         if (characterNode.direction == Vector2.Zero)
         {

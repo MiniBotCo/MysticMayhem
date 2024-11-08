@@ -14,6 +14,8 @@ public partial class PlayerIdleState : Node
     public override void _PhysicsProcess(double delta)
     {
         characterNode.velocity = characterNode.Velocity;
+        //Resetting the character movement to 0 for the idle state
+        characterNode.velocity.X = 0;
 
         // Add the gravity.
         if (!characterNode.IsOnFloor())
@@ -22,21 +24,13 @@ public partial class PlayerIdleState : Node
         }
 
         characterNode.direction = Input.GetVector(GameConstants.INPUT_MOVE_LEFT, GameConstants.INPUT_MOVE_RIGHT, GameConstants.INPUT_JUMP, "ui_down");
-        GD.Print("The direction is: " + characterNode.direction);
-        if (characterNode.direction != Vector2.Zero)
+        if (characterNode.direction != Vector2.Zero && characterNode.direction.Y == 0)
         {
             characterNode.stateMachineNode.SwitchState<PlayerMoveState>();
         }
-
-        /*
-        if (characterNode.direction != Vector2.Zero)
-        {
-            characterNode.stateMachineNode.SwitchState<PlayerMoveState>();
-        }
-        */
 
         //Switch to the Jump State
-        if (Input.IsActionJustPressed(GameConstants.INPUT_JUMP))
+        if (Input.IsActionJustPressed(GameConstants.INPUT_JUMP) && characterNode.IsOnFloor())
         {
             characterNode.stateMachineNode.SwitchState<PlayerJumpState>();
         }

@@ -11,53 +11,11 @@ public partial class Player : CharacterBody2D
 	public Vector2 direction = new();
 	public Vector2 velocity = new();
 	public float Speed = 200.0f;
-	public float JumpVelocity = -300.0f;
+	public float JumpVelocity = -450.0f;
 
 	public override void _Ready()
 	{
 
-	}
-
-	public override void _PhysicsProcess(double delta)
-	{
-		//velocity = Velocity;
-
-		/*
-		// Add the gravity.
-		if (!IsOnFloor())
-		{
-			velocity += GetGravity() * (float)delta;
-		}
-
-		
-		// Handle Jump.
-		if (Input.IsActionJustPressed("Jump") && IsOnFloor())
-		{
-			velocity.Y = JumpVelocity;
-		}
-		*/
-
-
-
-		/*
-		// Get the input direction and handle the movement/deceleration.
-		direction = Input.GetVector(GameConstants.INPUT_MOVE_LEFT, GameConstants.INPUT_MOVE_RIGHT, GameConstants.INPUT_JUMP, "ui_down");
-		if (direction != Vector2.Zero)
-		{
-			velocity.X = direction.X * Speed;
-		}
-		else
-		{
-			velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
-		}
-		*/
-
-		/*
-		Velocity = velocity;
-
-		MoveAndSlide();
-		Flip();
-		*/
 	}
 
 	public void Flip()

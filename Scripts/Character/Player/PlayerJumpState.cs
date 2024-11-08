@@ -22,20 +22,6 @@ public partial class PlayerJumpState : Node
             characterNode.velocity += characterNode.GetGravity() * (float)delta;
         }
 
-        /*
-        if (characterNode.IsOnFloor())
-        {
-            jumpCount = 0;
-        }
-
-        if (jumpCount < maxJumps)
-        {
-            characterNode.velocity.Y = characterNode.JumpVelocity * 400;
-            jumpCount += 1;
-            GD.Print("Tried to double jump" + "Jump velocity is: " + characterNode.velocity.Y + " Jump count: " + jumpCount);
-        }
-        */
-
         // Handle Jump.
         if (characterNode.IsOnFloor())
         {
