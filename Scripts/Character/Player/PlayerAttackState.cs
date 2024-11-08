@@ -2,15 +2,13 @@ using Godot;
 using System;
 using System.Reflection.Metadata;
 
-public partial class PlayerAttackState : Node
+public partial class PlayerAttackState : PlayerState
 {
-    private Player characterNode;
     [Export] private Timer attackTimerNode;
 
     public override void _Ready()
     {
-        characterNode = GetOwner<Player>();
-        SetPhysicsProcess(false);
+        base._Ready();
         attackTimerNode.Timeout += HandleAttackTimeout;
     }
 
