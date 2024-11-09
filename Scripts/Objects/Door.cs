@@ -1,8 +1,12 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
-public partial class Door : AnimatedSprite2D
+public partial class Door : Area2D, ISpawnable
 {
+
 	[Export]
-	PackedScene player { get; set; } = new PackedScene();
+    public Spawn spawner { get; set; }
+
+
 }

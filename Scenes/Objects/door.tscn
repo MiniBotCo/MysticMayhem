@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://tck21y72cs44"]
+[gd_scene load_steps=16 format=3 uid="uid://tck21y72cs44"]
 
 [ext_resource type="Texture2D" uid="uid://chk13nspme7pk" path="res://Assets/Sprites/Objects/Door/DoorClosed.png" id="1_3bmoa"]
 [ext_resource type="Texture2D" uid="uid://b0f2svu8ey2gc" path="res://Assets/Sprites/Objects/Door/DoorOpen.png" id="2_wn1ul"]
@@ -13,8 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://dd8mikm8ss2f2" path="res://Assets/Sprites/Objects/Door/DoorClosing9.png" id="11_ldrgt"]
 [ext_resource type="Script" path="res://Scripts/Objects/Door.cs" id="12_forbl"]
 [ext_resource type="Shape2D" uid="uid://due5kfjexei57" path="res://Scenes/Objects/door_collision_shape.tres" id="12_xbl12"]
-[ext_resource type="PackedScene" uid="uid://quchqw8qhhoi" path="res://Scenes/Spawnables/spawn_algorithm.tscn" id="14_mte5t"]
-[ext_resource type="PackedScene" uid="uid://bwonokl8kriyo" path="res://Scenes/Spawnables/door_spawner_algorithm.tscn" id="15_wtbrs"]
+[ext_resource type="PackedScene" uid="uid://d057vb218xyid" path="res://Scenes/Spawnables/door_spawn.tscn" id="14_7148y"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_d1v8g"]
 animations = [{
@@ -73,8 +72,10 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Area2D" type="Area2D" groups=["Spawnable"]]
+[node name="Area2D" type="Area2D" node_paths=PackedStringArray("spawner") groups=["Spawnable"]]
 collision_mask = 2
+script = ExtResource("12_forbl")
+spawner = NodePath("Spawn")
 metadata/_edit_lock_ = true
 
 [node name="Door" type="AnimatedSprite2D" parent="."]
@@ -83,13 +84,9 @@ sprite_frames = SubResource("SpriteFrames_d1v8g")
 animation = &"Closing"
 autoplay = "Closing"
 offset = Vector2(0, -16)
-script = ExtResource("12_forbl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -16)
 shape = ExtResource("12_xbl12")
 
-[node name="SpawnAlgorithm" parent="." node_paths=PackedStringArray("spawnerAlgorithm") instance=ExtResource("14_mte5t")]
-spawnerAlgorithm = NodePath("DoorSpawnerAlgorithm")
-
-[node name="DoorSpawnerAlgorithm" parent="SpawnAlgorithm" instance=ExtResource("15_wtbrs")]
+[node name="Spawn" parent="." instance=ExtResource("14_7148y")]

@@ -1,5 +1,4 @@
-using System.Runtime.CompilerServices;
-using System.Runtime.Serialization.Formatters;
+using System.Collections.Generic;
 using Godot;
 using Godot.Collections;
 
@@ -10,9 +9,9 @@ public partial class LevelGenerator : Node2D
     public Vector2I LevelSize { get; set; } = new Vector2I(60, 40);
 
     [Export]
-    public Area2D Entrance { get; set; } = null;
+    public Door Entrance { get; set; } = null;
     [Export]
-    public Area2D Exit { get; set; } = null;
+    public Door Exit { get; set; } = null;
 
     [Export]
     public PackedScene PlayerScene { get; set;} = null;
@@ -25,8 +24,8 @@ public partial class LevelGenerator : Node2D
     private TileMapLayer _debugTileMapLayer;
 
     private bool _inDoor = false;
-    private Array<TileMapLayer> _tileMapLayers;
-    private Array<Vector2I> _unusedTiles;
+    private List<TileMapLayer> _tileMapLayers;
+    private List<Vector2I> _unusedTiles;
 
 
     // Called when the node enters the scene tree for the first time.
@@ -40,8 +39,8 @@ public partial class LevelGenerator : Node2D
         // For debug purposes, remove for rinal release
         _debugTileMapLayer = GetNode<TileMapLayer>("DebugTileMapLayer");
 
-        _tileMapLayers = new Array<TileMapLayer>();
-        _unusedTiles = new Array<Vector2I>();
+        _tileMapLayers = new List<TileMapLayer>();
+        _unusedTiles = new List<Vector2I>();
 
         base._Ready();
 
@@ -78,22 +77,19 @@ public partial class LevelGenerator : Node2D
         _unusedTiles = GetUnusedTiles(_tileMapLayers);
 
         // Spawns the entrance and exit doors
-        _spawner.Spawn(new Array<Node2D>() {Entrance, Exit}, _unusedTiles, _tileMapLayers);
+        _spawner.AddToSpawnList(Entrance);
+        _spawner.AddToSpawnList(Exit);
 
         // Signals for the exit door, used to exit the level
         Exit.BodyEntered += OnExitBodyEntered;
         Exit.BodyExited += OnExitBodyExited;
 
-        // Adds an emey to the level
-        // TODO Provide a list of enemies to spawn instead
-        PackedScene enemy = GD.Load<PackedScene>("res://Scenes/Characters/Character.tscn");
-        Node2D enemyInst = enemy.Instantiate<Node2D>();
-        CallDeferred(Node.MethodName.AddChild, enemyInst);
-        await ToSignal(enemyInst, Node2D.SignalName.Ready);
+        // Spawns the spawnable list
+        _spawner.Spawn(_tileMapLayers, _unusedTiles);
 
         // Spawn the enemy
-        _spawner.levelSize = LevelSize;
-        _unusedTiles = _spawner.Spawn(new Array<Node2D>{enemyInst}, _unusedTiles, _tileMapLayers);
+        //_spawner.levelSize = LevelSize;
+        //_unusedTiles = _spawner.Spawn(new Array<Node2D>{enemyInst}, _unusedTiles, _tileMapLayers);
 
         // Draw the debug tiles, to be removed in full release
         for (int i = 0; i < _unusedTiles.Count; i++)
@@ -139,10 +135,10 @@ public partial class LevelGenerator : Node2D
     /// </summary>
     /// <param name="tileMaps">A list of used TileMapLayers</param>
     /// <returns></returns>
-    private Array<Vector2I> GetUnusedTiles(Array<TileMapLayer> tileMaps)
+    private List<Vector2I> GetUnusedTiles(List<TileMapLayer> tileMaps)
     {
         // Array to hold the unused tiles
-        Array<Vector2I> unusedTiles = new Array<Vector2I>();
+        List<Vector2I> unusedTiles = new List<Vector2I>();
 
         // Gets all tiles withing level bounds
         for(int x = 0; x <= LevelSize.X; x++)
@@ -166,6 +162,8 @@ public partial class LevelGenerator : Node2D
                 _debugTileMapLayer.SetCell(tileMapTiles[j], 0, new Vector2I(0, 0)); // For debug purposes, remove for final release
             }
         }
+
+        Shuffle<Vector2I>.ShuffleList(unusedTiles);
 
         return unusedTiles;
     }

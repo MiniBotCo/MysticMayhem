@@ -1,9 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://b5a27fq0q8733"]
+[gd_scene load_steps=4 format=3 uid="uid://b5a27fq0q8733"]
 
 [ext_resource type="Texture2D" uid="uid://dhpcksctgtsnf" path="res://icon.svg" id="1_jqkpa"]
 [ext_resource type="Script" path="res://Scripts/Character/Character.cs" id="1_lbh1h"]
-[ext_resource type="PackedScene" uid="uid://quchqw8qhhoi" path="res://Scenes/Spawnables/spawn_algorithm.tscn" id="3_05ntu"]
-[ext_resource type="PackedScene" uid="uid://klwgqq6rpd4o" path="res://Scenes/Spawnables/spawner_algorithm.tscn" id="4_k3302"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_63rla"]
 
@@ -18,8 +16,3 @@ shape = SubResource("RectangleShape2D_63rla")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_jqkpa")
-
-[node name="SpawnAlgorithm" parent="." node_paths=PackedStringArray("spawnerAlgorithm") instance=ExtResource("3_05ntu")]
-spawnerAlgorithm = NodePath("SpawnerAlgorithm")
-
-[node name="SpawnerAlgorithm" parent="SpawnAlgorithm" instance=ExtResource("4_k3302")]
