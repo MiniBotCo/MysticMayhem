@@ -4,6 +4,11 @@ using System.Collections.Generic;
 
 public partial class Spawn : Node
 {
+	/// <summary>
+	/// Spawns an entity
+	/// </summary>
+	/// <param name="tileMapLayers">The TileMapLayers to spwan on</param>
+	/// <param name="unusedTiles"></param>
     public virtual void SpawnEntity(List<TileMapLayer> tileMapLayers, List<Vector2I> unusedTiles)
     {
 		

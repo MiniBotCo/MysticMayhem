@@ -51,7 +51,7 @@ public partial class LevelGenerator : Node2D
     /// <summary>
     /// Generates the level
     /// </summary>
-    public async void GenerateLevel()
+    public void GenerateLevel()
     {
         // Randomizes the scene
         GD.Randomize();
@@ -86,10 +86,6 @@ public partial class LevelGenerator : Node2D
 
         // Spawns the spawnable list
         _spawner.Spawn(_tileMapLayers, _unusedTiles);
-
-        // Spawn the enemy
-        //_spawner.levelSize = LevelSize;
-        //_unusedTiles = _spawner.Spawn(new Array<Node2D>{enemyInst}, _unusedTiles, _tileMapLayers);
 
         // Draw the debug tiles, to be removed in full release
         for (int i = 0; i < _unusedTiles.Count; i++)
