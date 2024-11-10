@@ -1,16 +1,8 @@
 using Godot;
 using System;
 
-public partial class PlayerMoveState : Node
+public partial class PlayerMoveState : PlayerState
 {
-    private Player characterNode;
-    public override void _Ready()
-    {
-        characterNode = GetOwner<Player>();
-        SetPhysicsProcess(false);
-        SetProcessInput(false);
-    }
-
     public override void _PhysicsProcess(double delta)
     {
         characterNode.velocity = characterNode.Velocity;
@@ -48,23 +40,12 @@ public partial class PlayerMoveState : Node
 
         characterNode.MoveAndSlide();
         characterNode.Flip();
-
     }
 
-    public override void _Notification(int what)
+    protected override void EnterState()
     {
-        base._Notification(what);
-
-        if (what == 5001)
-        {
-            characterNode.animationPlayerNode.Play(GameConstants.ANIM_MOVE);
-            SetPhysicsProcess(true);
-            SetProcessInput(true);
-        }
-        else if (what == 5002)
-        {
-            SetPhysicsProcess(false);
-            SetProcessInput(false);
-        }
+        base.EnterState();
+        characterNode.animationPlayerNode.Play(GameConstants.ANIM_MOVE);
     }
+
 }

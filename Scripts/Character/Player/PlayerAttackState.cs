@@ -12,11 +12,27 @@ public partial class PlayerAttackState : PlayerState
         attackTimerNode.Timeout += HandleAttackTimeout;
     }
 
+    public override void _PhysicsProcess(double delta)
+    {
+        characterNode.velocity = characterNode.Velocity;
+
+        // Add the gravity.
+        if (!characterNode.IsOnFloor())
+        {
+            characterNode.velocity += characterNode.GetGravity() * (float)delta;
+        }
+
+        characterNode.Velocity = characterNode.velocity;
+
+        characterNode.MoveAndSlide();
+        characterNode.Flip();
+    }
+
     public override void _Notification(int what)
     {
         base._Notification(what);
 
-        if (what == 5001)
+        if (what == GameConstants.NOTIFICATION_ENTER_STATE)
         {
             GD.Print("Switched to the attack state");
             characterNode.animationPlayerNode.Play(GameConstants.ANIM_ATTACK);

@@ -102,6 +102,8 @@ script = ExtResource("1_l2rlm")
 animationPlayerNode = NodePath("AnimationPlayer")
 sprite2DNode = NodePath("Sprite2D")
 stateMachineNode = NodePath("StateMachine")
+Speed = 150.0
+JumpVelocity = -625.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(14, -21)

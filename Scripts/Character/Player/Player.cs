@@ -10,8 +10,8 @@ public partial class Player : CharacterBody2D
 
 	public Vector2 direction = new();
 	public Vector2 velocity = new();
-	public float Speed = 200.0f;
-	public float JumpVelocity = -450.0f;
+	[Export(PropertyHint.Range, "50,800,25")] public float Speed = 200.0f;
+	[Export(PropertyHint.Range, "-850,-50,25")] public float JumpVelocity = -450.0f;
 
 	public override void _Ready()
 	{
