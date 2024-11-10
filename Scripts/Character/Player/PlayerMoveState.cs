@@ -17,23 +17,23 @@ public partial class PlayerMoveState : PlayerState
         characterNode.direction = Input.GetVector(GameConstants.INPUT_MOVE_LEFT, GameConstants.INPUT_MOVE_RIGHT, GameConstants.INPUT_JUMP, "ui_down");
         if (characterNode.direction != Vector2.Zero)
         {
-            characterNode.velocity.X = characterNode.direction.X * characterNode.Speed;
+            characterNode.velocity.X = characterNode.direction.X * characterNode.PlayerSpeed;
         }
         else
         {
-            characterNode.velocity.X = Mathf.MoveToward(characterNode.Velocity.X, 0, characterNode.Speed);
+            characterNode.velocity.X = Mathf.MoveToward(characterNode.Velocity.X, 0, characterNode.PlayerSpeed);
         }
 
         if (characterNode.direction == Vector2.Zero)
         {
-            characterNode.stateMachineNode.SwitchState<PlayerIdleState>();
+            characterNode.StateMachineNode.SwitchState<PlayerIdleState>();
             return;
         }
 
         //Switch to the Jump State
         if (Input.IsActionJustPressed(GameConstants.INPUT_JUMP))
         {
-            characterNode.stateMachineNode.SwitchState<PlayerJumpState>();
+            characterNode.StateMachineNode.SwitchState<PlayerJumpState>();
         }
 
         characterNode.Velocity = characterNode.velocity;
@@ -45,7 +45,7 @@ public partial class PlayerMoveState : PlayerState
     protected override void EnterState()
     {
         base.EnterState();
-        characterNode.animationPlayerNode.Play(GameConstants.ANIM_MOVE);
+        characterNode.AnimationPlayerNode.Play(GameConstants.ANIM_MOVE);
     }
 
 }

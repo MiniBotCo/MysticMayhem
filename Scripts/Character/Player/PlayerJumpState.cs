@@ -25,7 +25,7 @@ public partial class PlayerJumpState : PlayerState
         //Transition back to the idle state when the player is not jumping
         if (characterNode.Velocity.Y == 0)
         {
-            characterNode.stateMachineNode.SwitchState<PlayerIdleState>();
+            characterNode.StateMachineNode.SwitchState<PlayerIdleState>();
         }
 
         characterNode.Velocity = characterNode.velocity;
@@ -39,6 +39,6 @@ public partial class PlayerJumpState : PlayerState
     {
         base.EnterState();
         GD.Print("SHould be player the jump animation right now.  WIll update the jump animation soon!");
-        characterNode.animationPlayerNode.Play(GameConstants.ANIM_IDLE);
+        characterNode.AnimationPlayerNode.Play(GameConstants.ANIM_IDLE);
     }
 }

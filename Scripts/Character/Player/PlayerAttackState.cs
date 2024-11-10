@@ -35,13 +35,13 @@ public partial class PlayerAttackState : PlayerState
         if (what == GameConstants.NOTIFICATION_ENTER_STATE)
         {
             GD.Print("Switched to the attack state");
-            characterNode.animationPlayerNode.Play(GameConstants.ANIM_ATTACK);
+            characterNode.AnimationPlayerNode.Play(GameConstants.ANIM_ATTACK);
             SetPhysicsProcess(true);
             attackTimerNode.Start();
         }
     }
     private void HandleAttackTimeout()
     {
-        characterNode.stateMachineNode.SwitchState<PlayerIdleState>();
+        characterNode.StateMachineNode.SwitchState<PlayerIdleState>();
     }
 }
