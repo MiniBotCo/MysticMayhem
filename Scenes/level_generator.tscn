@@ -31,7 +31,6 @@ Exit = NodePath("Exit")
 PlayerScene = ExtResource("2_gdulj")
 
 [node name="FrameGenerator" parent="." instance=ExtResource("3_875ce")]
-Blobs = 0
 
 [node name="PlatformGenerator" parent="." instance=ExtResource("3_yfxaf")]
 PlatformCount = 40
