@@ -1,39 +1,16 @@
-[gd_scene load_steps=12 format=3 uid="uid://brwhlm8vwrm57"]
+[gd_scene load_steps=5 format=3 uid="uid://brwhlm8vwrm57"]
 
 [ext_resource type="Script" path="res://Scripts/LevelGeneration/LevelGenerator.cs" id="1_dwtof"]
-[ext_resource type="PackedScene" uid="uid://b71wwwq6jo2yi" path="res://Scenes/Characters/Player/Player.tscn" id="2_gdulj"]
 [ext_resource type="PackedScene" uid="uid://bul6nsjowvbwh" path="res://Scenes/frame_generator.tscn" id="3_875ce"]
 [ext_resource type="PackedScene" uid="uid://bvbun1n5dbhka" path="res://Scenes/platform_generator.tscn" id="3_yfxaf"]
-[ext_resource type="PackedScene" uid="uid://dint4viqi4e56" path="res://Scenes/spawner.tscn" id="4_vanfr"]
-[ext_resource type="Texture2D" uid="uid://dpeeqgg457m3g" path="res://Assets/Debug/invalidTile.png" id="6_na52r"]
-[ext_resource type="Texture2D" uid="uid://cgcuapdnh80nt" path="res://Assets/Debug/validTile.png" id="7_cc1yp"]
-[ext_resource type="PackedScene" uid="uid://tck21y72cs44" path="res://Scenes/Objects/door.tscn" id="8_pryei"]
+[ext_resource type="PackedScene" uid="uid://b4ugxyvbx8pak" path="res://Scenes/spawner.tscn" id="4_vanfr"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_whipo"]
-texture = ExtResource("6_na52r")
-texture_region_size = Vector2i(32, 32)
-0:0/0 = 0
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vysoh"]
-texture = ExtResource("7_cc1yp")
-texture_region_size = Vector2i(32, 32)
-0:0/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_jwjmc"]
-tile_size = Vector2i(32, 32)
-sources/0 = SubResource("TileSetAtlasSource_whipo")
-sources/1 = SubResource("TileSetAtlasSource_vysoh")
-
-[node name="LevelGenerator" type="Node2D" node_paths=PackedStringArray("Entrance", "Exit")]
+[node name="LevelGenerator" type="Node2D"]
 script = ExtResource("1_dwtof")
-Entrance = NodePath("Entrance")
-Exit = NodePath("Exit")
-PlayerScene = ExtResource("2_gdulj")
 
 [node name="FrameGenerator" parent="." instance=ExtResource("3_875ce")]
 
 [node name="PlatformGenerator" parent="." instance=ExtResource("3_yfxaf")]
-PlatformCount = 40
 
 [node name="Spawner" parent="." instance=ExtResource("4_vanfr")]
 
@@ -51,4 +28,4 @@ tile_set = SubResource("TileSet_jwjmc")
 
 [editable path="FrameGenerator"]
 [editable path="PlatformGenerator"]
-[editable path="Spawner"]
+[editable path="EnemySpawner"]

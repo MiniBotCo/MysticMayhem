@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bwonokl8kriyo"]
-
-[ext_resource type="Script" path="res://Scripts/Spawnables/DoorSpawnerAlgorithm.cs" id="1_3joj6"]
-
-[node name="DoorSpawnerAlgorithm" type="Node"]
-script = ExtResource("1_3joj6")
