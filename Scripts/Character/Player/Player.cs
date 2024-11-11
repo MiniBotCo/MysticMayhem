@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class Player : CharacterBody2D
 {
@@ -8,17 +9,31 @@ public partial class Player : CharacterBody2D
 	[Export] public Sprite2D sprite2DNode;
 	[Export] public StateMachine stateMachineNode;
 
+	[ExportGroup("Player Stats")]
+	[Export] public float Speed = 500.0f;
+	[Export] public float JumpVelocity = -700.0f;
+	[Export] public float Health = 20.0f;
+	[Export] public float Damage = 5.0f;
+
 	public Vector2 direction = new();
-	public const float Speed = 500.0f;
-	public const float JumpVelocity = -700.0f;
+
+
+	private static List<Effect> _effects = new List<Effect>();
 
 	public override void _Ready()
 	{
-
+		ApplyEffects();
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
+		//TODO remove
+		if (Input.IsActionJustPressed("Debug"))
+		{
+			_effects.Add(new Effect("health", 1.0f, true));
+		}
+
+
 		Vector2 velocity = Velocity;
 
 		// Add the gravity.
@@ -59,5 +74,46 @@ public partial class Player : CharacterBody2D
 
 		bool isMovingLeft = Velocity.X < 0;
 		sprite2DNode.FlipH = isMovingLeft;
+	}
+
+	private void ApplyEffects()
+	{
+		GD.Print("Effects: ");
+		List<Effect> nonPermanentEffects = new List<Effect>();
+		foreach (Effect effect in _effects)
+		{
+			switch(effect.name)
+			{
+				case "health":
+					Health += effect.amount;
+					break;
+				case "damage":
+					Damage += effect.amount;
+					break;
+				case "speed":
+					Speed += effect.amount;
+					break;
+				case "jump":
+					JumpVelocity -= effect.amount;
+					break;
+				default:
+					break;
+			}
+
+			if (!effect.permanent)
+			{
+				nonPermanentEffects.Add(effect);
+			}
+
+			//TODO remove
+			GD.Print(effect.name);
+		}
+
+		foreach (Effect effect in nonPermanentEffects)
+		{
+			if (!effect.permanent) _effects.Remove(effect);
+		}
+
+		GD.Print("Stats: Health " + Health + " | Damage " + Damage + " | Speed " + Speed + " | Jump Speed " + JumpVelocity);
 	}
 }
