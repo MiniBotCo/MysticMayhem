@@ -1,12 +1,9 @@
 using Godot;
 using System;
 
-public partial class Player : CharacterBody2D
+public partial class Player : Character
 {
-	[ExportGroup("Required Nodes")]
-	[Export] public AnimationPlayer AnimationPlayerNode { get; private set; }
-	[Export] public Sprite2D Sprite2DNode { get; private set; }
-	[Export] public StateMachine StateMachineNode { get; private set; }
+
 
 	public Vector2 direction = new();
 	public Vector2 velocity = new();
@@ -15,16 +12,8 @@ public partial class Player : CharacterBody2D
 
 	public override void _Ready()
 	{
-
+		characterNode = GetOwner<Player>();
 	}
 
-	public void Flip()
-	{
-		bool isNotMovingHorizontally = Velocity.X == 0;
 
-		if (isNotMovingHorizontally) { return; }
-
-		bool isMovingLeft = Velocity.X < 0;
-		Sprite2DNode.FlipH = isMovingLeft;
-	}
 }

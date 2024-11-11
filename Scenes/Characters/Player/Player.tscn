@@ -15,8 +15,8 @@
 [ext_resource type="Script" path="res://Scripts/Character/Player/PlayerMoveState.cs" id="10_82i2q"]
 [ext_resource type="Texture2D" uid="uid://5liof810tlt5" path="res://Assets/Sprites/Character/Player/Warrior/Animation_Idle/WarriorIdle4.png" id="10_j8dv8"]
 [ext_resource type="Script" path="res://Scripts/Character/Player/PlayerJumpState.cs" id="11_3sg2n"]
-[ext_resource type="Script" path="res://Scripts/Character/StateMachine.cs" id="11_tod2f"]
 [ext_resource type="Script" path="res://Scripts/Character/Player/PlayerAttackState.cs" id="12_b17sf"]
+[ext_resource type="PackedScene" uid="uid://untwbv6c7xc2" path="res://Scenes/Characters/state_machine.tscn" id="13_l7ebq"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_scoyt"]
 
@@ -121,8 +121,7 @@ libraries = {
 scale = Vector2(0.5, 0.5)
 zoom = Vector2(2, 2)
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("currentState", "states")]
-script = ExtResource("11_tod2f")
+[node name="StateMachine" parent="." node_paths=PackedStringArray("currentState", "states") instance=ExtResource("13_l7ebq")]
 currentState = NodePath("IdleState")
 states = [NodePath("IdleState"), NodePath("MoveState"), NodePath("JumpState"), NodePath("AttackState")]
 

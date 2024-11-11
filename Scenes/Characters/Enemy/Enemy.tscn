@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bjupuljh4v708"]
+[gd_scene load_steps=10 format=3 uid="uid://bjupuljh4v708"]
 
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/Enemy.cs" id="1_s7n2v"]
 [ext_resource type="Texture2D" uid="uid://uf67ea6s75px" path="res://Assets/Sprites/Enemy/Ghost.png" id="2_qnxvh"]
 [ext_resource type="Texture2D" uid="uid://dguhjy3gar2ia" path="res://Assets/Sprites/Enemy/Ghost2.png" id="3_igdq4"]
+[ext_resource type="PackedScene" uid="uid://untwbv6c7xc2" path="res://Scenes/Characters/state_machine.tscn" id="4_pcvf8"]
+[ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyIdleState.cs" id="5_olfrj"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oa781"]
 radius = 24.0
@@ -63,3 +65,8 @@ root_node = NodePath("../CollisionShape2D")
 libraries = {
 "": SubResource("AnimationLibrary_u6m5e")
 }
+
+[node name="StateMachine" parent="." instance=ExtResource("4_pcvf8")]
+
+[node name="IdleState" type="Node" parent="StateMachine"]
+script = ExtResource("5_olfrj")
