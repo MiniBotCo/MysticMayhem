@@ -14,25 +14,12 @@ public partial class Character : CharacterBody2D
     [Export] public Sprite2D Sprite2DNode { get; private set; }
     [Export] public StateMachine StateMachineNode { get; private set; }
 
-
     public Vector2 velocity = Vector2.Zero;
 
 
     public override void _PhysicsProcess(double delta)
     {
-        // Apply gravity
-        velocity.Y += Gravity * (float)delta;
-
-        // Clamp the falling speed to prevent infinite fall speed
-        if (velocity.Y > MaxFallSpeed)
-        {
-            velocity.Y = MaxFallSpeed;
-        }
-
-        Velocity = velocity;
-        // Move and slide the character using its velocity
-        MoveAndSlide();
-        Velocity = velocity;
+        
     }
 
     public void Flip()

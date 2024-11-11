@@ -2,7 +2,6 @@ using Godot;
 
 public abstract partial class CharacterState : Node
 {
-    //protected Character characterNode;
     public override void _Ready()
     {
         SetPhysicsProcess(false);
