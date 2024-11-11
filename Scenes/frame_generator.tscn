@@ -1,11 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://bul6nsjowvbwh"]
 
 [ext_resource type="Script" path="res://Scripts/LevelGeneration/FrameGenerator.cs" id="1_hwvq1"]
-[ext_resource type="TileSet" uid="uid://dtdbx03d8spku" path="res://Assets/Sprites/TileMaps/castle_tiles.tres" id="2_npoux"]
+[ext_resource type="TileSet" uid="uid://cpdu7gs6jn763" path="res://Assets/Sprites/TileMaps/PeacefulNightField.tres" id="2_pmbp4"]
 
 [node name="FrameGenerator" type="Node2D"]
 script = ExtResource("1_hwvq1")
 
 [node name="FrameTileMapLayer" type="TileMapLayer" parent="."]
-texture_filter = 1
-tile_set = ExtResource("2_npoux")
+tile_set = ExtResource("2_pmbp4")
