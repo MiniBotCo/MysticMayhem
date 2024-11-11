@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bobfb2mcf5d6x"]
+
+[ext_resource type="Script" path="res://Scripts/Character/Enemy/FloatingEnemy.cs" id="1_4efcx"]
+[ext_resource type="Texture2D" uid="uid://cengc73fvl8jg" path="res://Assets/Sprites/Enemy/png-clipart-ghost-ghost-thumbnail.png" id="1_8d37s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pm7w8"]
+size = Vector2(367, 320)
+
+[node name="FloatingEnemy" type="RigidBody2D"]
+script = ExtResource("1_4efcx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2.5, 0)
+shape = SubResource("RectangleShape2D_pm7w8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_8d37s")
