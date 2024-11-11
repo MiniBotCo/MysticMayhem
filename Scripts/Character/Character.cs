@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using Godot.Collections;
 
 public partial class Character : CharacterBody2D
 {
@@ -26,4 +27,6 @@ public partial class Character : CharacterBody2D
         MoveAndSlide();
         Velocity = velocity;
     }
+
+
 }

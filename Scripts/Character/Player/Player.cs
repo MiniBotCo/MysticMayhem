@@ -3,6 +3,7 @@ using System;
 
 public partial class Player : CharacterBody2D
 {
+
 	[ExportGroup("Required Nodes")]
 	[Export] public AnimationPlayer animationPlayerNode;
 	[Export] public Sprite2D sprite2DNode;

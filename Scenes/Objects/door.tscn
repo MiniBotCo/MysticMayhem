@@ -1,0 +1,92 @@
+[gd_scene load_steps=16 format=3 uid="uid://tck21y72cs44"]
+
+[ext_resource type="Texture2D" uid="uid://chk13nspme7pk" path="res://Assets/Sprites/Objects/Door/DoorClosed.png" id="1_3bmoa"]
+[ext_resource type="Texture2D" uid="uid://b0f2svu8ey2gc" path="res://Assets/Sprites/Objects/Door/DoorOpen.png" id="2_wn1ul"]
+[ext_resource type="Texture2D" uid="uid://b57du746ipvv3" path="res://Assets/Sprites/Objects/Door/DoorClosing1.png" id="3_d6jde"]
+[ext_resource type="Texture2D" uid="uid://jtohhjorig8m" path="res://Assets/Sprites/Objects/Door/DoorClosing2.png" id="4_pgpr5"]
+[ext_resource type="Texture2D" uid="uid://b0qgjr3702ses" path="res://Assets/Sprites/Objects/Door/DoorClosing3.png" id="5_s10hh"]
+[ext_resource type="Texture2D" uid="uid://duc4keey2nm6e" path="res://Assets/Sprites/Objects/Door/DoorClosing4.png" id="6_n65wu"]
+[ext_resource type="Texture2D" uid="uid://xn3y6uifxe2j" path="res://Assets/Sprites/Objects/Door/DoorClosing5.png" id="7_vk555"]
+[ext_resource type="Texture2D" uid="uid://br13pcdk3700d" path="res://Assets/Sprites/Objects/Door/DoorClosing6.png" id="8_vwxmi"]
+[ext_resource type="Texture2D" uid="uid://c2apb1dufx8pm" path="res://Assets/Sprites/Objects/Door/DoorClosing7.png" id="9_3iqyt"]
+[ext_resource type="Texture2D" uid="uid://de2nwr5f0pqna" path="res://Assets/Sprites/Objects/Door/DoorClosing8.png" id="10_k3r57"]
+[ext_resource type="Texture2D" uid="uid://dd8mikm8ss2f2" path="res://Assets/Sprites/Objects/Door/DoorClosing9.png" id="11_ldrgt"]
+[ext_resource type="Script" path="res://Scripts/Objects/Door.cs" id="12_forbl"]
+[ext_resource type="Shape2D" uid="uid://due5kfjexei57" path="res://Scenes/Objects/door_collision_shape.tres" id="12_xbl12"]
+[ext_resource type="PackedScene" uid="uid://d057vb218xyid" path="res://Scenes/Spawnables/door_spawn.tscn" id="14_7148y"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d1v8g"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_3bmoa")
+}],
+"loop": true,
+"name": &"Closed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_wn1ul")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_d6jde")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_pgpr5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_s10hh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_n65wu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_vk555")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_vwxmi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_3iqyt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_k3r57")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ldrgt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_3bmoa")
+}],
+"loop": false,
+"name": &"Closing",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_wn1ul")
+}],
+"loop": true,
+"name": &"Open",
+"speed": 5.0
+}]
+
+[node name="Area2D" type="Area2D" node_paths=PackedStringArray("spawner") groups=["Spawnable"]]
+collision_mask = 2
+script = ExtResource("12_forbl")
+spawner = NodePath("Spawn")
+metadata/_edit_lock_ = true
+
+[node name="Door" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_d1v8g")
+animation = &"Closing"
+autoplay = "Closing"
+offset = Vector2(0, -16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -16)
+shape = ExtResource("12_xbl12")
+
+[node name="Spawn" parent="." instance=ExtResource("14_7148y")]
