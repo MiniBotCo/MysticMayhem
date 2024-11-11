@@ -31,7 +31,6 @@ Exit = NodePath("Exit")
 PlayerScene = ExtResource("2_gdulj")
 
 [node name="FrameGenerator" parent="." instance=ExtResource("3_875ce")]
-Blobs = 0
 
 [node name="PlatformGenerator" parent="." instance=ExtResource("3_yfxaf")]
 PlatformCount = 40
@@ -43,10 +42,10 @@ position = Vector2(1155, 645)
 zoom = Vector2(0.5, 0.5)
 
 [node name="DebugTileMapLayer" type="TileMapLayer" parent="."]
+visible = false
 tile_set = SubResource("TileSet_jwjmc")
 
 [node name="Entrance" parent="." instance=ExtResource("8_pryei")]
-visible = false
 
 [node name="Exit" parent="." instance=ExtResource("8_pryei")]
 
