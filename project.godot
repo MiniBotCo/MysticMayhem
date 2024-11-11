@@ -15,10 +15,6 @@ run/main_scene="res://Scenes/Levels/Test_Level1.tscn"
 config/features=PackedStringArray("4.3", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 
-[display]
-
-window/stretch/mode="viewport"
-
 [dotnet]
 
 project/assembly_name="Mystic Mayhem"
@@ -26,11 +22,6 @@ project/assembly_name="Mystic Mayhem"
 [global_group]
 
 Spawnable="If the node can be placed by a spawner. Must have a ShapeCast2D named SpawnBuffer"
-Player=""
-
-[physics]
-
-2d/default_gravity=1200.0
 
 [input]
 
@@ -59,5 +50,3 @@ Attack={
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-2d/snap/snap_2d_transforms_to_pixel=true
-2d/snap/snap_2d_vertices_to_pixel=true

@@ -18,9 +18,6 @@
 [ext_resource type="Script" path="res://Scripts/Character/StateMachine.cs" id="11_tod2f"]
 [ext_resource type="Script" path="res://Scripts/Character/Player/PlayerAttackState.cs" id="12_b17sf"]
 
-[node name="Player" type="CharacterBody2D" groups=["Player"]]
-visibility_layer = 4
-
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_scoyt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4qun7"]
@@ -107,7 +104,6 @@ sprite2DNode = NodePath("Sprite2D")
 stateMachineNode = NodePath("StateMachine")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-
 position = Vector2(14, -21)
 texture = SubResource("CompressedTexture2D_scoyt")
 
