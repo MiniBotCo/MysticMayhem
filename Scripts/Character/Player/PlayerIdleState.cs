@@ -21,7 +21,7 @@ public partial class PlayerIdleState : Node
         if (characterNode.Velocity.Y < 0)
         {
             characterNode.stateMachineNode.SwitchState<PlayerJumpState>();
-            GD.Print("Switched to jump state");
+            //GD.Print("Switched to jump state");
         }
     }
 

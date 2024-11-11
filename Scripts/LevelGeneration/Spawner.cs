@@ -1,84 +1,36 @@
+using System.Collections.Generic;
 using Godot;
-using Godot.Collections;
 
 public partial class Spawner : Node2D
 {
-	[Export]
-	public int spawnCount { get; set; } = 5;
-	[Export]
-	public Vector2I levelSize { get; set; } = new Vector2I(60, 40);
-
-	private PackedScene _spawnScene = GD.Load<PackedScene>("res://Scenes/Characters/Character.tscn");
-	private Array<Node2D> _spawnList = new Array<Node2D>(); // To be implemented when multiple spawnable types exist
+	private List<ISpawnable> spawnables = new List<ISpawnable>();
 
 	/// <summary>
-	/// Spawns the spawnable on the tilemap passed. Currently intended only for use with the platform tilemap
+	/// Adds a spawnable to the list of things to spawn
 	/// </summary>
-	/// <param name="tileMap">The tilemap to spawn spawnables on</param>
-    public async void Spawn(TileMapLayer tileMap)
+	/// <param name="spawnable">The spawnable to add</param>
+	public void AddToSpawnList(ISpawnable spawnable)
 	{
-		for(int i = 0; i < spawnCount; i++)
-		{
-			Node2D spawn = _spawnScene.Instantiate<Node2D>();
-			if (spawn.IsInGroup("Spawnable"))
-			{
-				GetTree().Root.CallDeferred(Node.MethodName.AddChild, spawn);
-				await ToSignal(spawn, Node.SignalName.Ready);
-				PlaceSpawn(tileMap, spawn);
-			}
-		}
+		spawnables.Add(spawnable);
 	}
 
 	/// <summary>
-	/// Places a spawnable at a valid position on the given tilemap
+	/// Spawns eveything on the spawnables list
 	/// </summary>
-	/// <param name="tileMap">The tilemap to place on</param>
-	/// <param name="spawn">The spawnable to be placed</param>
-	private void PlaceSpawn(TileMapLayer tileMap, Node2D spawn)
+	/// <param name="tileMapLayers">The tile map layers to spawn on</param>
+	/// <param name="unusedTiles">The unused tiles</param>
+	public void Spawn(List<TileMapLayer> tileMapLayers, List<Vector2I> unusedTiles)
 	{
-		Array<Vector2> spawnPositions = GetValidSpawnPositions(tileMap, spawn);
-
-		if (spawnPositions.Count > 0)
+		foreach(ISpawnable spawn in spawnables)
 		{
-			spawn.GlobalPosition = GetValidSpawnPositions(tileMap, spawn).PickRandom();
-		}
-		else
-		{
-			spawn.QueueFree();
-		}
-		
-	}
-
-	/// <summary>
-	/// Returns an array of valid spawn positions as Vector2s
-	/// </summary>
-	/// <param name="tileMap">The tilemap to check for valid positions on</param>
-	/// <param name="spawn">The spawn to be placed</param>
-	/// <returns>Array of Vector2 valid spawn positions</returns>
-	private Array<Vector2> GetValidSpawnPositions(TileMapLayer tileMap, Node2D spawn)
-	{
-		Array<Vector2I> tiles = tileMap.GetUsedCells();
-		Array<Vector2> validPositions = new Array<Vector2>();
-		ShapeCast2D spawnBuffer = spawn.GetNode<ShapeCast2D>("SpawnBuffer");
-
-		for (int i=0; i < tiles.Count; i++)
-		{
-			//Gives a position slightly above the tile
-			spawnBuffer.Position = tileMap.MapToLocal(new Vector2I(tiles[i].X, tiles[i].Y-1)) + new Vector2(0, 2); 
-
-			// Force the spawnBuffer to update
-			spawnBuffer.ForceUpdateTransform();
-			spawnBuffer.ForceShapecastUpdate();
-
-			if (!spawnBuffer.IsColliding())
+			if(spawn.spawner != null)
 			{
-				validPositions.Add(spawnBuffer.Position);
+				spawn.spawner.SpawnEntity(tileMapLayers, unusedTiles);
 			}
-			
+			else
+			{
+				GD.Print("Spawnable:  " + spawn + " does not have a valid spawner node assigned");
+			}
 		}
-
-		spawnBuffer.Position = Vector2.Zero; // Reset the spawnBuffer position
-
-		return validPositions;
 	}
 }

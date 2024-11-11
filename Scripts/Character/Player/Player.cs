@@ -9,8 +9,8 @@ public partial class Player : CharacterBody2D
 	[Export] public StateMachine stateMachineNode;
 
 	public Vector2 direction = new();
-	public const float Speed = 300.0f;
-	public const float JumpVelocity = -400.0f;
+	public const float Speed = 500.0f;
+	public const float JumpVelocity = -700.0f;
 
 	public override void _Ready()
 	{

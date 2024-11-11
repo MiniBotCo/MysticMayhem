@@ -12,7 +12,7 @@ public partial class PlayerJumpState : Node
 
     public override void _PhysicsProcess(double delta)
     {
-        GD.Print("Jump state enabled!");
+        //GD.Print("Jump state enabled!");
         if (characterNode.Velocity.Y == 0)
         {
             characterNode.stateMachineNode.SwitchState<PlayerIdleState>();

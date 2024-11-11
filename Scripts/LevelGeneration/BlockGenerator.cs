@@ -40,7 +40,7 @@ public class Block
                 Vector2I position = new Vector2I(block.Position.X + x - block.Size.X/2, block.Position.Y + y - block.Size.Y/2);
                 if (position.X < levelSize.X && position.Y < levelSize.Y && position.X > 0 && position.Y > 0)
                 {
-                    blockTileMap.SetCell(position, 0, new Vector2I(2, 2));
+                    blockTileMap.SetCell(position, 0, new Vector2I(4, 0));
                 }
             }
         }

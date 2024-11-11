@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://b4ugxyvbx8pak"]
+[gd_scene load_steps=2 format=3 uid="uid://dint4viqi4e56"]
 
 [ext_resource type="Script" path="res://Scripts/LevelGeneration/Spawner.cs" id="1_2wc3p"]
 

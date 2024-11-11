@@ -96,7 +96,7 @@ _data = {
 "RESET": SubResource("Animation_a65ei")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animationPlayerNode", "sprite2DNode", "stateMachineNode")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animationPlayerNode", "sprite2DNode", "stateMachineNode") groups=["Player"]]
 collision_layer = 2
 script = ExtResource("1_l2rlm")
 animationPlayerNode = NodePath("AnimationPlayer")

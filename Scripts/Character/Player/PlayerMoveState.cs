@@ -13,7 +13,7 @@ public partial class PlayerMoveState : Node
 
     public override void _PhysicsProcess(double delta)
     {
-        GD.Print("MOVE STATE");
+        //GD.Print("MOVE STATE");
         if (characterNode.direction == Vector2.Zero)
         {
             characterNode.stateMachineNode.SwitchState<PlayerIdleState>();
@@ -22,7 +22,7 @@ public partial class PlayerMoveState : Node
         if (characterNode.Velocity.Y < 0)
         {
             characterNode.stateMachineNode.SwitchState<PlayerJumpState>();
-            GD.Print("Switched to jump state");
+            //GD.Print("Switched to jump state");
         }
     }
 

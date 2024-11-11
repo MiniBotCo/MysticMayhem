@@ -13,14 +13,6 @@ public partial class FrameGenerator : Node2D
     [Export]
     public Vector2I FrameBlockMaxSize { get; set; } = new Vector2I(15, 10);
 
-    [ExportGroup("Blob Properties")]
-    [Export]
-    public int Blobs { get; set; } = 2;
-    [Export]
-    public Vector2I BlobMaxSize { get; set; } = new Vector2I(7, 7);
-    [Export]
-    public Vector2I BlobMinSize { get; set; } = new Vector2I(5, 5);
-
     private TileMapLayer _frameTileMap;
 
 
@@ -58,19 +50,16 @@ public partial class FrameGenerator : Node2D
             {
                 for (int x = 0; x <= FrameSize.X; x++)
                 {
-                    _frameTileMap.SetCell(new Vector2I(x, y), 0, new Vector2I(2, 2));
+                    _frameTileMap.SetCell(new Vector2I(x, y), 0, new Vector2I(4, 0));
                 }
             }
             else // Sides
             {
-                _frameTileMap.SetCell(new Vector2I(0, y), 0, new Vector2I(2, 2));
-                _frameTileMap.SetCell(new Vector2I(FrameSize.X, y), 0, new Vector2I(2, 2));
+                _frameTileMap.SetCell(new Vector2I(0, y), 0, new Vector2I(4, 0));
+                _frameTileMap.SetCell(new Vector2I(FrameSize.X, y), 0, new Vector2I(4, 0));
             }
         }
         GenerateSides();
-        for (int i = 0; i < Blobs; i++) GenerateBlob();
-
-        EmitSignal(SignalName.GenerationComplete);
     }
 
     /// <summary>
@@ -104,20 +93,6 @@ public partial class FrameGenerator : Node2D
         {
             Block b = new Block();
             n += b.GenerateBlock(new Vector2I(n, FrameSize.Y), FrameBlockMinSize, FrameBlockMaxSize).X/2;
-            b.DrawBlock(_frameTileMap, FrameSize);
-        }
-    }
-
-    /// <summary>
-    /// Creates a blob out of blocks using the predefined blob size
-    /// </summary>
-    private void GenerateBlob()
-    {
-        Vector2I position = FrameSize/2 + new Vector2I(GD.RandRange(-FrameSize.X/3, FrameSize.X/3), GD.RandRange(-FrameSize.Y/3, FrameSize.Y/3));
-        for(int i = 0; i < 5; i++)
-        {
-            Block b = new Block();
-            b.GenerateBlock(new Vector2I(position.X + GD.RandRange(-3, 3), position.Y + GD.RandRange(-3, 3)), BlobMinSize, BlobMaxSize);
             b.DrawBlock(_frameTileMap, FrameSize);
         }
     }
