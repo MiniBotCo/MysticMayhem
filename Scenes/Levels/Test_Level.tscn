@@ -17,4 +17,4 @@ rendering_quadrant_size = 17
 position = Vector2(-16, -125)
 
 [node name="Enemy" parent="." instance=ExtResource("3_20fpa")]
-position = Vector2(154, -180)
+position = Vector2(81, -220)

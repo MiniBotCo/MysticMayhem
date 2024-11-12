@@ -14,12 +14,15 @@ public partial class Character : CharacterBody2D
     [Export] public Sprite2D Sprite2DNode { get; private set; }
     [Export] public StateMachine StateMachineNode { get; private set; }
 
+    [ExportGroup("AI Nodes")]
+    [Export] public Path2D PathNode { get; private set; }
+
     public Vector2 velocity = Vector2.Zero;
 
 
     public override void _PhysicsProcess(double delta)
     {
-        
+
     }
 
     public void Flip()

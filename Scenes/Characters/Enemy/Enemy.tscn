@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://bjupuljh4v708"]
+[gd_scene load_steps=12 format=3 uid="uid://bjupuljh4v708"]
 
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/Enemy.cs" id="1_s7n2v"]
 [ext_resource type="Texture2D" uid="uid://uf67ea6s75px" path="res://Assets/Sprites/Enemy/Ghost.png" id="2_qnxvh"]
 [ext_resource type="Texture2D" uid="uid://dguhjy3gar2ia" path="res://Assets/Sprites/Enemy/Ghost2.png" id="3_igdq4"]
 [ext_resource type="PackedScene" uid="uid://untwbv6c7xc2" path="res://Scenes/Characters/state_machine.tscn" id="4_pcvf8"]
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyIdleState.cs" id="5_olfrj"]
+[ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyReturnState.cs" id="6_ksx3o"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oa781"]
 radius = 24.0
@@ -48,10 +49,18 @@ _data = {
 "RESET": SubResource("Animation_h7ce0")
 }
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("AnimationPlayerNode", "Sprite2DNode")]
+[sub_resource type="Curve2D" id="Curve2D_dtgxo"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 114, 0, 0, 0, 0, 0, 67, 0, 0, 0, 0, 0, -142.325, 1)
+}
+point_count = 3
+
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("AnimationPlayerNode", "Sprite2DNode", "StateMachineNode", "PathNode")]
 script = ExtResource("1_s7n2v")
 AnimationPlayerNode = NodePath("AnimationPlayer")
 Sprite2DNode = NodePath("Sprite2D")
+StateMachineNode = NodePath("StateMachine")
+PathNode = NodePath("Path2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_qnxvh")
@@ -66,8 +75,15 @@ libraries = {
 "": SubResource("AnimationLibrary_u6m5e")
 }
 
-[node name="StateMachine" parent="." node_paths=PackedStringArray("currentState") instance=ExtResource("4_pcvf8")]
-currentState = NodePath("IdleState")
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_dtgxo")
+
+[node name="StateMachine" parent="." node_paths=PackedStringArray("currentState", "states") instance=ExtResource("4_pcvf8")]
+currentState = NodePath("ReturnState")
+states = [NodePath("IdleState"), NodePath("ReturnState"), null, null]
 
 [node name="IdleState" type="Node" parent="StateMachine"]
 script = ExtResource("5_olfrj")
+
+[node name="ReturnState" type="Node" parent="StateMachine"]
+script = ExtResource("6_ksx3o")
