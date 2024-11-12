@@ -1,0 +1,171 @@
+[gd_scene load_steps=13 format=3 uid="uid://bf6ostbu5y17d"]
+
+[ext_resource type="Texture2D" uid="uid://cpuw5yui7gtsc" path="res://Assets/Sprites/Objects/Chest/chest_closed.png" id="1_2s8oc"]
+[ext_resource type="Script" path="res://Scripts/Objects/Chest.cs" id="1_3rset"]
+[ext_resource type="Texture2D" uid="uid://c374pbwpa8bu4" path="res://Assets/Sprites/Objects/Chest/chest2.png" id="2_fypp6"]
+[ext_resource type="Texture2D" uid="uid://salk63ra7gkf" path="res://Assets/Sprites/Objects/Chest/chest3.png" id="3_fsj2l"]
+[ext_resource type="Texture2D" uid="uid://c0jgn38ec53xf" path="res://Assets/Sprites/Objects/Chest/chest_open.png" id="4_q1vaq"]
+[ext_resource type="Texture2D" uid="uid://blxovxjyriy31" path="res://Assets/Sprites/Objects/Items/damage.png" id="6_lglvu"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ith7t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_2s8oc")
+}],
+"loop": true,
+"name": &"closed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_2s8oc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_fypp6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_fsj2l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_q1vaq")
+}],
+"loop": false,
+"name": &"opening",
+"speed": 5.0
+}]
+
+[sub_resource type="Curve" id="Curve_6xafj"]
+min_value = -1.0
+_data = [Vector2(0, 0.0805922), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j7g45"]
+size = Vector2(26, 26)
+
+[sub_resource type="Animation" id="Animation_8tsor"]
+resource_name = "opening"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.233333, 0.366667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_3eqfy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wkjpw"]
+_data = {
+"RESET": SubResource("Animation_3eqfy"),
+"opening": SubResource("Animation_8tsor")
+}
+
+[node name="chest" type="Area2D"]
+script = ExtResource("1_3rset")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_ith7t")
+animation = &"opening"
+metadata/_edit_lock_ = true
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(0, -2)
+emitting = false
+amount = 20
+lifetime = 1.75
+one_shot = true
+explosiveness = 0.8
+lifetime_randomness = 0.75
+emission_shape = 3
+emission_rect_extents = Vector2(6, 4)
+direction = Vector2(0, -1)
+gravity = Vector2(0, 50)
+initial_velocity_min = 55.0
+initial_velocity_max = 60.0
+scale_amount_min = 2.0
+scale_amount_max = 2.0
+hue_variation_min = 1.0
+hue_variation_max = 1.0
+hue_variation_curve = SubResource("Curve_6xafj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_j7g45")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_wkjpw")
+}
+
+[node name="Slot1" type="Button" parent="."]
+texture_filter = 1
+offset_left = -60.0
+offset_top = -40.0
+offset_right = -20.0
+icon = ExtResource("6_lglvu")
+flat = true
+
+[node name="Slot2" type="Button" parent="."]
+texture_filter = 1
+offset_left = -20.0
+offset_top = -60.0
+offset_right = 20.0
+offset_bottom = -20.0
+icon = ExtResource("6_lglvu")
+flat = true
+
+[node name="Slot3" type="Button" parent="."]
+texture_filter = 1
+offset_left = 20.0
+offset_top = -40.0
+offset_right = 60.0
+icon = ExtResource("6_lglvu")
+flat = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)

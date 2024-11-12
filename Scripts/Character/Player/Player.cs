@@ -78,7 +78,8 @@ public partial class Player : CharacterBody2D
 
 	private void ApplyEffects()
 	{
-		GD.Print("Effects: ");
+		GD.Print("Effects: "); //TODO remove
+
 		List<Effect> nonPermanentEffects = new List<Effect>();
 		foreach (Effect effect in _effects)
 		{
@@ -105,8 +106,7 @@ public partial class Player : CharacterBody2D
 				nonPermanentEffects.Add(effect);
 			}
 
-			//TODO remove
-			GD.Print(effect.name);
+			GD.Print(effect.name); //TODO remove
 		}
 
 		foreach (Effect effect in nonPermanentEffects)
@@ -114,6 +114,6 @@ public partial class Player : CharacterBody2D
 			if (!effect.permanent) _effects.Remove(effect);
 		}
 
-		GD.Print("Stats: Health " + Health + " | Damage " + Damage + " | Speed " + Speed + " | Jump Speed " + JumpVelocity);
+		GD.Print("Stats: Health " + Health + " | Damage " + Damage + " | Speed " + Speed + " | Jump Speed " + JumpVelocity); //TODO remove
 	}
 }
