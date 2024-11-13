@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dguhjy3gar2ia"
-path="res://.godot/imported/Ghost2.png-97f0047e5b0fe5434ba2f70138f72b36.ctex"
+uid="uid://dli36ptrvkvb3"
+path="res://.godot/imported/Ghost_Attack2.png-f0bb31bd1da5c207d5850955e08f00b6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Enemy/Ghost2.png"
-dest_files=["res://.godot/imported/Ghost2.png-97f0047e5b0fe5434ba2f70138f72b36.ctex"]
+source_file="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Attack/Ghost_Attack2.png"
+dest_files=["res://.godot/imported/Ghost_Attack2.png-f0bb31bd1da5c207d5850955e08f00b6.ctex"]
 
 [params]
 

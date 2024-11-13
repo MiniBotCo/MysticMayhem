@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cengc73fvl8jg"
-path="res://.godot/imported/png-clipart-ghost-ghost-thumbnail.png-b10ae33ad7e83c0f0c5a713fe72a0757.ctex"
+uid="uid://byuyjwvykdpl5"
+path="res://.godot/imported/Ghost_Idle2.png-01ce03280b20b4e79007d85695b1a027.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Enemy/png-clipart-ghost-ghost-thumbnail.png"
-dest_files=["res://.godot/imported/png-clipart-ghost-ghost-thumbnail.png-b10ae33ad7e83c0f0c5a713fe72a0757.ctex"]
+source_file="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Idle/Ghost_Idle2.png"
+dest_files=["res://.godot/imported/Ghost_Idle2.png-01ce03280b20b4e79007d85695b1a027.ctex"]
 
 [params]
 

@@ -1,15 +1,35 @@
-[gd_scene load_steps=12 format=3 uid="uid://bjupuljh4v708"]
+[gd_scene load_steps=16 format=3 uid="uid://bjupuljh4v708"]
 
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/Enemy.cs" id="1_s7n2v"]
-[ext_resource type="Texture2D" uid="uid://uf67ea6s75px" path="res://Assets/Sprites/Enemy/Ghost.png" id="2_qnxvh"]
-[ext_resource type="Texture2D" uid="uid://dguhjy3gar2ia" path="res://Assets/Sprites/Enemy/Ghost2.png" id="3_igdq4"]
+[ext_resource type="Texture2D" uid="uid://uf67ea6s75px" path="res://Assets/Sprites/Character/Enemy/Ghost.png" id="2_qnxvh"]
+[ext_resource type="Texture2D" uid="uid://c25ugshfk3ith" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Idle/Ghost_Idle1.png" id="3_dwpcu"]
 [ext_resource type="PackedScene" uid="uid://untwbv6c7xc2" path="res://Scenes/Characters/state_machine.tscn" id="4_pcvf8"]
+[ext_resource type="Texture2D" uid="uid://byuyjwvykdpl5" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Idle/Ghost_Idle2.png" id="4_s8jux"]
+[ext_resource type="Texture2D" uid="uid://c5dcgr43rd0nl" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Attack/Ghost_Attack1.png" id="5_aw7f7"]
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyIdleState.cs" id="5_olfrj"]
+[ext_resource type="Texture2D" uid="uid://dli36ptrvkvb3" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Attack/Ghost_Attack2.png" id="6_brtih"]
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyReturnState.cs" id="6_ksx3o"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oa781"]
 radius = 24.0
 height = 76.0
+
+[sub_resource type="Animation" id="Animation_g30ne"]
+resource_name = "Attack"
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("5_aw7f7"), ExtResource("6_brtih"), ExtResource("5_aw7f7"), ExtResource("6_brtih")]
+}
 
 [sub_resource type="Animation" id="Animation_x6bf4"]
 resource_name = "Idle"
@@ -25,7 +45,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("2_qnxvh"), ExtResource("3_igdq4"), ExtResource("2_qnxvh"), ExtResource("3_igdq4")]
+"values": [ExtResource("3_dwpcu"), ExtResource("4_s8jux"), ExtResource("3_dwpcu"), ExtResource("4_s8jux")]
 }
 
 [sub_resource type="Animation" id="Animation_h7ce0"]
@@ -45,22 +65,25 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_u6m5e"]
 _data = {
+"Attack": SubResource("Animation_g30ne"),
 "Idle": SubResource("Animation_x6bf4"),
 "RESET": SubResource("Animation_h7ce0")
 }
 
 [sub_resource type="Curve2D" id="Curve2D_dtgxo"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 114, 0, 0, 0, 0, 0, 67, 0, 0, 0, 0, 0, -142.325, 1)
+"points": PackedVector2Array(0, 0, 0, 0, -142, 0, 0, 0, 0, 0, 114, 0)
 }
-point_count = 3
+point_count = 2
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("AnimationPlayerNode", "Sprite2DNode", "StateMachineNode", "PathNode")]
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("AnimationPlayerNode", "Sprite2DNode", "StateMachineNode", "PathNode", "Agent2DNode")]
 script = ExtResource("1_s7n2v")
+EnemySpeed = 100.0
 AnimationPlayerNode = NodePath("AnimationPlayer")
 Sprite2DNode = NodePath("Sprite2D")
 StateMachineNode = NodePath("StateMachine")
 PathNode = NodePath("Path2D")
+Agent2DNode = NodePath("NavigationAgent2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_qnxvh")
@@ -87,3 +110,5 @@ script = ExtResource("5_olfrj")
 
 [node name="ReturnState" type="Node" parent="StateMachine"]
 script = ExtResource("6_ksx3o")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

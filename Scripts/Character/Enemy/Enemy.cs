@@ -3,6 +3,7 @@ using System;
 
 public partial class Enemy : Character
 {
+	[Export(PropertyHint.Range, "50,800,25")] public float EnemySpeed = 150.0f;
 	public override void _Ready()
 	{
 	}

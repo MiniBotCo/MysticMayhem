@@ -16,6 +16,7 @@ public partial class Character : CharacterBody2D
 
     [ExportGroup("AI Nodes")]
     [Export] public Path2D PathNode { get; private set; }
+    [Export] public NavigationAgent2D Agent2DNode { get; private set; }
 
     public Vector2 velocity = Vector2.Zero;
 
