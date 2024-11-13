@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pm7w8"]
 size = Vector2(367, 320)
 
-[node name="FloatingEnemy" type="RigidBody2D"]
+[node name="FloatingEnemy" type="CharacterBody2D"]
 script = ExtResource("1_4efcx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

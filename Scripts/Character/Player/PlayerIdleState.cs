@@ -13,6 +13,7 @@ public partial class PlayerIdleState : PlayerState
         if (!characterNode.IsOnFloor())
         {
             characterNode.velocity += characterNode.GetGravity() * (float)delta;
+            characterNode.AnimationPlayerNode.Play(GameConstants.ANIM_JUMP);
         }
 
         characterNode.direction = Input.GetVector(GameConstants.INPUT_MOVE_LEFT, GameConstants.INPUT_MOVE_RIGHT, GameConstants.INPUT_JUMP, "ui_down");

@@ -14,10 +14,10 @@ public partial class EnemyReturnState : EnemyState
     }
     protected override void EnterState()
     {
-        GD.Print("Should be playing an enemy move animation!");
         characterNode.AnimationPlayerNode.Play(GameConstants.ANIM_IDLE);
 
         characterNode.Agent2DNode.TargetPosition = destination;
+        GD.Print("The desitination is: " + destination);
 
     }
 
@@ -29,8 +29,9 @@ public partial class EnemyReturnState : EnemyState
             return;
         }
 
-        //GD.Print("CharacterNode GlobalPosition: " + characterNode.GlobalPosition);
-        //GD.Print("Destination is: " + destination);
+        GD.Print("Distance to target: " + characterNode.Agent2DNode.DistanceToTarget());
+        GD.Print("CharacterNode GlobalPosition: " + characterNode.GlobalPosition);
+        GD.Print("Destination is: " + destination);
 
         characterNode.Velocity = characterNode.GlobalPosition.DirectionTo(destination) * characterNode.EnemySpeed;
 

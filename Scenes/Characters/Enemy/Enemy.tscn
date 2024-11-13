@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bjupuljh4v708"]
+[gd_scene load_steps=17 format=3 uid="uid://bjupuljh4v708"]
 
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/Enemy.cs" id="1_s7n2v"]
 [ext_resource type="Texture2D" uid="uid://uf67ea6s75px" path="res://Assets/Sprites/Character/Enemy/Ghost.png" id="2_qnxvh"]
@@ -76,6 +76,11 @@ _data = {
 }
 point_count = 2
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_shqom"]
+vertices = PackedVector2Array(106.422, -33.0703, 109.547, 38.0313, -135, 38.9609, -135, -34.9219)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-145, -45, -145, 49, 120, 48, 116, -43)])
+
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("AnimationPlayerNode", "Sprite2DNode", "StateMachineNode", "PathNode", "Agent2DNode")]
 script = ExtResource("1_s7n2v")
 EnemySpeed = 100.0
@@ -112,3 +117,7 @@ script = ExtResource("5_olfrj")
 script = ExtResource("6_ksx3o")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_shqom")

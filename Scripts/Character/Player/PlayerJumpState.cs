@@ -10,9 +10,11 @@ public partial class PlayerJumpState : PlayerState
     {
         characterNode.velocity = characterNode.Velocity;
 
+
         // Add the gravity.
         if (!characterNode.IsOnFloor())
         {
+            characterNode.AnimationPlayerNode.Play(GameConstants.ANIM_JUMP);
             characterNode.velocity += characterNode.GetGravity() * (float)delta;
         }
 
@@ -39,6 +41,6 @@ public partial class PlayerJumpState : PlayerState
     {
         base.EnterState();
         GD.Print("SHould be player the jump animation right now.  WIll update the jump animation soon!");
-        characterNode.AnimationPlayerNode.Play(GameConstants.ANIM_IDLE);
+        characterNode.AnimationPlayerNode.Play(GameConstants.ANIM_JUMP);
     }
 }
