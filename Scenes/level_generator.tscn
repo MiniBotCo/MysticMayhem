@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://brwhlm8vwrm57"]
+[gd_scene load_steps=13 format=3 uid="uid://brwhlm8vwrm57"]
 
 [ext_resource type="Script" path="res://Scripts/LevelGeneration/LevelGenerator.cs" id="1_dwtof"]
 [ext_resource type="PackedScene" uid="uid://b71wwwq6jo2yi" path="res://Scenes/Characters/Player/Player.tscn" id="2_gdulj"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dpeeqgg457m3g" path="res://Assets/Debug/invalidTile.png" id="6_na52r"]
 [ext_resource type="Texture2D" uid="uid://cgcuapdnh80nt" path="res://Assets/Debug/validTile.png" id="7_cc1yp"]
 [ext_resource type="PackedScene" uid="uid://tck21y72cs44" path="res://Scenes/Objects/door.tscn" id="8_pryei"]
+[ext_resource type="PackedScene" uid="uid://bf6ostbu5y17d" path="res://Scenes/Objects/chest.tscn" id="9_yt0vo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_whipo"]
 texture = ExtResource("6_na52r")
@@ -37,13 +38,11 @@ PlatformCount = 40
 
 [node name="Spawner" parent="." instance=ExtResource("4_vanfr")]
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(1155, 645)
-zoom = Vector2(0.5, 0.5)
-
 [node name="DebugTileMapLayer" type="TileMapLayer" parent="."]
 visible = false
 tile_set = SubResource("TileSet_jwjmc")
+
+[node name="Chest" parent="." instance=ExtResource("9_yt0vo")]
 
 [node name="Entrance" parent="." instance=ExtResource("8_pryei")]
 

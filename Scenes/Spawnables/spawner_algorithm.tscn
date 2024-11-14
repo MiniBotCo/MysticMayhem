@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://klwgqq6rpd4o"]
-
-[ext_resource type="Script" path="res://Scripts/Spawnables/SpawnerAlgorithm.cs" id="1_t0u1l"]
-
-[node name="SpawnerAlgorithm" type="Node"]
-script = ExtResource("1_t0u1l")

@@ -27,13 +27,6 @@ public partial class Player : CharacterBody2D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		//TODO remove
-		if (Input.IsActionJustPressed("Debug"))
-		{
-			_effects.Add(new Effect("health", 1.0f, true));
-		}
-
-
 		Vector2 velocity = Velocity;
 
 		// Add the gravity.
@@ -76,10 +69,11 @@ public partial class Player : CharacterBody2D
 		sprite2DNode.FlipH = isMovingLeft;
 	}
 
+	/// <summary>
+	/// Applies the effects to the player
+	/// </summary>
 	private void ApplyEffects()
 	{
-		GD.Print("Effects: "); //TODO remove
-
 		List<Effect> nonPermanentEffects = new List<Effect>();
 		foreach (Effect effect in _effects)
 		{
@@ -106,7 +100,7 @@ public partial class Player : CharacterBody2D
 				nonPermanentEffects.Add(effect);
 			}
 
-			GD.Print(effect.name); //TODO remove
+			//GD.Print(effect.name); //TODO remove
 		}
 
 		foreach (Effect effect in nonPermanentEffects)
@@ -114,6 +108,15 @@ public partial class Player : CharacterBody2D
 			if (!effect.permanent) _effects.Remove(effect);
 		}
 
-		GD.Print("Stats: Health " + Health + " | Damage " + Damage + " | Speed " + Speed + " | Jump Speed " + JumpVelocity); //TODO remove
+		//GD.Print("Stats: Health " + Health + " | Damage " + Damage + " | Speed " + Speed + " | Jump Speed " + JumpVelocity); //TODO remove
+	}
+
+	/// <summary>
+	/// Adds an effect to the effects list
+	/// </summary>
+	/// <param name="effect">The effect to be added</param>
+	public void AddEffect(Effect effect)
+	{
+		_effects.Add(effect);
 	}
 }
