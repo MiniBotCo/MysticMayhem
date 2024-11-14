@@ -19,6 +19,7 @@ public abstract partial class EnemyState : CharacterState
 
     protected void Move()
     {
+        characterNode.Agent2DNode.GetNextPathPosition();
         characterNode.Velocity = characterNode.GlobalPosition.DirectionTo(destination) * characterNode.EnemySpeed;
 
         characterNode.MoveAndSlide();
