@@ -10,7 +10,6 @@ public partial class PlayerJumpState : PlayerState
     {
         characterNode.velocity = characterNode.Velocity;
 
-
         // Add the gravity.
         if (!characterNode.IsOnFloor())
         {

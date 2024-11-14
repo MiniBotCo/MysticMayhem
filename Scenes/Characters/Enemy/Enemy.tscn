@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bjupuljh4v708"]
+[gd_scene load_steps=18 format=3 uid="uid://bjupuljh4v708"]
 
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/Enemy.cs" id="1_s7n2v"]
 [ext_resource type="Texture2D" uid="uid://uf67ea6s75px" path="res://Assets/Sprites/Character/Enemy/Ghost.png" id="2_qnxvh"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyIdleState.cs" id="5_olfrj"]
 [ext_resource type="Texture2D" uid="uid://dli36ptrvkvb3" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Attack/Ghost_Attack2.png" id="6_brtih"]
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyReturnState.cs" id="6_ksx3o"]
+[ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyPatrolState.cs" id="10_rhu0y"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oa781"]
 radius = 24.0
@@ -107,14 +108,17 @@ libraries = {
 curve = SubResource("Curve2D_dtgxo")
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("currentState", "states") instance=ExtResource("4_pcvf8")]
-currentState = NodePath("ReturnState")
-states = [NodePath("IdleState"), NodePath("ReturnState"), null, null]
+currentState = NodePath("IdleState")
+states = [NodePath("IdleState"), NodePath("ReturnState"), NodePath("PatrolState")]
 
 [node name="IdleState" type="Node" parent="StateMachine"]
 script = ExtResource("5_olfrj")
 
 [node name="ReturnState" type="Node" parent="StateMachine"]
 script = ExtResource("6_ksx3o")
+
+[node name="PatrolState" type="Node" parent="StateMachine"]
+script = ExtResource("10_rhu0y")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 debug_enabled = true

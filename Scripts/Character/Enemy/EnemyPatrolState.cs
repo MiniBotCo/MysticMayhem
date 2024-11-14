@@ -1,16 +1,18 @@
 using Godot;
 using System;
 
-public partial class EnemyIdleState : EnemyState
+public partial class EnemyPatrolState : EnemyState
 {
     protected override void EnterState()
     {
-        base.EnterState();
         characterNode.AnimationPlayerNode.Play(GameConstants.ANIM_IDLE);
+
+        destination = GetPointGlobalPosition(1);
+        characterNode.Agent2DNode.TargetPosition = destination;
     }
 
     public override void _PhysicsProcess(double delta)
     {
-        characterNode.StateMachineNode.SwitchState<EnemyReturnState>();
+        Move();
     }
 }
