@@ -141,7 +141,7 @@ public partial class LevelGenerator : Node2D
         List<Vector2I> unusedTiles = new List<Vector2I>();
 
         // Gets all tiles withing level bounds
-        for(int x = 0; x <= LevelSize.X; x++)
+        for(int x = _frameGenerator.FrameBlockMaxSize.X; x <= LevelSize.X - _frameGenerator.FrameBlockMaxSize.X; x++)
         {
             for(int y = 0; y <= LevelSize.Y; y++)
             {
