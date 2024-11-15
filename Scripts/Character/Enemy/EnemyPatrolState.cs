@@ -17,6 +17,14 @@ public partial class EnemyPatrolState : EnemyState
 
         characterNode.Agent2DNode.NavigationFinished += HandleNavigationFinished;
         idleTimerNode.Timeout += HandleTimeout;
+        characterNode.ChaseAreaNode.BodyEntered += HandleChaseAreaBodyEntered;
+    }
+
+    protected override void ExitState()
+    {
+        characterNode.Agent2DNode.NavigationFinished -= HandleNavigationFinished;
+        idleTimerNode.Timeout -= HandleTimeout;
+        characterNode.ChaseAreaNode.BodyEntered -= HandleChaseAreaBodyEntered;
     }
 
     public override void _PhysicsProcess(double delta)
