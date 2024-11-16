@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://wgdo17ddj15v"]
+
+[ext_resource type="Script" path="res://Scripts/Spawners/ChestSpawn.cs" id="1_ri7u4"]
+
+[node name="ChestSpawn" type="Node"]
+script = ExtResource("1_ri7u4")

@@ -19,6 +19,7 @@ public partial class LevelGenerator : Node2D
     private FrameGenerator _frameGenerator;
     private PlatformGenerator _platformGenerator;
     private Spawner _spawner;
+    private Chest _chest;
 
     // For debug purposes, remove for rinal release
     private TileMapLayer _debugTileMapLayer;
@@ -41,6 +42,8 @@ public partial class LevelGenerator : Node2D
 
         _tileMapLayers = new List<TileMapLayer>();
         _unusedTiles = new List<Vector2I>();
+
+        _chest = GetNode<Chest>("Chest");
 
         base._Ready();
 
@@ -79,6 +82,7 @@ public partial class LevelGenerator : Node2D
         // Spawns the entrance and exit doors
         _spawner.AddToSpawnList(Entrance);
         _spawner.AddToSpawnList(Exit);
+        _spawner.AddToSpawnList(_chest);
 
         // Signals for the exit door, used to exit the level
         Exit.BodyEntered += OnExitBodyEntered;
@@ -137,7 +141,7 @@ public partial class LevelGenerator : Node2D
         List<Vector2I> unusedTiles = new List<Vector2I>();
 
         // Gets all tiles withing level bounds
-        for(int x = 0; x <= LevelSize.X; x++)
+        for(int x = _frameGenerator.FrameBlockMaxSize.X; x <= LevelSize.X - _frameGenerator.FrameBlockMaxSize.X; x++)
         {
             for(int y = 0; y <= LevelSize.Y; y++)
             {
