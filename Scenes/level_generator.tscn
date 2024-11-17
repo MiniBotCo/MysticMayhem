@@ -32,6 +32,8 @@ Entrance = NodePath("Entrance")
 Exit = NodePath("Exit")
 PlayerScene = ExtResource("2_gdulj")
 
+[node name="Chest" parent="." instance=ExtResource("9_yt0vo")]
+
 [node name="FrameGenerator" parent="." instance=ExtResource("3_875ce")]
 
 [node name="PlatformGenerator" parent="." instance=ExtResource("3_yfxaf")]
@@ -42,8 +44,6 @@ PlatformCount = 40
 [node name="DebugTileMapLayer" type="TileMapLayer" parent="."]
 visible = false
 tile_set = SubResource("TileSet_jwjmc")
-
-[node name="Chest" parent="." instance=ExtResource("9_yt0vo")]
 
 [node name="Entrance" parent="." instance=ExtResource("8_pryei")]
 

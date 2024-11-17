@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bu0soecijui6w"]
+
+[ext_resource type="FontFile" uid="uid://p2e7po6dd2bd" path="res://Assets/Fonts/Pixelated Elegance.ttf" id="1_qxfft"]
+
+[resource]
+default_font = ExtResource("1_qxfft")
+default_font_size = 18

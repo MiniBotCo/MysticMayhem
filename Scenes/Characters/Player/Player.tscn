@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://b71wwwq6jo2yi"]
+[gd_scene load_steps=28 format=3 uid="uid://b71wwwq6jo2yi"]
 
 [ext_resource type="Script" path="res://Scripts/Character/Player/Player.cs" id="1_l2rlm"]
 [ext_resource type="Texture2D" uid="uid://cyc43rprs7fij" path="res://Assets/Sprites/Character/Player/Warrior/Animation_Attack/GigaWarriorStandingAttack1.png" id="5_yrhql"]
@@ -16,8 +16,9 @@
 [ext_resource type="Texture2D" uid="uid://5liof810tlt5" path="res://Assets/Sprites/Character/Player/Warrior/Animation_Idle/WarriorIdle4.png" id="10_j8dv8"]
 [ext_resource type="Script" path="res://Scripts/Character/Player/PlayerJumpState.cs" id="11_3sg2n"]
 [ext_resource type="Script" path="res://Scripts/Character/Player/PlayerAttackState.cs" id="12_b17sf"]
-[ext_resource type="PackedScene" path="res://Scenes/Characters/state_machine.tscn" id="13_l7ebq"]
+[ext_resource type="PackedScene" uid="uid://untwbv6c7xc2" path="res://Scenes/Characters/state_machine.tscn" id="13_l7ebq"]
 [ext_resource type="Texture2D" uid="uid://bdmcciwxu6dgs" path="res://Assets/Sprites/Character/Player/Warrior/Animation_Jump/Warrior_Jumping.png" id="13_xlsde"]
+[ext_resource type="PackedScene" uid="uid://cv8xo6fltm2ep" path="res://Scenes/Menus/HUD.tscn" id="19_w6eje"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_scoyt"]
 
@@ -160,3 +161,11 @@ attackTimerNode = NodePath("Timer")
 
 [node name="Timer" type="Timer" parent="StateMachine/AttackState"]
 one_shot = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" parent="CanvasLayer" instance=ExtResource("19_w6eje")]
+offset_left = 17.0
+offset_top = 8.0
+offset_right = -15.0
+offset_bottom = -5.0

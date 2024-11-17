@@ -608,7 +608,7 @@ icon = ExtResource("6_lglvu")
 flat = true
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
-position = Vector2(0, -2)
+position = Vector2(8, -2)
 emitting = false
 amount = 20
 lifetime = 1.75

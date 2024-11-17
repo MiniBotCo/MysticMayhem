@@ -1,0 +1,91 @@
+[gd_scene load_steps=8 format=3 uid="uid://cv8xo6fltm2ep"]
+
+[ext_resource type="FontFile" uid="uid://p2e7po6dd2bd" path="res://Assets/Fonts/Pixelated Elegance.ttf" id="1_0mqjg"]
+[ext_resource type="Theme" uid="uid://bu0soecijui6w" path="res://Scenes/Menus/menu_theme.tres" id="1_1j4ng"]
+[ext_resource type="Texture2D" uid="uid://bdgy5wx68hmrj" path="res://Assets/Sprites/Objects/Items/health.png" id="2_tqcqc"]
+[ext_resource type="Texture2D" uid="uid://blxovxjyriy31" path="res://Assets/Sprites/Objects/Items/damage.png" id="4_pesp4"]
+[ext_resource type="Texture2D" uid="uid://bcm5ivd5jl4mk" path="res://Assets/Sprites/Objects/Items/speed.png" id="5_hwu7q"]
+[ext_resource type="Texture2D" uid="uid://cq0bttaflgo4i" path="res://Assets/Sprites/Objects/Items/jump.png" id="6_t0yh4"]
+
+[sub_resource type="Theme" id="Theme_dn6op"]
+default_font = ExtResource("1_0mqjg")
+default_font_size = 18
+
+[node name="Control" type="Control"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_1j4ng")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_right = 593.0
+offset_bottom = 40.0
+theme = ExtResource("1_1j4ng")
+theme_override_constants/separation = 7
+
+[node name="HealthSrpite" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("2_tqcqc")
+expand_mode = 3
+
+[node name="Health" type="Label" parent="HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_0mqjg")
+theme_override_font_sizes/font_size = 18
+text = "Health: 100"
+
+[node name="DamageSprite" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("4_pesp4")
+expand_mode = 3
+
+[node name="Damage" type="Label" parent="HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_0mqjg")
+theme_override_font_sizes/font_size = 18
+text = "Damage: 1.00x"
+
+[node name="SpeedSprite" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("5_hwu7q")
+expand_mode = 3
+
+[node name="Speed" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_dn6op")
+text = "Speed 1.00x"
+
+[node name="JumpSprite" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("6_t0yh4")
+expand_mode = 3
+
+[node name="Jump" type="Label" parent="HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme = ExtResource("1_1j4ng")
+text = "Jump: 1.00x"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_direction = 3
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Level" type="Label" parent="HBoxContainer2"]
+texture_filter = 1
+layout_direction = 2
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_0mqjg")
+theme_override_font_sizes/font_size = 18
+text = "Level: 5"
