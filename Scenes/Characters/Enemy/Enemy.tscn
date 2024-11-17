@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bjupuljh4v708"]
+[gd_scene load_steps=21 format=3 uid="uid://bjupuljh4v708"]
 
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/Enemy.cs" id="1_s7n2v"]
 [ext_resource type="Texture2D" uid="uid://uf67ea6s75px" path="res://Assets/Sprites/Character/Enemy/Ghost.png" id="2_qnxvh"]
@@ -11,9 +11,10 @@
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyReturnState.cs" id="6_ksx3o"]
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyPatrolState.cs" id="10_rhu0y"]
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyChaseState.cs" id="11_g8kic"]
+[ext_resource type="PackedScene" uid="uid://d057vb218xyid" path="res://Scenes/Spawnables/door_spawn.tscn" id="12_c71fo"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oa781"]
-radius = 24.0
+radius = 15.0
 height = 76.0
 
 [sub_resource type="Animation" id="Animation_g30ne"]
@@ -86,9 +87,10 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-163, -45, -162, 49, 13
 [sub_resource type="CircleShape2D" id="CircleShape2D_vgys7"]
 radius = 90.85
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("AnimationPlayerNode", "Sprite2DNode", "StateMachineNode", "PathNode", "Agent2DNode", "ChaseAreaNode")]
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("spawner", "AnimationPlayerNode", "Sprite2DNode", "StateMachineNode", "PathNode", "Agent2DNode", "ChaseAreaNode")]
 script = ExtResource("1_s7n2v")
 EnemySpeed = 100.0
+spawner = NodePath("Spawn")
 AnimationPlayerNode = NodePath("AnimationPlayer")
 Sprite2DNode = NodePath("Sprite2D")
 StateMachineNode = NodePath("StateMachine")
@@ -148,3 +150,5 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ChaseArea"]
 shape = SubResource("CircleShape2D_vgys7")
+
+[node name="Spawn" parent="." instance=ExtResource("12_c71fo")]

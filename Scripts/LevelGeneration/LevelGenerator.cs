@@ -21,17 +21,21 @@ public partial class LevelGenerator : Node2D
     private Spawner _spawner;
     private Chest _chest;
 
-    // For debug purposes, remove for rinal release
-    private TileMapLayer _debugTileMapLayer;
 
     private bool _inDoor = false;
     private List<TileMapLayer> _tileMapLayers;
     private List<Vector2I> _unusedTiles;
 
+    
+    // For debug purposes, remove for rinal release
+    private TileMapLayer _debugTileMapLayer;
+    private Enemy _enemy;
+
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        _enemy = GetNode<Enemy>("Enemy");
         // Initializing the child nodes
         _frameGenerator = GetNode<FrameGenerator>("FrameGenerator");
         _platformGenerator = GetNode<PlatformGenerator>("PlatformGenerator");
@@ -83,6 +87,7 @@ public partial class LevelGenerator : Node2D
         _spawner.AddToSpawnList(Entrance);
         _spawner.AddToSpawnList(Exit);
         _spawner.AddToSpawnList(_chest);
+        _spawner.AddToSpawnList(_enemy);
 
         // Signals for the exit door, used to exit the level
         Exit.BodyEntered += OnExitBodyEntered;
