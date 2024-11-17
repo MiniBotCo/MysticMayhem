@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bjupuljh4v708"]
+[gd_scene load_steps=22 format=3 uid="uid://bjupuljh4v708"]
 
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/Enemy.cs" id="1_s7n2v"]
 [ext_resource type="Texture2D" uid="uid://uf67ea6s75px" path="res://Assets/Sprites/Character/Enemy/Ghost.png" id="2_qnxvh"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyReturnState.cs" id="6_ksx3o"]
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyPatrolState.cs" id="10_rhu0y"]
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyChaseState.cs" id="11_g8kic"]
+[ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyAttackState.cs" id="12_ie2x2"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oa781"]
 radius = 24.0
@@ -86,7 +87,13 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-163, -45, -162, 49, 13
 [sub_resource type="CircleShape2D" id="CircleShape2D_vgys7"]
 radius = 90.85
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("AnimationPlayerNode", "Sprite2DNode", "StateMachineNode", "PathNode", "Agent2DNode", "ChaseAreaNode")]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pv02b"]
+radius = 35.0877
+height = 105.988
+
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("AnimationPlayerNode", "Sprite2DNode", "StateMachineNode", "PathNode", "Agent2DNode", "ChaseAreaNode", "AttackAreaNode")]
+collision_layer = 4
+collision_mask = 3
 script = ExtResource("1_s7n2v")
 EnemySpeed = 100.0
 AnimationPlayerNode = NodePath("AnimationPlayer")
@@ -95,6 +102,7 @@ StateMachineNode = NodePath("StateMachine")
 PathNode = NodePath("Path2D")
 Agent2DNode = NodePath("NavigationAgent2D")
 ChaseAreaNode = NodePath("ChaseArea")
+AttackAreaNode = NodePath("AttackArea")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_qnxvh")
@@ -114,7 +122,7 @@ curve = SubResource("Curve2D_dtgxo")
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("currentState", "states") instance=ExtResource("4_pcvf8")]
 currentState = NodePath("IdleState")
-states = [NodePath("IdleState"), NodePath("ReturnState"), NodePath("PatrolState"), NodePath("ChaseState")]
+states = [NodePath("IdleState"), NodePath("ReturnState"), NodePath("PatrolState"), NodePath("ChaseState"), NodePath("AttackState")]
 
 [node name="IdleState" type="Node" parent="StateMachine"]
 script = ExtResource("5_olfrj")
@@ -137,6 +145,9 @@ chaseTimerNode = NodePath("Timer")
 wait_time = 0.5
 autostart = true
 
+[node name="AttackState" type="Node" parent="StateMachine"]
+script = ExtResource("12_ie2x2")
+
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 debug_enabled = true
 
@@ -149,3 +160,11 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ChaseArea"]
 shape = SubResource("CircleShape2D_vgys7")
+
+[node name="AttackArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+rotation = -1.5861
+shape = SubResource("CapsuleShape2D_pv02b")

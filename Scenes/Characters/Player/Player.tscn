@@ -117,6 +117,7 @@ _data = {
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("AnimationPlayerNode", "Sprite2DNode", "StateMachineNode")]
 collision_layer = 2
+collision_mask = 5
 script = ExtResource("1_l2rlm")
 AnimationPlayerNode = NodePath("AnimationPlayer")
 Sprite2DNode = NodePath("Sprite2D")
