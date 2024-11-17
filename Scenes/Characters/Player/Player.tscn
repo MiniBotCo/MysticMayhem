@@ -162,9 +162,9 @@ attackTimerNode = NodePath("Timer")
 [node name="Timer" type="Timer" parent="StateMachine/AttackState"]
 one_shot = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="HUDCanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Control" parent="CanvasLayer" instance=ExtResource("19_w6eje")]
+[node name="HUD" parent="HUDCanvasLayer" instance=ExtResource("19_w6eje")]
 offset_left = 17.0
 offset_top = 8.0
 offset_right = -15.0

@@ -41,7 +41,6 @@ texture_filter = 1
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_0mqjg")
 theme_override_font_sizes/font_size = 18
-text = "Health: 100"
 
 [node name="DamageSprite" type="TextureRect" parent="HBoxContainer"]
 layout_mode = 2
@@ -53,7 +52,6 @@ texture_filter = 1
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_0mqjg")
 theme_override_font_sizes/font_size = 18
-text = "Damage: 1.00x"
 
 [node name="SpeedSprite" type="TextureRect" parent="HBoxContainer"]
 layout_mode = 2
@@ -63,7 +61,6 @@ expand_mode = 3
 [node name="Speed" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 theme = SubResource("Theme_dn6op")
-text = "Speed 1.00x"
 
 [node name="JumpSprite" type="TextureRect" parent="HBoxContainer"]
 layout_mode = 2
@@ -74,7 +71,6 @@ expand_mode = 3
 texture_filter = 1
 layout_mode = 2
 theme = ExtResource("1_1j4ng")
-text = "Jump: 1.00x"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="."]
 layout_direction = 3

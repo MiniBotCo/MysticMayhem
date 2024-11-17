@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 
 public partial class Player : Character
 {
@@ -13,12 +14,15 @@ public partial class Player : Character
 	public Vector2 direction = new();
 
 
+	private Control _hud;
 	private static List<Effect> _effects = new List<Effect>();
 
 
 	public override void _Ready()
 	{
+		_hud = GetNode<Control>("HUDCanvasLayer/HUD");
 		ApplyEffects();
+		UpdateHUD();
 		characterNode = GetOwner<Player>();
 	}
 
@@ -63,7 +67,7 @@ public partial class Player : Character
 			if (!effect.permanent) _effects.Remove(effect);
 		}
 
-		//GD.Print("Stats: Health " + Health + " | Damage " + Damage + " | Speed " + Speed + " | Jump Speed " + JumpVelocity); //TODO remove
+		GD.Print("Stats: Health " + Health + " | Damage " + Damage + " | Speed " + PlayerSpeed + " | Jump Speed " + JumpVelocity); //TODO remove
 	}
 
 	/// <summary>
@@ -73,5 +77,13 @@ public partial class Player : Character
 	public void AddEffect(Effect effect)
 	{
 		_effects.Add(effect);
+	}
+
+	private void UpdateHUD()
+	{
+		_hud.GetNode<Label>("HBoxContainer/Health").Text = "Health: " + Health;
+		_hud.GetNode<Label>("HBoxContainer/Damage").Text = "Damage: " + Damage;
+		_hud.GetNode<Label>("HBoxContainer/Jump").Text = "Jump: " + JumpVelocity;
+		_hud.GetNode<Label>("HBoxContainer/Speed").Text = "Speed: " + PlayerSpeed;
 	}
 }
