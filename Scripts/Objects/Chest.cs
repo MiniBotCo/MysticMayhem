@@ -63,6 +63,7 @@ public partial class Chest : Area2D, ISpawnable
 			Button button = _slots.GetChild<Button>(i);
 			
 			_slotEffects.Add(button, possibleEffects[i%_slots.GetChildCount()]);
+			 // this is where the issue is. Whenever this is called it moved the iterator to 3 and thus applies the first effect. Fix later
 			button.Pressed += () => OnButtonPressed(possibleEffects[i%_slots.GetChildCount()]);
 
 			switch (possibleEffects[i%_slots.GetChildCount()].name)

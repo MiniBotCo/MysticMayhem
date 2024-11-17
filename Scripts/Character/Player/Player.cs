@@ -67,7 +67,7 @@ public partial class Player : Character
 			if (!effect.permanent) _effects.Remove(effect);
 		}
 
-		GD.Print("Stats: Health " + Health + " | Damage " + Damage + " | Speed " + PlayerSpeed + " | Jump Speed " + JumpVelocity); //TODO remove
+		//GD.Print("Stats: Health " + Health + " | Damage " + Damage + " | Speed " + PlayerSpeed + " | Jump Speed " + JumpVelocity); //TODO remove
 	}
 
 	/// <summary>
