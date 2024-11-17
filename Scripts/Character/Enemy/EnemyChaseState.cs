@@ -4,13 +4,14 @@ using System.Linq;
 
 public partial class EnemyChaseState : EnemyState
 {
-    private CharacterBody2D target;
+    private Node2D target = null;
     [Export] private Timer chaseTimerNode;
     protected override void EnterState()
     {
         //Should have a dedicated move animation for this
         characterNode.AnimationPlayerNode.Play(GameConstants.ANIM_IDLE);
-        target = characterNode.ChaseAreaNode.GetOverlappingBodies().First() as CharacterBody2D;
+
+        characterNode.ChaseAreaNode.BodyEntered += OnChaseAreaBodyEntered;
 
         chaseTimerNode.Timeout += HandleTimeout;
     }
@@ -27,7 +28,18 @@ public partial class EnemyChaseState : EnemyState
 
     private void HandleTimeout()
     {
-        destination = target.GlobalPosition;
-        characterNode.Agent2DNode.TargetPosition = destination;
+        if (target != null)
+        {
+            destination = target.GlobalPosition;
+            characterNode.Agent2DNode.TargetPosition = destination;
+        }
+    }
+
+    private void OnChaseAreaBodyEntered(Node2D body)
+    {
+        if(body.IsInGroup("Player"))
+        {
+            target = body;
+        }
     }
 }

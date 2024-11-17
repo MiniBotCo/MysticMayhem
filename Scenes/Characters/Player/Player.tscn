@@ -16,7 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://5liof810tlt5" path="res://Assets/Sprites/Character/Player/Warrior/Animation_Idle/WarriorIdle4.png" id="10_j8dv8"]
 [ext_resource type="Script" path="res://Scripts/Character/Player/PlayerJumpState.cs" id="11_3sg2n"]
 [ext_resource type="Script" path="res://Scripts/Character/Player/PlayerAttackState.cs" id="12_b17sf"]
-[ext_resource type="PackedScene" uid="uid://untwbv6c7xc2" path="res://Scenes/Characters/state_machine.tscn" id="13_l7ebq"]
+[ext_resource type="PackedScene" path="res://Scenes/Characters/state_machine.tscn" id="13_l7ebq"]
 [ext_resource type="Texture2D" uid="uid://bdmcciwxu6dgs" path="res://Assets/Sprites/Character/Player/Warrior/Animation_Jump/Warrior_Jumping.png" id="13_xlsde"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_scoyt"]
@@ -115,9 +115,11 @@ _data = {
 "RESET": SubResource("Animation_a65ei")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animationPlayerNode", "sprite2DNode", "stateMachineNode") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("AnimationPlayerNode", "Sprite2DNode", "StateMachineNode") groups=["Player"]]
 collision_layer = 2
 script = ExtResource("1_l2rlm")
+PlayerSpeed = 300.0
+JumpVelocity = -600.0
 AnimationPlayerNode = NodePath("AnimationPlayer")
 Sprite2DNode = NodePath("Sprite2D")
 StateMachineNode = NodePath("StateMachine")

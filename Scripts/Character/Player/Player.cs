@@ -4,8 +4,6 @@ using System.Collections.Generic;
 
 public partial class Player : Character
 {
-
-
 	[ExportGroup("Player Stats")]
 	[Export(PropertyHint.Range, "50,800,25")] public float PlayerSpeed = 200.0f;
 	[Export(PropertyHint.Range, "-850,-50,25")] public float JumpVelocity = -450.0f;

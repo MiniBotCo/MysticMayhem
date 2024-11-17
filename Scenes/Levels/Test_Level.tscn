@@ -1,5 +1,6 @@
 [gd_scene load_steps=5 format=4 uid="uid://pb8ot5dhw7ol"]
 
+[ext_resource type="PackedScene" uid="uid://b71wwwq6jo2yi" path="res://Scenes/Characters/Player/Player.tscn" id="2_f1gmu"]
 [ext_resource type="TileSet" uid="uid://cgwu1u813bq4i" path="res://Assets/Sprites/TileMaps/kenney_pixel-platformer-blocks/Kenney_pixel_tile_set.tres" id="2_jy538"]
 [ext_resource type="PackedScene" uid="uid://bjupuljh4v708" path="res://Scenes/Characters/Enemy/Enemy.tscn" id="3_20fpa"]
 [ext_resource type="PackedScene" uid="uid://bobfb2mcf5d6x" path="res://Scenes/Characters/Enemy/FloatingEnemy.tscn" id="4_1f1wr"]
