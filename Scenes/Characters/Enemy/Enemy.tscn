@@ -1,6 +1,151 @@
-[gd_scene load_steps=2 format=3 uid="uid://bjupuljh4v708"]
+[gd_scene load_steps=20 format=3 uid="uid://bjupuljh4v708"]
 
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/Enemy.cs" id="1_s7n2v"]
+[ext_resource type="Texture2D" uid="uid://uf67ea6s75px" path="res://Assets/Sprites/Character/Enemy/Ghost.png" id="2_qnxvh"]
+[ext_resource type="Texture2D" uid="uid://c25ugshfk3ith" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Idle/Ghost_Idle1.png" id="3_dwpcu"]
+[ext_resource type="PackedScene" uid="uid://untwbv6c7xc2" path="res://Scenes/Characters/state_machine.tscn" id="4_pcvf8"]
+[ext_resource type="Texture2D" uid="uid://byuyjwvykdpl5" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Idle/Ghost_Idle2.png" id="4_s8jux"]
+[ext_resource type="Texture2D" uid="uid://c5dcgr43rd0nl" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Attack/Ghost_Attack1.png" id="5_aw7f7"]
+[ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyIdleState.cs" id="5_olfrj"]
+[ext_resource type="Texture2D" uid="uid://dli36ptrvkvb3" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Attack/Ghost_Attack2.png" id="6_brtih"]
+[ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyReturnState.cs" id="6_ksx3o"]
+[ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyPatrolState.cs" id="10_rhu0y"]
+[ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyChaseState.cs" id="11_g8kic"]
 
-[node name="Enemy" type="RigidBody2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oa781"]
+radius = 24.0
+height = 76.0
+
+[sub_resource type="Animation" id="Animation_g30ne"]
+resource_name = "Attack"
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("5_aw7f7"), ExtResource("6_brtih"), ExtResource("5_aw7f7"), ExtResource("6_brtih")]
+}
+
+[sub_resource type="Animation" id="Animation_x6bf4"]
+resource_name = "Idle"
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("3_dwpcu"), ExtResource("4_s8jux"), ExtResource("3_dwpcu"), ExtResource("4_s8jux")]
+}
+
+[sub_resource type="Animation" id="Animation_h7ce0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_qnxvh")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u6m5e"]
+_data = {
+"Attack": SubResource("Animation_g30ne"),
+"Idle": SubResource("Animation_x6bf4"),
+"RESET": SubResource("Animation_h7ce0")
+}
+
+[sub_resource type="Curve2D" id="Curve2D_dtgxo"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -155, 1, 0, 0, 0, 0, 133, 0)
+}
+point_count = 2
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_shqom"]
+vertices = PackedVector2Array(126.891, -34.0313, 126.102, 40.9297, -152.102, 39.0625, -152.891, -34.9609)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-163, -45, -162, 49, 136, 51, 137, -44)])
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vgys7"]
+radius = 90.85
+
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("AnimationPlayerNode", "Sprite2DNode", "StateMachineNode", "PathNode", "Agent2DNode", "ChaseAreaNode")]
 script = ExtResource("1_s7n2v")
+EnemySpeed = 100.0
+AnimationPlayerNode = NodePath("AnimationPlayer")
+Sprite2DNode = NodePath("Sprite2D")
+StateMachineNode = NodePath("StateMachine")
+PathNode = NodePath("Path2D")
+Agent2DNode = NodePath("NavigationAgent2D")
+ChaseAreaNode = NodePath("ChaseArea")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_qnxvh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5)
+shape = SubResource("CapsuleShape2D_oa781")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../CollisionShape2D")
+libraries = {
+"": SubResource("AnimationLibrary_u6m5e")
+}
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_dtgxo")
+
+[node name="StateMachine" parent="." node_paths=PackedStringArray("currentState", "states") instance=ExtResource("4_pcvf8")]
+currentState = NodePath("IdleState")
+states = [NodePath("IdleState"), NodePath("ReturnState"), NodePath("PatrolState"), NodePath("ChaseState")]
+
+[node name="IdleState" type="Node" parent="StateMachine"]
+script = ExtResource("5_olfrj")
+
+[node name="ReturnState" type="Node" parent="StateMachine"]
+script = ExtResource("6_ksx3o")
+
+[node name="PatrolState" type="Node" parent="StateMachine" node_paths=PackedStringArray("idleTimerNode")]
+script = ExtResource("10_rhu0y")
+idleTimerNode = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="StateMachine/PatrolState"]
+one_shot = true
+
+[node name="ChaseState" type="Node" parent="StateMachine" node_paths=PackedStringArray("chaseTimerNode")]
+script = ExtResource("11_g8kic")
+chaseTimerNode = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="StateMachine/ChaseState"]
+wait_time = 0.5
+autostart = true
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_shqom")
+
+[node name="ChaseArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChaseArea"]
+shape = SubResource("CircleShape2D_vgys7")

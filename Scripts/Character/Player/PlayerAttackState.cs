@@ -2,32 +2,46 @@ using Godot;
 using System;
 using System.Reflection.Metadata;
 
-public partial class PlayerAttackState : Node
+public partial class PlayerAttackState : PlayerState
 {
-    private Player characterNode;
     [Export] private Timer attackTimerNode;
 
     public override void _Ready()
     {
-        characterNode = GetOwner<Player>();
-        SetPhysicsProcess(false);
+        base._Ready();
         attackTimerNode.Timeout += HandleAttackTimeout;
+    }
+
+    public override void _PhysicsProcess(double delta)
+    {
+        characterNode.velocity = characterNode.Velocity;
+
+        // Add the gravity.
+        if (!characterNode.IsOnFloor())
+        {
+            characterNode.velocity += characterNode.GetGravity() * (float)delta;
+        }
+
+        characterNode.Velocity = characterNode.velocity;
+
+        characterNode.MoveAndSlide();
+        characterNode.Flip();
     }
 
     public override void _Notification(int what)
     {
         base._Notification(what);
 
-        if (what == 5001)
+        if (what == GameConstants.NOTIFICATION_ENTER_STATE)
         {
             GD.Print("Switched to the attack state");
-            characterNode.animationPlayerNode.Play(GameConstants.ANIM_ATTACK);
+            characterNode.AnimationPlayerNode.Play(GameConstants.ANIM_ATTACK);
             SetPhysicsProcess(true);
             attackTimerNode.Start();
         }
     }
     private void HandleAttackTimeout()
     {
-        characterNode.stateMachineNode.SwitchState<PlayerIdleState>();
+        characterNode.StateMachineNode.SwitchState<PlayerIdleState>();
     }
 }

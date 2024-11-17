@@ -1,45 +1,51 @@
 using Godot;
 using System;
 
-public partial class PlayerMoveState : Node
+public partial class PlayerMoveState : PlayerState
 {
-    private Player characterNode;
-    public override void _Ready()
-    {
-        characterNode = GetOwner<Player>();
-        SetPhysicsProcess(false);
-        SetProcessInput(false);
-    }
-
     public override void _PhysicsProcess(double delta)
     {
-        //GD.Print("MOVE STATE");
+        characterNode.velocity = characterNode.Velocity;
+
+        // Add the gravity.
+        if (!characterNode.IsOnFloor())
+        {
+            characterNode.velocity += characterNode.GetGravity() * (float)delta;
+        }
+
+        // Get the input direction and handle the movement/deceleration.
+        characterNode.direction = Input.GetVector(GameConstants.INPUT_MOVE_LEFT, GameConstants.INPUT_MOVE_RIGHT, GameConstants.INPUT_JUMP, "ui_down");
+        if (characterNode.direction != Vector2.Zero)
+        {
+            characterNode.velocity.X = characterNode.direction.X * characterNode.PlayerSpeed;
+        }
+        else
+        {
+            characterNode.velocity.X = Mathf.MoveToward(characterNode.Velocity.X, 0, characterNode.PlayerSpeed);
+        }
+
         if (characterNode.direction == Vector2.Zero)
         {
-            characterNode.stateMachineNode.SwitchState<PlayerIdleState>();
+            characterNode.StateMachineNode.SwitchState<PlayerIdleState>();
+            return;
         }
 
-        if (characterNode.Velocity.Y < 0)
+        //Switch to the Jump State
+        if (Input.IsActionJustPressed(GameConstants.INPUT_JUMP))
         {
-            characterNode.stateMachineNode.SwitchState<PlayerJumpState>();
-            //GD.Print("Switched to jump state");
+            characterNode.StateMachineNode.SwitchState<PlayerJumpState>();
         }
+
+        characterNode.Velocity = characterNode.velocity;
+
+        characterNode.MoveAndSlide();
+        characterNode.Flip();
     }
 
-    public override void _Notification(int what)
+    protected override void EnterState()
     {
-        base._Notification(what);
-
-        if (what == 5001)
-        {
-            characterNode.animationPlayerNode.Play(GameConstants.ANIM_MOVE);
-            SetPhysicsProcess(true);
-            SetProcessInput(true);
-        }
-        else if (what == 5002)
-        {
-            SetPhysicsProcess(false);
-            SetProcessInput(false);
-        }
+        base.EnterState();
+        characterNode.AnimationPlayerNode.Play(GameConstants.ANIM_MOVE);
     }
+
 }
