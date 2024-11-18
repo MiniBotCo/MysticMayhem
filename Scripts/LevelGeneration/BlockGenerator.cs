@@ -31,7 +31,7 @@ public class Block
     /// </summary>
     /// <param name="blockTileMap">The tilemap to draw to</param>
     /// <param name="levelSize">The bounds to draw within</param>
-    public void DrawBlock(TileMapLayer blockTileMap, Vector2I levelSize)
+    public void DrawBlock(TileMapLayer blockTileMap, Vector2I levelSize, Vector2I tile)
     {
         for (int x = 0; x <= block.Size.X; x++)
         {
@@ -40,7 +40,7 @@ public class Block
                 Vector2I position = new Vector2I(block.Position.X + x - block.Size.X/2, block.Position.Y + y - block.Size.Y/2);
                 if (position.X < levelSize.X && position.Y < levelSize.Y && position.X > 0 && position.Y > 0)
                 {
-                    blockTileMap.SetCell(position, 0, new Vector2I(4, 0));
+                    blockTileMap.SetCell(position, 0, tile);
                 }
             }
         }

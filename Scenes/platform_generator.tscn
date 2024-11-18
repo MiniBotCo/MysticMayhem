@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://bvbun1n5dbhka"]
 
 [ext_resource type="Script" path="res://Scripts/LevelGeneration/PlatformGenerator.cs" id="1_hetsq"]
-[ext_resource type="TileSet" uid="uid://dtdbx03d8spku" path="res://Assets/Sprites/TileMaps/castle_tiles.tres" id="2_ru5ge"]
+[ext_resource type="TileSet" uid="uid://dj2yrbxaaj0gh" path="res://Assets/Sprites/TileMaps/FinalTilemap.tres" id="2_xnv64"]
 
 [node name="PlatformGenerator" type="Node2D"]
 script = ExtResource("1_hetsq")
 
 [node name="PlatformTileMapLayer" type="TileMapLayer" parent="."]
 z_index = 1
-tile_set = ExtResource("2_ru5ge")
+tile_set = ExtResource("2_xnv64")

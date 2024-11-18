@@ -51,7 +51,6 @@ tile_set = SubResource("TileSet_jwjmc")
 
 [node name="Enemy" parent="." instance=ExtResource("10_mac7m")]
 position = Vector2(613, 342)
+collision_layer = 4
 
-[editable path="FrameGenerator"]
-[editable path="PlatformGenerator"]
 [editable path="Spawner"]

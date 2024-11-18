@@ -61,7 +61,7 @@ public class BasicPlatform
 			{
 				for (int y = 0; y < _tiles.Size.Y; y++)
 				{
-					tileMap.SetCell(_tiles.Position + new Vector2I(x, y), 0, new Vector2I(4,4));
+					tileMap.SetCell(_tiles.Position + new Vector2I(x, y), 2, new Vector2I(0, 0));
 				}
 			}
 		}
@@ -71,7 +71,7 @@ public class BasicPlatform
 			{
 				for (int y = 0; y < _tiles.Size.Y; y++)
 				{
-					tileMap.SetCell(_tiles.Position + new Vector2I(x, y), 0, new Vector2I(4,4));
+					tileMap.SetCell(_tiles.Position + new Vector2I(x, y), 2, new Vector2I(0,0));
 				}
 			}
 		}

@@ -117,6 +117,12 @@ public partial class LevelGenerator : Node2D
             CallDeferred(Node.MethodName.AddChild, player);
             await ToSignal(player, Node2D.SignalName.Ready);
             player.Position = Entrance.Position + new Vector2(0, -32);
+
+            Vector2I levelPixels = (Vector2I)(_frameGenerator.GetTileMapLayer().MapToLocal(LevelSize) + new Vector2(16, -16));
+            player.GetNode<Camera2D>("Camera2D").LimitBottom = levelPixels.Y;
+            player.GetNode<Camera2D>("Camera2D").LimitTop = 32;
+            player.GetNode<Camera2D>("Camera2D").LimitRight = levelPixels.X;
+            player.GetNode<Camera2D>("Camera2D").LimitLeft = 0;
         }
     }
 
