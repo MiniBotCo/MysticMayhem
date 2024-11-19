@@ -33,18 +33,22 @@ public partial class ChestSpawn : Spawn
 			foreach (TileMapLayer tileMapLayer in tileMapLayers)
 			{
 
-				if(tileMapLayer.GetCellTileData(cell) == null && tileMapLayer.GetCellTileData(cell + Vector2I.Right) == null && tileMapLayer.GetCellTileData(cell + Vector2I.Down) != null)
+				if(tileMapLayer.GetCellTileData(cell) == null && tileMapLayer.GetCellTileData(cell + Vector2I.Right) == null)
 				{
-					Node2D parent = GetParentOrNull<Node2D>();
-
-					if (parent != null)
+					if (tileMapLayer.GetCellTileData(cell + Vector2I.Down) != null && tileMapLayer.GetCellTileData(cell + Vector2I.Down + Vector2I.Right) != null)
 					{
-						parent.Position = tileMapLayer.MapToLocal(cell);
-						usedCells.Add(cell);
-                        usedCells.Add(cell + Vector2I.Right);
+						Node2D parent = GetParentOrNull<Node2D>();
 
-						return usedCells;
+						if (parent != null)
+						{
+							parent.Position = tileMapLayer.MapToLocal(cell);
+							usedCells.Add(cell);
+                        	usedCells.Add(cell + Vector2I.Right);
+
+							return usedCells;
+						}
 					}
+
 				}
             }
 

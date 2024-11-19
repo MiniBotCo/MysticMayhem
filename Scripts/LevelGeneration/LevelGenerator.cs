@@ -30,6 +30,7 @@ public partial class LevelGenerator : Node2D
     // For debug purposes, remove for rinal release
     private TileMapLayer _debugTileMapLayer;
     private Enemy _enemy;
+    private AnimationPlayer _animationPlayer;
 
 
     // Called when the node enters the scene tree for the first time.
@@ -48,6 +49,7 @@ public partial class LevelGenerator : Node2D
         _unusedTiles = new List<Vector2I>();
 
         _chest = GetNode<Chest>("Chest");
+        _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 
         base._Ready();
 
@@ -130,10 +132,12 @@ public partial class LevelGenerator : Node2D
     /// Handles input, only used here for the exit door
     /// </summary>
     /// <param name="event">The input event</param>
-    public override void _Input(InputEvent @event)
+    public override async void _Input(InputEvent @event)
     {
         if(@event.IsActionPressed("EnterDoor") && _inDoor)
         {
+            _animationPlayer.Play("ChangeScene");
+            await ToSignal(_animationPlayer, AnimationPlayer.SignalName.AnimationFinished);
             // TODO make this switch to a transition scene
             GetTree().ChangeSceneToFile("res://Scenes/level_generator.tscn");
         }
