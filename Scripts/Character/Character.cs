@@ -19,6 +19,7 @@ public partial class Character : CharacterBody2D
     [Export] public Path2D PathNode { get; private set; }
     [Export] public NavigationAgent2D Agent2DNode { get; private set; }
     [Export] public Area2D ChaseAreaNode { get; private set; }
+    [Export] public Area2D AttackAreaNode { get; private set; }
 
     public Vector2 velocity = Vector2.Zero;
 

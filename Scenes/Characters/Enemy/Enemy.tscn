@@ -1,9 +1,9 @@
-[gd_scene load_steps=21 format=3 uid="uid://bjupuljh4v708"]
+[gd_scene load_steps=23 format=3 uid="uid://bjupuljh4v708"]
 
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/Enemy.cs" id="1_s7n2v"]
 [ext_resource type="Texture2D" uid="uid://uf67ea6s75px" path="res://Assets/Sprites/Character/Enemy/Ghost.png" id="2_qnxvh"]
 [ext_resource type="Texture2D" uid="uid://c25ugshfk3ith" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Idle/Ghost_Idle1.png" id="3_dwpcu"]
-[ext_resource type="PackedScene" path="res://Scenes/Characters/state_machine.tscn" id="4_pcvf8"]
+[ext_resource type="PackedScene" uid="uid://untwbv6c7xc2" path="res://Scenes/Characters/state_machine.tscn" id="4_pcvf8"]
 [ext_resource type="Texture2D" uid="uid://byuyjwvykdpl5" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Idle/Ghost_Idle2.png" id="4_s8jux"]
 [ext_resource type="Texture2D" uid="uid://c5dcgr43rd0nl" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Attack/Ghost_Attack1.png" id="5_aw7f7"]
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyIdleState.cs" id="5_olfrj"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyPatrolState.cs" id="10_rhu0y"]
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyChaseState.cs" id="11_g8kic"]
 [ext_resource type="PackedScene" uid="uid://d057vb218xyid" path="res://Scenes/Spawnables/door_spawn.tscn" id="12_c71fo"]
+[ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyAttackState.cs" id="12_ibycl"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oa781"]
 radius = 15.0
@@ -80,14 +81,19 @@ _data = {
 point_count = 2
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_shqom"]
-vertices = PackedVector2Array(126.891, -34.0313, 126.102, 40.9297, -152.102, 39.0625, -152.891, -34.9609)
+vertices = PackedVector2Array(216.203, -34.0391, 217.781, 40.9688, -179.891, 40.0234, -179.102, -35.9531)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-163, -45, -162, 49, 136, 51, 137, -44)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-189, -46, -190, 50, 228, 51, 226, -44)])
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vgys7"]
-radius = 90.85
+radius = 115.004
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("spawner", "AnimationPlayerNode", "Sprite2DNode", "StateMachineNode", "PathNode", "Agent2DNode", "ChaseAreaNode")]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2ddjq"]
+radius = 30.0
+height = 118.0
+
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("spawner", "AnimationPlayerNode", "Sprite2DNode", "StateMachineNode", "PathNode", "Agent2DNode", "ChaseAreaNode", "AttackAreaNode")]
+collision_layer = 3
 script = ExtResource("1_s7n2v")
 EnemySpeed = 100.0
 spawner = NodePath("Spawn")
@@ -97,6 +103,7 @@ StateMachineNode = NodePath("StateMachine")
 PathNode = NodePath("Path2D")
 Agent2DNode = NodePath("NavigationAgent2D")
 ChaseAreaNode = NodePath("ChaseArea")
+AttackAreaNode = NodePath("AttackArea")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_qnxvh")
@@ -116,7 +123,7 @@ curve = SubResource("Curve2D_dtgxo")
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("currentState", "states") instance=ExtResource("4_pcvf8")]
 currentState = NodePath("IdleState")
-states = [NodePath("IdleState"), NodePath("ReturnState"), NodePath("PatrolState"), NodePath("ChaseState")]
+states = [NodePath("IdleState"), NodePath("ReturnState"), NodePath("PatrolState"), NodePath("ChaseState"), NodePath("AttackState")]
 
 [node name="IdleState" type="Node" parent="StateMachine"]
 script = ExtResource("5_olfrj")
@@ -139,6 +146,9 @@ chaseTimerNode = NodePath("Timer")
 wait_time = 0.5
 autostart = true
 
+[node name="AttackState" type="Node" parent="StateMachine"]
+script = ExtResource("12_ibycl")
+
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 debug_enabled = true
 
@@ -146,9 +156,18 @@ debug_enabled = true
 navigation_polygon = SubResource("NavigationPolygon_shqom")
 
 [node name="ChaseArea" type="Area2D" parent="."]
+collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ChaseArea"]
 shape = SubResource("CircleShape2D_vgys7")
+
+[node name="AttackArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+rotation = 1.56891
+shape = SubResource("CapsuleShape2D_2ddjq")
 
 [node name="Spawn" parent="." instance=ExtResource("12_c71fo")]
