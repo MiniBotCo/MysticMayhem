@@ -17,10 +17,23 @@ public partial class PlayerJumpState : PlayerState
             characterNode.velocity += characterNode.GetGravity() * (float)delta;
         }
 
+        // Get the input direction and handle the movement/deceleration.
+        characterNode.direction = Input.GetVector(GameConstants.INPUT_MOVE_LEFT, GameConstants.INPUT_MOVE_RIGHT, GameConstants.INPUT_JUMP, "ui_down");
+        if (characterNode.direction != Vector2.Zero)
+        {
+            characterNode.velocity.X = characterNode.direction.X * characterNode.PlayerSpeed;
+        }
+        else
+        {
+            characterNode.velocity.X = Mathf.MoveToward(characterNode.Velocity.X, 0, characterNode.PlayerSpeed);
+        }
+
         // Handle Jump.
         if (characterNode.IsOnFloor())
         {
-            characterNode.velocity.Y = characterNode.JumpVelocity;
+            characterNode.AudioPlayer.Stream = characterNode.landSound;
+            characterNode.AudioPlayer.Play();
+            characterNode.StateMachineNode.SwitchState<PlayerIdleState>();
         }
 
         //Transition back to the idle state when the player is not jumping
@@ -39,7 +52,6 @@ public partial class PlayerJumpState : PlayerState
     protected override void EnterState()
     {
         base.EnterState();
-        GD.Print("SHould be player the jump animation right now.  WIll update the jump animation soon!");
         characterNode.AnimationPlayerNode.Play(GameConstants.ANIM_JUMP);
     }
 }

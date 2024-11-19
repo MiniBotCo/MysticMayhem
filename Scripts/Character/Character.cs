@@ -13,6 +13,7 @@ public partial class Character : CharacterBody2D
     [Export] public AnimationPlayer AnimationPlayerNode { get; private set; }
     [Export] public Sprite2D Sprite2DNode { get; private set; }
     [Export] public StateMachine StateMachineNode { get; private set; }
+    [Export] public AudioStreamPlayer AudioPlayer { get; private set; }
 
     [ExportGroup("AI Nodes")]
     [Export] public Path2D PathNode { get; private set; }

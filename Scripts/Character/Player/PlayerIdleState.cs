@@ -25,6 +25,9 @@ public partial class PlayerIdleState : PlayerState
         //Switch to the Jump State
         if (Input.IsActionJustPressed(GameConstants.INPUT_JUMP) && characterNode.IsOnFloor())
         {
+            characterNode.AudioPlayer.Stream = characterNode.jumpSound;
+            characterNode.AudioPlayer.Play();
+            characterNode.velocity.Y = characterNode.JumpVelocity;
             characterNode.StateMachineNode.SwitchState<PlayerJumpState>();
         }
 

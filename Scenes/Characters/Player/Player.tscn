@@ -1,7 +1,6 @@
 [gd_scene load_steps=28 format=3 uid="uid://b71wwwq6jo2yi"]
 
 [ext_resource type="Script" path="res://Scripts/Character/Player/Player.cs" id="1_l2rlm"]
-[ext_resource type="Texture2D" uid="uid://cyc43rprs7fij" path="res://Assets/Sprites/Character/Player/Warrior/Animation_Attack/GigaWarriorStandingAttack1.png" id="5_yrhql"]
 [ext_resource type="Texture2D" uid="uid://bd3upfojwluw1" path="res://Assets/Sprites/Character/Player/Warrior/Animation_Attack/GigaWarriorStandingAttack2.png" id="6_x6ucm"]
 [ext_resource type="Texture2D" uid="uid://c0c8wsf7sh3v6" path="res://Assets/Sprites/Character/Player/Warrior/Animation_Move/WarriorWalk1.png" id="7_2jrpj"]
 [ext_resource type="Texture2D" uid="uid://c0b8yp3ibdflq" path="res://Assets/Sprites/Character/Player/Warrior/Animation_Idle/WarriorIdle1.png" id="7_fsoa7"]
@@ -18,6 +17,7 @@
 [ext_resource type="Script" path="res://Scripts/Character/Player/PlayerAttackState.cs" id="12_b17sf"]
 [ext_resource type="PackedScene" uid="uid://untwbv6c7xc2" path="res://Scenes/Characters/state_machine.tscn" id="13_l7ebq"]
 [ext_resource type="Texture2D" uid="uid://bdmcciwxu6dgs" path="res://Assets/Sprites/Character/Player/Warrior/Animation_Jump/Warrior_Jumping.png" id="13_xlsde"]
+[ext_resource type="AudioStream" uid="uid://bdd51e6cwv2vy" path="res://Assets/Sfx/jump.wav" id="19_mlnnq"]
 [ext_resource type="PackedScene" uid="uid://cv8xo6fltm2ep" path="res://Scenes/Menus/HUD.tscn" id="19_w6eje"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_scoyt"]
@@ -26,6 +26,7 @@
 
 [sub_resource type="Animation" id="Animation_14li8"]
 resource_name = "Attack"
+length = 0.3
 step = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -34,10 +35,10 @@ tracks/0/path = NodePath("Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [SubResource("CompressedTexture2D_scoyt"), ExtResource("5_yrhql"), ExtResource("6_x6ucm"), ExtResource("7_t07e8"), ExtResource("8_bndxu")]
+"values": [ExtResource("7_t07e8"), ExtResource("6_x6ucm"), ExtResource("8_bndxu")]
 }
 
 [sub_resource type="Animation" id="Animation_5k773"]
@@ -115,7 +116,7 @@ _data = {
 "RESET": SubResource("Animation_a65ei")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("AnimationPlayerNode", "Sprite2DNode", "StateMachineNode") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("AnimationPlayerNode", "Sprite2DNode", "StateMachineNode", "AudioPlayer") groups=["Player"]]
 collision_layer = 2
 script = ExtResource("1_l2rlm")
 PlayerSpeed = 300.0
@@ -123,6 +124,7 @@ JumpVelocity = -600.0
 AnimationPlayerNode = NodePath("AnimationPlayer")
 Sprite2DNode = NodePath("Sprite2D")
 StateMachineNode = NodePath("StateMachine")
+AudioPlayer = NodePath("AudioStreamPlayer")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(14, -21)
@@ -159,6 +161,7 @@ script = ExtResource("12_b17sf")
 attackTimerNode = NodePath("Timer")
 
 [node name="Timer" type="Timer" parent="StateMachine/AttackState"]
+wait_time = 0.25
 one_shot = true
 
 [node name="HUDCanvasLayer" type="CanvasLayer" parent="."]
@@ -168,3 +171,7 @@ offset_left = 17.0
 offset_top = 8.0
 offset_right = -15.0
 offset_bottom = -5.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("19_mlnnq")
+volume_db = -12.0

@@ -16,6 +16,8 @@ public partial class PlayerAttackState : PlayerState
     {
         characterNode.velocity = characterNode.Velocity;
 
+        characterNode.velocity.X = 0;
+
         // Add the gravity.
         if (!characterNode.IsOnFloor())
         {
@@ -34,7 +36,19 @@ public partial class PlayerAttackState : PlayerState
 
         if (what == GameConstants.NOTIFICATION_ENTER_STATE)
         {
-            GD.Print("Switched to the attack state");
+            //GD.Print("Switched to the attack state");
+
+            if (Input.IsActionPressed(GameConstants.INPUT_MOVE_LEFT))
+            {
+                characterNode.Sprite2DNode.FlipH = true;
+            }
+            else if (Input.IsActionPressed(GameConstants.INPUT_MOVE_RIGHT))
+            {
+                characterNode.Sprite2DNode.FlipH = false;
+            }
+
+            characterNode.AudioPlayer.Stream = characterNode.swordSwingSound;
+            characterNode.AudioPlayer.Play();
             characterNode.AnimationPlayerNode.Play(GameConstants.ANIM_ATTACK);
             SetPhysicsProcess(true);
             attackTimerNode.Start();

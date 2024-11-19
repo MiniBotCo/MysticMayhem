@@ -17,6 +17,9 @@ public partial class Player : Character
 	private Control _hud;
 	private static List<Effect> _effects = new List<Effect>();
 
+	public AudioStreamWav jumpSound = GD.Load<AudioStreamWav>("res://Assets/Sfx/jump.wav");
+	public AudioStreamWav landSound = GD.Load<AudioStreamWav>("res://Assets/Sfx/land.wav");
+    public AudioStreamWav swordSwingSound = GD.Load<AudioStreamWav>("res://Assets/Sfx/swordSwing.wav");
 
 	public override void _Ready()
 	{

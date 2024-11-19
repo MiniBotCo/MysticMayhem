@@ -26,12 +26,20 @@ public partial class PlayerMoveState : PlayerState
 
         if (characterNode.direction == Vector2.Zero)
         {
+            
             characterNode.StateMachineNode.SwitchState<PlayerIdleState>();
             return;
         }
 
-        //Switch to the Jump State
+        //Apply jump speed and switch to the Jump State
         if (Input.IsActionJustPressed(GameConstants.INPUT_JUMP))
+        {
+            characterNode.AudioPlayer.Stream = characterNode.jumpSound;
+            characterNode.AudioPlayer.Play();
+            characterNode.velocity.Y = characterNode.JumpVelocity;
+        }
+
+        if (!characterNode.IsOnFloor())
         {
             characterNode.StateMachineNode.SwitchState<PlayerJumpState>();
         }
@@ -40,6 +48,14 @@ public partial class PlayerMoveState : PlayerState
 
         characterNode.MoveAndSlide();
         characterNode.Flip();
+    }
+
+    public override void _Input(InputEvent @event)
+    {
+        if (Input.IsActionJustPressed(GameConstants.INPUT_ATTACK))
+        {
+            characterNode.StateMachineNode.SwitchState<PlayerAttackState>();
+        }
     }
 
     protected override void EnterState()
