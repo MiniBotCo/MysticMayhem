@@ -12,6 +12,8 @@ public partial class FrameGenerator : Node2D
     public Vector2I FrameBlockMinSize { get; set; } = new Vector2I(5, 5);
     [Export]
     public Vector2I FrameBlockMaxSize { get; set; } = new Vector2I(15, 10);
+    [Export]
+    public int holes { get; set; } = 14;
 
     private TileMapLayer _frameTileMap;
     private TileMapLayer _backgroudTileMap;
@@ -108,6 +110,18 @@ public partial class FrameGenerator : Node2D
             for (int y = 0; y <= FrameSize.Y; y++)
             {
                 _backgroudTileMap.SetCell(new Vector2I(x, y), 1, new Vector2I(0, 0));
+            }
+        }
+
+        for (int i = 0; i < holes; i++)
+        {
+            Vector2I pos = new Vector2I(GD.RandRange(0, FrameSize.X), GD.RandRange(FrameSize.Y, 0));
+            Block b = new Block();
+
+            for (int j = 0; j < 5; j++)
+            {
+                b.GenerateBlock(pos + new Vector2I(GD.RandRange(-3, 3), GD.RandRange(-3, 3)), new Vector2I(4, 4), new Vector2I(6, 6));
+                b.DrawBlock(_backgroudTileMap, FrameSize, Vector2I.Zero, true);
             }
         }
     }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://brwhlm8vwrm57"]
+[gd_scene load_steps=15 format=3 uid="uid://brwhlm8vwrm57"]
 
 [ext_resource type="Script" path="res://Scripts/LevelGeneration/LevelGenerator.cs" id="1_dwtof"]
 [ext_resource type="PackedScene" uid="uid://b71wwwq6jo2yi" path="res://Scenes/Characters/Player/Player.tscn" id="2_gdulj"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://tck21y72cs44" path="res://Scenes/Objects/door.tscn" id="8_pryei"]
 [ext_resource type="PackedScene" uid="uid://bf6ostbu5y17d" path="res://Scenes/Objects/chest.tscn" id="9_yt0vo"]
 [ext_resource type="PackedScene" uid="uid://bjupuljh4v708" path="res://Scenes/Characters/Enemy/Enemy.tscn" id="10_mac7m"]
+[ext_resource type="Texture2D" uid="uid://c5repxrx8jbpm" path="res://Assets/Sprites/background.png" id="11_kbaql"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_whipo"]
 texture = ExtResource("6_na52r")
@@ -32,8 +33,6 @@ Entrance = NodePath("Entrance")
 Exit = NodePath("Exit")
 PlayerScene = ExtResource("2_gdulj")
 
-[node name="Chest" parent="." instance=ExtResource("9_yt0vo")]
-
 [node name="FrameGenerator" parent="." instance=ExtResource("3_875ce")]
 
 [node name="PlatformGenerator" parent="." instance=ExtResource("3_yfxaf")]
@@ -49,8 +48,20 @@ tile_set = SubResource("TileSet_jwjmc")
 
 [node name="Exit" parent="." instance=ExtResource("8_pryei")]
 
+[node name="Chest" parent="." instance=ExtResource("9_yt0vo")]
+
 [node name="Enemy" parent="." instance=ExtResource("10_mac7m")]
 position = Vector2(613, 342)
 collision_layer = 4
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.5, 0.5)
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
+offset_right = 2257.0
+offset_bottom = 1354.0
+texture = ExtResource("11_kbaql")
 
 [editable path="Spawner"]
