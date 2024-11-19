@@ -4,6 +4,7 @@ public class GameConstants
     public const string ANIM_IDLE = "Idle";
     public const string ANIM_MOVE = "Move";
     public const string ANIM_ATTACK = "Attack";
+    public const string ANIM_ATTACK_2 = "Attack2";
     public const string ANIM_JUMP = "Jump";
 
 

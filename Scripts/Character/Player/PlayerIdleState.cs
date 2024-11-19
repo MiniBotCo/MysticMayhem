@@ -5,6 +5,8 @@ public partial class PlayerIdleState : PlayerState
 {
     public override void _PhysicsProcess(double delta)
     {
+        //GD.Print("In the IDLE STATE");
+
         characterNode.velocity = characterNode.Velocity;
         //Resetting the character movement to 0 for the idle state
         characterNode.velocity.X = 0;
@@ -13,7 +15,6 @@ public partial class PlayerIdleState : PlayerState
         if (!characterNode.IsOnFloor())
         {
             characterNode.velocity += characterNode.GetGravity() * (float)delta;
-            characterNode.AnimationPlayerNode.Play(GameConstants.ANIM_JUMP);
         }
 
         characterNode.direction = Input.GetVector(GameConstants.INPUT_MOVE_LEFT, GameConstants.INPUT_MOVE_RIGHT, GameConstants.INPUT_JUMP, "ui_down");
@@ -22,19 +23,11 @@ public partial class PlayerIdleState : PlayerState
             characterNode.StateMachineNode.SwitchState<PlayerMoveState>();
         }
 
-        //Switch to the Jump State
-        if (Input.IsActionJustPressed(GameConstants.INPUT_JUMP) && characterNode.IsOnFloor())
-        {
-            characterNode.StateMachineNode.SwitchState<PlayerJumpState>();
-        }
-
         characterNode.Velocity = characterNode.velocity;
 
         characterNode.MoveAndSlide();
         characterNode.Flip();
     }
-
-
 
     public override void _Input(InputEvent @event)
     {
@@ -42,6 +35,12 @@ public partial class PlayerIdleState : PlayerState
         {
             //GD.Print("Player attack state - input detected");
             characterNode.StateMachineNode.SwitchState<PlayerAttackState>();
+        }
+
+        //Switch to the Jump State
+        if (Input.IsActionJustPressed(GameConstants.INPUT_JUMP) && characterNode.IsOnFloor())
+        {
+            characterNode.StateMachineNode.SwitchState<PlayerJumpState>();
         }
     }
 

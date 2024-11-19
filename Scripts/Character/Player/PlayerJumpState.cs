@@ -29,17 +29,16 @@ public partial class PlayerJumpState : PlayerState
             characterNode.StateMachineNode.SwitchState<PlayerIdleState>();
         }
 
+
         characterNode.Velocity = characterNode.velocity;
 
         characterNode.MoveAndSlide();
         characterNode.Flip();
-
     }
 
     protected override void EnterState()
     {
         base.EnterState();
-        GD.Print("SHould be player the jump animation right now.  WIll update the jump animation soon!");
         characterNode.AnimationPlayerNode.Play(GameConstants.ANIM_JUMP);
     }
 }
