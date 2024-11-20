@@ -8,4 +8,12 @@ public abstract partial class PlayerState : CharacterState
         base._Ready();
         characterNode = GetOwner<Player>();
     }
+
+    protected void CheckForAttackInput()
+    {
+        if (Input.IsActionJustPressed(GameConstants.INPUT_ATTACK))
+        {
+            characterNode.StateMachineNode.SwitchState<PlayerAttackState>();
+        }
+    }
 }
