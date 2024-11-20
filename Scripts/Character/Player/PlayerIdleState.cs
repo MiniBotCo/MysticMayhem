@@ -43,7 +43,6 @@ public partial class PlayerIdleState : PlayerState
     {
         if (Input.IsActionJustPressed(GameConstants.INPUT_ATTACK))
         {
-            //GD.Print("Player attack state - input detected");
             characterNode.StateMachineNode.SwitchState<PlayerAttackState>();
         }
     }

@@ -27,6 +27,8 @@ public partial class EnemyChaseState : EnemyState
 
     public override void _PhysicsProcess(double delta)
     {
+        destination = target.GlobalPosition;
+        characterNode.Agent2DNode.TargetPosition = destination;
         Move();
     }
 

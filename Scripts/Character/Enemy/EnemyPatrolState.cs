@@ -54,9 +54,4 @@ public partial class EnemyPatrolState : EnemyState
         characterNode.Agent2DNode.TargetPosition = destination;
     }
 
-    private void HandleChaseAreaBodyEntered(Node2D body)
-    {
-        characterNode.StateMachineNode.SwitchState<EnemyChaseState>();
-    }
-
 }

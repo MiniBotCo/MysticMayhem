@@ -156,13 +156,8 @@ script = ExtResource("10_82i2q")
 [node name="JumpState" type="Node" parent="StateMachine"]
 script = ExtResource("11_3sg2n")
 
-[node name="AttackState" type="Node" parent="StateMachine" node_paths=PackedStringArray("attackTimerNode")]
+[node name="AttackState" type="Node" parent="StateMachine"]
 script = ExtResource("12_b17sf")
-attackTimerNode = NodePath("Timer")
-
-[node name="Timer" type="Timer" parent="StateMachine/AttackState"]
-wait_time = 0.25
-one_shot = true
 
 [node name="HUDCanvasLayer" type="CanvasLayer" parent="."]
 
