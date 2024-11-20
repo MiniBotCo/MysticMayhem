@@ -8,12 +8,12 @@ public partial class EnemyIdleState : EnemyState
         base.EnterState();
         characterNode.AnimationPlayerNode.Play(GameConstants.ANIM_IDLE);
 
-        //characterNode.ChaseAreaNode.BodyEntered += HandleChaseAreaBodyEntered;
+        characterNode.ChaseAreaNode.BodyEntered += HandleChaseAreaBodyEntered;
     }
 
     protected override void ExitState()
     {
-        //characterNode.ChaseAreaNode.BodyEntered -= HandleChaseAreaBodyEntered;
+        characterNode.ChaseAreaNode.BodyEntered -= HandleChaseAreaBodyEntered;
     }
 
     public override void _PhysicsProcess(double delta)

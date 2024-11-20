@@ -34,9 +34,4 @@ public partial class EnemyReturnState : EnemyState
 
         Move();
     }
-
-    private void HandleChaseAreaBodyEntered(Node2D body)
-    {
-        GD.Print("Should now enter the chase state!");
-    }
 }
