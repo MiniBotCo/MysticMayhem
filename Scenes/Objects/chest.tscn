@@ -355,10 +355,22 @@ tracks/14/keys = {
 tracks/15/type = "value"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/15/path = NodePath("AudioStreamPlayer:stream")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("8_4y38s")]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("AudioStreamPlayer:playing")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -550,10 +562,22 @@ tracks/14/keys = {
 tracks/15/type = "value"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/15/path = NodePath("AudioStreamPlayer:stream")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("8_4y38s")]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("AudioStreamPlayer:playing")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -601,9 +625,9 @@ libraries = {
 [node name="Slot1" type="Button" parent="Slots"]
 visible = false
 texture_filter = 1
-offset_left = 8.0
-offset_right = 48.0
-offset_bottom = 40.0
+offset_left = -52.0
+offset_top = -40.0
+offset_right = -12.0
 theme = ExtResource("6_owd3m")
 disabled = true
 icon = ExtResource("6_lglvu")
@@ -612,9 +636,10 @@ flat = true
 [node name="Slot2" type="Button" parent="Slots"]
 visible = false
 texture_filter = 1
-offset_left = 8.0
-offset_right = 48.0
-offset_bottom = 40.0
+offset_left = -12.0
+offset_top = -60.0
+offset_right = 28.0
+offset_bottom = -20.0
 theme = ExtResource("6_owd3m")
 disabled = true
 toggle_mode = true
@@ -624,9 +649,9 @@ flat = true
 [node name="Slot3" type="Button" parent="Slots"]
 visible = false
 texture_filter = 1
-offset_left = 8.0
-offset_right = 48.0
-offset_bottom = 40.0
+offset_left = 28.0
+offset_top = -40.0
+offset_right = 68.0
 theme = ExtResource("6_owd3m")
 disabled = true
 toggle_mode = true
@@ -655,5 +680,5 @@ hue_variation_curve = SubResource("Curve_6xafj")
 
 [node name="ChestSpawn" parent="." instance=ExtResource("7_v4nni")]
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_4y38s")
