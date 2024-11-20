@@ -24,12 +24,19 @@ public partial class EnemyReturnState : EnemyState
 
     public override void _PhysicsProcess(double delta)
     {
+        GD.Print("In the Return state");
         if (characterNode.Agent2DNode.IsNavigationFinished())
         {
+            GD.Print("Navigation finished");
             characterNode.StateMachineNode.SwitchState<EnemyPatrolState>();
             return;
         }
 
         Move();
+    }
+
+    private void HandleChaseAreaBodyEntered(Node2D body)
+    {
+        GD.Print("Should now enter the chase state!");
     }
 }

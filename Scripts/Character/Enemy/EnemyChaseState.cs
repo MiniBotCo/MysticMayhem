@@ -11,6 +11,7 @@ public partial class EnemyChaseState : EnemyState
         //Should have a dedicated move animation for this
         characterNode.AnimationPlayerNode.Play(GameConstants.ANIM_IDLE);
         target = characterNode.ChaseAreaNode.GetOverlappingBodies().First() as CharacterBody2D;
+        GD.Print("Target is: " + target.Name);
 
         chaseTimerNode.Timeout += HandleTimeout;
         characterNode.AttackAreaNode.BodyEntered += HandleAttackAreaBodyEntered;

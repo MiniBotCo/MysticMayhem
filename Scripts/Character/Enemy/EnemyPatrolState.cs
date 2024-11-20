@@ -29,6 +29,7 @@ public partial class EnemyPatrolState : EnemyState
 
     public override void _PhysicsProcess(double delta)
     {
+        GD.Print("In the Patrol state!");
         if (!idleTimerNode.IsStopped())
         {
             return;
@@ -51,6 +52,11 @@ public partial class EnemyPatrolState : EnemyState
 
         destination = GetPointGlobalPosition(pointIndex);
         characterNode.Agent2DNode.TargetPosition = destination;
+    }
+
+    private void HandleChaseAreaBodyEntered(Node2D body)
+    {
+        characterNode.StateMachineNode.SwitchState<EnemyChaseState>();
     }
 
 }
