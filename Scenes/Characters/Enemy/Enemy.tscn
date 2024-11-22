@@ -1,6 +1,7 @@
-[gd_scene load_steps=23 format=3 uid="uid://bjupuljh4v708"]
+[gd_scene load_steps=27 format=3 uid="uid://bjupuljh4v708"]
 
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/Enemy.cs" id="1_s7n2v"]
+[ext_resource type="Script" path="res://Scripts/Resources/StatResource.cs" id="2_e64uy"]
 [ext_resource type="Texture2D" uid="uid://uf67ea6s75px" path="res://Assets/Sprites/Character/Enemy/Ghost.png" id="2_qnxvh"]
 [ext_resource type="Texture2D" uid="uid://c25ugshfk3ith" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Idle/Ghost_Idle1.png" id="3_dwpcu"]
 [ext_resource type="PackedScene" uid="uid://untwbv6c7xc2" path="res://Scenes/Characters/state_machine.tscn" id="4_pcvf8"]
@@ -13,6 +14,16 @@
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyChaseState.cs" id="11_g8kic"]
 [ext_resource type="PackedScene" uid="uid://d057vb218xyid" path="res://Scenes/Spawnables/door_spawn.tscn" id="12_c71fo"]
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyAttackState.cs" id="12_ibycl"]
+
+[sub_resource type="Resource" id="Resource_xfjbu"]
+script = ExtResource("2_e64uy")
+StatType = 0
+StatValue = 20.0
+
+[sub_resource type="Resource" id="Resource_jt6x1"]
+script = ExtResource("2_e64uy")
+StatType = 1
+StatValue = 5.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oa781"]
 radius = 15.0
@@ -92,15 +103,21 @@ radius = 124.036
 radius = 30.0
 height = 118.0
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("spawner", "AnimationPlayerNode", "Sprite2DNode", "StateMachineNode", "PathNode", "Agent2DNode", "ChaseAreaNode", "AttackAreaNode")]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gkj3s"]
+radius = 9.35113
+height = 99.335
+
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("spawner", "AnimationPlayerNode", "Sprite2DNode", "StateMachineNode", "HurtboxNode", "PathNode", "Agent2DNode", "ChaseAreaNode", "AttackAreaNode")]
 collision_layer = 5
 collision_mask = 3
 script = ExtResource("1_s7n2v")
 EnemySpeed = 100.0
 spawner = NodePath("Spawn")
+stats = Array[Object]([SubResource("Resource_xfjbu"), SubResource("Resource_jt6x1")])
 AnimationPlayerNode = NodePath("AnimationPlayer")
 Sprite2DNode = NodePath("Sprite2D")
 StateMachineNode = NodePath("StateMachine")
+HurtboxNode = NodePath("Hurtbox")
 PathNode = NodePath("Path2D")
 Agent2DNode = NodePath("NavigationAgent2D")
 ChaseAreaNode = NodePath("ChaseArea")
@@ -172,3 +189,12 @@ rotation = 1.56891
 shape = SubResource("CapsuleShape2D_2ddjq")
 
 [node name="Spawn" parent="." instance=ExtResource("12_c71fo")]
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, 3)
+scale = Vector2(2.24572, 0.664419)
+shape = SubResource("CapsuleShape2D_gkj3s")

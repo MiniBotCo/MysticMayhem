@@ -1,6 +1,7 @@
-[gd_scene load_steps=28 format=3 uid="uid://b71wwwq6jo2yi"]
+[gd_scene load_steps=32 format=3 uid="uid://b71wwwq6jo2yi"]
 
 [ext_resource type="Script" path="res://Scripts/Character/Player/Player.cs" id="1_l2rlm"]
+[ext_resource type="Script" path="res://Scripts/Resources/StatResource.cs" id="2_r26ca"]
 [ext_resource type="Texture2D" uid="uid://bd3upfojwluw1" path="res://Assets/Sprites/Character/Player/Warrior/Animation_Attack/GigaWarriorStandingAttack2.png" id="6_x6ucm"]
 [ext_resource type="Texture2D" uid="uid://c0c8wsf7sh3v6" path="res://Assets/Sprites/Character/Player/Warrior/Animation_Move/WarriorWalk1.png" id="7_2jrpj"]
 [ext_resource type="Texture2D" uid="uid://c0b8yp3ibdflq" path="res://Assets/Sprites/Character/Player/Warrior/Animation_Idle/WarriorIdle1.png" id="7_fsoa7"]
@@ -19,6 +20,16 @@
 [ext_resource type="Texture2D" uid="uid://bdmcciwxu6dgs" path="res://Assets/Sprites/Character/Player/Warrior/Animation_Jump/Warrior_Jumping.png" id="13_xlsde"]
 [ext_resource type="AudioStream" uid="uid://bdd51e6cwv2vy" path="res://Assets/Sfx/jump.wav" id="19_mlnnq"]
 [ext_resource type="PackedScene" uid="uid://cv8xo6fltm2ep" path="res://Scenes/Menus/HUD.tscn" id="19_w6eje"]
+
+[sub_resource type="Resource" id="Resource_cboxk"]
+script = ExtResource("2_r26ca")
+StatType = 0
+StatValue = 100.0
+
+[sub_resource type="Resource" id="Resource_u0p6j"]
+script = ExtResource("2_r26ca")
+StatType = 1
+StatValue = 10.0
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_scoyt"]
 
@@ -116,11 +127,15 @@ _data = {
 "RESET": SubResource("Animation_a65ei")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vx131"]
+size = Vector2(20, 38)
+
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("AnimationPlayerNode", "Sprite2DNode", "StateMachineNode", "AudioPlayer") groups=["Player"]]
 collision_layer = 2
 script = ExtResource("1_l2rlm")
 PlayerSpeed = 300.0
 JumpVelocity = -600.0
+stats = Array[Object]([SubResource("Resource_cboxk"), SubResource("Resource_u0p6j")])
 AnimationPlayerNode = NodePath("AnimationPlayer")
 Sprite2DNode = NodePath("Sprite2D")
 StateMachineNode = NodePath("StateMachine")
@@ -170,3 +185,13 @@ offset_bottom = -5.0
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("19_mlnnq")
 volume_db = -12.0
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(47, -1)
+scale = Vector2(-1.80646, 0.947366)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -9)
+shape = SubResource("RectangleShape2D_vx131")
