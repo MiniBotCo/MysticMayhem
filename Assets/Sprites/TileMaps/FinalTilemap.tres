@@ -19,12 +19,13 @@ texture_region_size = Vector2i(32, 32)
 texture = ExtResource("3_q00hn")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, -7.25, -16, -7)
-0:0/0/physics_layer_0/polygon_0/one_way = true
+0:0/0/physics_layer_1/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, -6.75, -16, -6.75)
+0:0/0/physics_layer_1/polygon_0/one_way = true
 
 [resource]
 tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
+physics_layer_1/collision_layer = 8
 sources/0 = SubResource("TileSetAtlasSource_ao5t7")
 sources/1 = SubResource("TileSetAtlasSource_5jsf5")
 sources/2 = SubResource("TileSetAtlasSource_b23j4")

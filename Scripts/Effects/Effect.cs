@@ -1,6 +1,6 @@
 using System.Net.Cache;
 
-public struct Effect
+public class Effect
 {
     public string name;
     public float amount;

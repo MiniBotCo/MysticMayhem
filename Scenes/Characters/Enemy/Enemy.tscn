@@ -89,6 +89,7 @@ radius = 90.85
 
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("spawner", "AnimationPlayerNode", "Sprite2DNode", "StateMachineNode", "PathNode", "Agent2DNode", "ChaseAreaNode")]
 collision_layer = 4
+collision_mask = 9
 script = ExtResource("1_s7n2v")
 EnemySpeed = 100.0
 spawner = NodePath("Spawn")

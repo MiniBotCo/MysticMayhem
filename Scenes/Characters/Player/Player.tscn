@@ -118,6 +118,7 @@ _data = {
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("AnimationPlayerNode", "Sprite2DNode", "StateMachineNode", "AudioPlayer") groups=["Player"]]
 collision_layer = 2
+collision_mask = 9
 script = ExtResource("1_l2rlm")
 PlayerSpeed = 300.0
 JumpVelocity = -600.0

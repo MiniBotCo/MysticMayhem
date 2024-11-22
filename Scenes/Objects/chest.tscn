@@ -682,3 +682,4 @@ hue_variation_curve = SubResource("Curve_6xafj")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_4y38s")
+volume_db = -7.678

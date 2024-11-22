@@ -47,6 +47,8 @@ public partial class PlayerAttackState : PlayerState
                 characterNode.Sprite2DNode.FlipH = false;
             }
 
+            FireBallAbility fb = new FireBallAbility("fireball", 1);
+            fb.Trigger(characterNode);
             characterNode.AudioPlayer.Stream = characterNode.swordSwingSound;
             characterNode.AudioPlayer.Play();
             characterNode.AnimationPlayerNode.Play(GameConstants.ANIM_ATTACK);
