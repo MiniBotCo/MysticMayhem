@@ -45,6 +45,9 @@ public partial class Character : CharacterBody2D
     private void HandleHurtboxEntered(Area2D area)
     {
         StatResource health = GetStatResource(Stat.Health);
+        Character player = area.GetOwner<Character>();
+        health.StatValue -= player.GetStatResource(Stat.Damage).StatValue;
+
         GD.Print(health.StatValue);
     }
 
