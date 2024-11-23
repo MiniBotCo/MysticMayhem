@@ -29,7 +29,7 @@ public partial class EnemyPatrolState : EnemyState
 
     public override void _PhysicsProcess(double delta)
     {
-        GD.Print("In the Patrol state!");
+        //GD.Print("In the Patrol state!");
         if (!idleTimerNode.IsStopped())
         {
             return;

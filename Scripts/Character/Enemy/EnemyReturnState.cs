@@ -10,6 +10,7 @@ public partial class EnemyReturnState : EnemyState
     }
     protected override void EnterState()
     {
+        GD.Print("In enemy return state!");
         characterNode.AnimationPlayerNode.Play(GameConstants.ANIM_IDLE);
 
         characterNode.Agent2DNode.TargetPosition = destination;

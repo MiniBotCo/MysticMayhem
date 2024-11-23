@@ -17,6 +17,7 @@ public partial class Character : CharacterBody2D
     [Export] public StateMachine StateMachineNode { get; private set; }
     [Export] public AudioStreamPlayer AudioPlayer { get; private set; }
     [Export] public Area2D HurtboxNode { get; private set; }
+    [Export] public Area2D HitboxNode { get; private set; }
 
 
     [ExportGroup("AI Nodes")]

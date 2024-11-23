@@ -61,4 +61,14 @@ public partial class PlayerAttackState : PlayerState
     {
         characterNode.StateMachineNode.SwitchState<PlayerIdleState>();
     }
+
+    private void PerformHit()
+    {
+        float distanceHitBoxFacingLeft = 16.0f;
+        float distanceHitBoxFacingRight = 44.0f;
+        Vector2 newPosition = characterNode.Sprite2DNode.FlipH ? Vector2.Left : Vector2.Right;
+        float distanceMultiplier = characterNode.Sprite2DNode.FlipH ? distanceHitBoxFacingLeft : distanceHitBoxFacingRight;
+        newPosition *= distanceMultiplier;
+        characterNode.HitboxNode.Position = newPosition;
+    }
 }

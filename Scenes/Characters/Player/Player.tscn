@@ -51,6 +51,20 @@ tracks/0/keys = {
 "update": 1,
 "values": [ExtResource("7_t07e8"), ExtResource("6_x6ucm"), ExtResource("8_bndxu")]
 }
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StateMachine/AttackState")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"PerformHit"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_5k773"]
 resource_name = "Idle"
@@ -130,7 +144,7 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vx131"]
 size = Vector2(20, 38)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("AnimationPlayerNode", "Sprite2DNode", "StateMachineNode", "AudioPlayer") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("AnimationPlayerNode", "Sprite2DNode", "StateMachineNode", "AudioPlayer", "HitboxNode") groups=["Player"]]
 collision_layer = 2
 script = ExtResource("1_l2rlm")
 PlayerSpeed = 300.0
@@ -140,14 +154,15 @@ AnimationPlayerNode = NodePath("AnimationPlayer")
 Sprite2DNode = NodePath("Sprite2D")
 StateMachineNode = NodePath("StateMachine")
 AudioPlayer = NodePath("AudioStreamPlayer")
+HitboxNode = NodePath("Hitbox")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(14, -21)
 texture = SubResource("CompressedTexture2D_scoyt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(12, -5)
-scale = Vector2(1.8, 3.04)
+position = Vector2(11, -5)
+scale = Vector2(1.8, 3.16)
 shape = SubResource("RectangleShape2D_bxntq")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -187,7 +202,7 @@ stream = ExtResource("19_mlnnq")
 volume_db = -12.0
 
 [node name="Hitbox" type="Area2D" parent="."]
-position = Vector2(47, -1)
+position = Vector2(11, -1)
 scale = Vector2(-1.80646, 0.947366)
 collision_layer = 2
 collision_mask = 0
