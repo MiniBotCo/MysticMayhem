@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bjupuljh4v708"]
+[gd_scene load_steps=28 format=3 uid="uid://bjupuljh4v708"]
 
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/Enemy.cs" id="1_s7n2v"]
 [ext_resource type="Script" path="res://Scripts/Resources/StatResource.cs" id="2_e64uy"]
@@ -103,11 +103,13 @@ radius = 124.036
 radius = 30.0
 height = 118.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_johrx"]
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gkj3s"]
 radius = 9.35113
 height = 99.335
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("spawner", "AnimationPlayerNode", "Sprite2DNode", "StateMachineNode", "HurtboxNode", "PathNode", "Agent2DNode", "ChaseAreaNode", "AttackAreaNode")]
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("spawner", "AnimationPlayerNode", "Sprite2DNode", "StateMachineNode", "HurtboxNode", "HitboxNode", "HitboxShapeNode", "PathNode", "Agent2DNode", "ChaseAreaNode", "AttackAreaNode")]
 collision_layer = 5
 collision_mask = 3
 script = ExtResource("1_s7n2v")
@@ -118,6 +120,8 @@ AnimationPlayerNode = NodePath("AnimationPlayer")
 Sprite2DNode = NodePath("Sprite2D")
 StateMachineNode = NodePath("StateMachine")
 HurtboxNode = NodePath("Hurtbox")
+HitboxNode = NodePath("Hitbox")
+HitboxShapeNode = NodePath("Hitbox/CollisionShape2D")
 PathNode = NodePath("Path2D")
 Agent2DNode = NodePath("NavigationAgent2D")
 ChaseAreaNode = NodePath("ChaseArea")
@@ -189,6 +193,15 @@ rotation = 1.56891
 shape = SubResource("CapsuleShape2D_2ddjq")
 
 [node name="Spawn" parent="." instance=ExtResource("12_c71fo")]
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(40, 0)
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+scale = Vector2(-1.88623, 1.79907)
+shape = SubResource("RectangleShape2D_johrx")
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 0

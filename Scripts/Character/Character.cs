@@ -18,6 +18,7 @@ public partial class Character : CharacterBody2D
     [Export] public AudioStreamPlayer AudioPlayer { get; private set; }
     [Export] public Area2D HurtboxNode { get; private set; }
     [Export] public Area2D HitboxNode { get; private set; }
+    [Export] public CollisionShape2D HitboxShapeNode { get; private set; }
 
 
     [ExportGroup("AI Nodes")]
@@ -49,11 +50,16 @@ public partial class Character : CharacterBody2D
         Character player = area.GetOwner<Character>();
         health.StatValue -= player.GetStatResource(Stat.Damage).StatValue;
 
-        GD.Print(health.StatValue);
+        GD.Print("Health is now: " + health.StatValue);
     }
 
     private StatResource GetStatResource(Stat stat)
     {
         return stats.Where((element) => element.StatType == stat).FirstOrDefault();
+    }
+
+    public void ToggleHitBox(bool flag)
+    {
+        HitboxShapeNode.Disabled = flag;
     }
 }

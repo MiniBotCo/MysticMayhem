@@ -144,7 +144,7 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vx131"]
 size = Vector2(20, 38)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("AnimationPlayerNode", "Sprite2DNode", "StateMachineNode", "AudioPlayer", "HitboxNode") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("AnimationPlayerNode", "Sprite2DNode", "StateMachineNode", "AudioPlayer", "HurtboxNode", "HitboxNode", "HitboxShapeNode") groups=["Player"]]
 collision_layer = 2
 script = ExtResource("1_l2rlm")
 PlayerSpeed = 300.0
@@ -154,7 +154,9 @@ AnimationPlayerNode = NodePath("AnimationPlayer")
 Sprite2DNode = NodePath("Sprite2D")
 StateMachineNode = NodePath("StateMachine")
 AudioPlayer = NodePath("AudioStreamPlayer")
+HurtboxNode = NodePath("Hurtbox")
 HitboxNode = NodePath("Hitbox")
+HitboxShapeNode = NodePath("Hitbox/CollisionShape2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(14, -21)
@@ -210,3 +212,15 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, -9)
 shape = SubResource("RectangleShape2D_vx131")
+disabled = true
+
+[node name="Hurtbox" type="Area2D" parent="."]
+position = Vector2(-2, 0)
+scale = Vector2(1.17603, 1)
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(11, -5)
+scale = Vector2(1.76, 3.19419)
+shape = SubResource("RectangleShape2D_bxntq")

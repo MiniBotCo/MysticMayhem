@@ -59,6 +59,7 @@ public partial class PlayerAttackState : PlayerState
 
     private void HandleAnimationFinished(StringName animName)
     {
+        characterNode.ToggleHitBox(true);
         characterNode.StateMachineNode.SwitchState<PlayerIdleState>();
     }
 
@@ -70,5 +71,7 @@ public partial class PlayerAttackState : PlayerState
         float distanceMultiplier = characterNode.Sprite2DNode.FlipH ? distanceHitBoxFacingLeft : distanceHitBoxFacingRight;
         newPosition *= distanceMultiplier;
         characterNode.HitboxNode.Position = newPosition;
+
+        characterNode.ToggleHitBox(false);
     }
 }

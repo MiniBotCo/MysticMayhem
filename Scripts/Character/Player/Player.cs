@@ -19,10 +19,11 @@ public partial class Player : Character
 
 	public AudioStreamWav jumpSound = GD.Load<AudioStreamWav>("res://Assets/Sfx/jump.wav");
 	public AudioStreamWav landSound = GD.Load<AudioStreamWav>("res://Assets/Sfx/land.wav");
-    public AudioStreamWav swordSwingSound = GD.Load<AudioStreamWav>("res://Assets/Sfx/swordSwing.wav");
+	public AudioStreamWav swordSwingSound = GD.Load<AudioStreamWav>("res://Assets/Sfx/swordSwing.wav");
 
 	public override void _Ready()
 	{
+		base._Ready();
 		_hud = GetNode<Control>("HUDCanvasLayer/HUD");
 		ApplyEffects();
 		UpdateHUD();
@@ -39,7 +40,7 @@ public partial class Player : Character
 		List<Effect> nonPermanentEffects = new List<Effect>();
 		foreach (Effect effect in _effects)
 		{
-			switch(effect.name)
+			switch (effect.name)
 			{
 				case "health":
 					Health += effect.amount;
