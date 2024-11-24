@@ -53,7 +53,7 @@ public partial class Character : CharacterBody2D
         GD.Print("Health is now: " + health.StatValue);
     }
 
-    private StatResource GetStatResource(Stat stat)
+    protected StatResource GetStatResource(Stat stat)
     {
         return stats.Where((element) => element.StatType == stat).FirstOrDefault();
     }
