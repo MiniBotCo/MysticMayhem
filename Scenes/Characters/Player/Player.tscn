@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://b71wwwq6jo2yi"]
+[gd_scene load_steps=35 format=3 uid="uid://b71wwwq6jo2yi"]
 
 [ext_resource type="Script" path="res://Scripts/Character/Player/Player.cs" id="1_l2rlm"]
 [ext_resource type="Script" path="res://Scripts/Resources/StatResource.cs" id="2_r26ca"]
@@ -18,8 +18,10 @@
 [ext_resource type="Script" path="res://Scripts/Character/Player/PlayerAttackState.cs" id="12_b17sf"]
 [ext_resource type="PackedScene" uid="uid://untwbv6c7xc2" path="res://Scenes/Characters/state_machine.tscn" id="13_l7ebq"]
 [ext_resource type="Texture2D" uid="uid://bdmcciwxu6dgs" path="res://Assets/Sprites/Character/Player/Warrior/Animation_Jump/Warrior_Jumping.png" id="13_xlsde"]
+[ext_resource type="Texture2D" uid="uid://c348h1hm7epy7" path="res://Assets/Sprites/Character/Player/Warrior/Animation_Death/Death.png" id="14_tisbs"]
 [ext_resource type="AudioStream" uid="uid://bdd51e6cwv2vy" path="res://Assets/Sfx/jump.wav" id="19_mlnnq"]
 [ext_resource type="PackedScene" uid="uid://cv8xo6fltm2ep" path="res://Scenes/Menus/HUD.tscn" id="19_w6eje"]
+[ext_resource type="Script" path="res://Scripts/Character/Player/PlayerDeathState.cs" id="20_df8kn"]
 
 [sub_resource type="Resource" id="Resource_cboxk"]
 script = ExtResource("2_r26ca")
@@ -64,6 +66,22 @@ tracks/1/keys = {
 "args": [],
 "method": &"PerformHit"
 }]
+}
+
+[sub_resource type="Animation" id="Animation_rj1gw"]
+resource_name = "Death"
+step = 0.142857
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.142857, 0.285714, 0.428571, 0.571429, 0.714286, 0.857143),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("7_fsoa7"), ExtResource("7_fsoa7"), ExtResource("14_tisbs"), ExtResource("14_tisbs"), ExtResource("14_tisbs"), ExtResource("14_tisbs"), ExtResource("14_tisbs")]
 }
 
 [sub_resource type="Animation" id="Animation_5k773"]
@@ -135,6 +153,7 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_n0yme"]
 _data = {
 "Attack": SubResource("Animation_14li8"),
+"Death": SubResource("Animation_rj1gw"),
 "Idle": SubResource("Animation_5k773"),
 "Jump": SubResource("Animation_p5slu"),
 "Move": SubResource("Animation_t35jx"),
@@ -177,7 +196,7 @@ scale = Vector2(0.5, 0.5)
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("currentState", "states") instance=ExtResource("13_l7ebq")]
 currentState = NodePath("IdleState")
-states = [NodePath("IdleState"), NodePath("MoveState"), NodePath("JumpState"), NodePath("AttackState")]
+states = [NodePath("IdleState"), NodePath("MoveState"), NodePath("JumpState"), NodePath("AttackState"), NodePath("DeathState")]
 
 [node name="IdleState" type="Node" parent="StateMachine"]
 script = ExtResource("9_slpt1")
@@ -190,6 +209,9 @@ script = ExtResource("11_3sg2n")
 
 [node name="AttackState" type="Node" parent="StateMachine"]
 script = ExtResource("12_b17sf")
+
+[node name="DeathState" type="Node" parent="StateMachine"]
+script = ExtResource("20_df8kn")
 
 [node name="HUDCanvasLayer" type="CanvasLayer" parent="."]
 
