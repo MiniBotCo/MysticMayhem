@@ -17,9 +17,11 @@ rendering_quadrant_size = 17
 
 [node name="Player" parent="." instance=ExtResource("2_f1gmu")]
 position = Vector2(13, -351)
+stats = null
 
 [node name="Enemy" parent="." instance=ExtResource("3_20fpa")]
 position = Vector2(248, -267)
+stats = null
 
 [node name="FloatingEnemy" parent="." instance=ExtResource("4_1f1wr")]
 position = Vector2(-499.871, -284.979)

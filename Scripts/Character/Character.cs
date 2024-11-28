@@ -4,7 +4,7 @@ using System.Linq;
 
 public partial class Character : CharacterBody2D
 {
-    [Export] private StatResource[] stats;
+    [Export] private StatResource[] stats = new StatResource[2];
     protected Character characterNode;
     // Define gravity and other variables
     [Export] public float Gravity = 900.0f;
