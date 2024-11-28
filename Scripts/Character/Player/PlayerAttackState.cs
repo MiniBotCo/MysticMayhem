@@ -4,18 +4,27 @@ using System.Reflection.Metadata;
 
 public partial class PlayerAttackState : PlayerState
 {
-    [Export] private Timer attackTimerNode;
+    protected override void EnterState()
+    {
+        characterNode.AudioPlayer.Stream = characterNode.swordSwingSound;
+        characterNode.AudioPlayer.Play();
+        characterNode.AnimationPlayerNode.Play(GameConstants.ANIM_ATTACK);
+        characterNode.AnimationPlayerNode.AnimationFinished += HandleAnimationFinished;
+    }
+
+    protected override void ExitState()
+    {
+        characterNode.AnimationPlayerNode.AnimationFinished -= HandleAnimationFinished;
+    }
 
     public override void _Ready()
     {
         base._Ready();
-        attackTimerNode.Timeout += HandleAttackTimeout;
     }
 
     public override void _PhysicsProcess(double delta)
     {
         characterNode.velocity = characterNode.Velocity;
-
         characterNode.velocity.X = 0;
 
         // Add the gravity.
@@ -36,8 +45,6 @@ public partial class PlayerAttackState : PlayerState
 
         if (what == GameConstants.NOTIFICATION_ENTER_STATE)
         {
-            //GD.Print("Switched to the attack state");
-
             if (Input.IsActionPressed(GameConstants.INPUT_MOVE_LEFT))
             {
                 characterNode.Sprite2DNode.FlipH = true;
@@ -46,16 +53,25 @@ public partial class PlayerAttackState : PlayerState
             {
                 characterNode.Sprite2DNode.FlipH = false;
             }
-
-            characterNode.AudioPlayer.Stream = characterNode.swordSwingSound;
-            characterNode.AudioPlayer.Play();
-            characterNode.AnimationPlayerNode.Play(GameConstants.ANIM_ATTACK);
             SetPhysicsProcess(true);
-            attackTimerNode.Start();
         }
     }
-    private void HandleAttackTimeout()
+
+    private void HandleAnimationFinished(StringName animName)
     {
+        characterNode.ToggleHitBox(true);
         characterNode.StateMachineNode.SwitchState<PlayerIdleState>();
+    }
+
+    private void PerformHit()
+    {
+        float distanceHitBoxFacingLeft = 16.0f;
+        float distanceHitBoxFacingRight = 44.0f;
+        Vector2 newPosition = characterNode.Sprite2DNode.FlipH ? Vector2.Left : Vector2.Right;
+        float distanceMultiplier = characterNode.Sprite2DNode.FlipH ? distanceHitBoxFacingLeft : distanceHitBoxFacingRight;
+        newPosition *= distanceMultiplier;
+        characterNode.HitboxNode.Position = newPosition;
+
+        characterNode.ToggleHitBox(false);
     }
 }

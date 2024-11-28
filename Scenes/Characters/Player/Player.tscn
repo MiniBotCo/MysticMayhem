@@ -1,6 +1,7 @@
-[gd_scene load_steps=28 format=3 uid="uid://b71wwwq6jo2yi"]
+[gd_scene load_steps=35 format=3 uid="uid://b71wwwq6jo2yi"]
 
 [ext_resource type="Script" path="res://Scripts/Character/Player/Player.cs" id="1_l2rlm"]
+[ext_resource type="Script" path="res://Scripts/Resources/StatResource.cs" id="2_r26ca"]
 [ext_resource type="Texture2D" uid="uid://bd3upfojwluw1" path="res://Assets/Sprites/Character/Player/Warrior/Animation_Attack/GigaWarriorStandingAttack2.png" id="6_x6ucm"]
 [ext_resource type="Texture2D" uid="uid://c0c8wsf7sh3v6" path="res://Assets/Sprites/Character/Player/Warrior/Animation_Move/WarriorWalk1.png" id="7_2jrpj"]
 [ext_resource type="Texture2D" uid="uid://c0b8yp3ibdflq" path="res://Assets/Sprites/Character/Player/Warrior/Animation_Idle/WarriorIdle1.png" id="7_fsoa7"]
@@ -17,8 +18,20 @@
 [ext_resource type="Script" path="res://Scripts/Character/Player/PlayerAttackState.cs" id="12_b17sf"]
 [ext_resource type="PackedScene" uid="uid://untwbv6c7xc2" path="res://Scenes/Characters/state_machine.tscn" id="13_l7ebq"]
 [ext_resource type="Texture2D" uid="uid://bdmcciwxu6dgs" path="res://Assets/Sprites/Character/Player/Warrior/Animation_Jump/Warrior_Jumping.png" id="13_xlsde"]
+[ext_resource type="Texture2D" uid="uid://c348h1hm7epy7" path="res://Assets/Sprites/Character/Player/Warrior/Animation_Death/Death.png" id="14_tisbs"]
 [ext_resource type="AudioStream" uid="uid://bdd51e6cwv2vy" path="res://Assets/Sfx/jump.wav" id="19_mlnnq"]
 [ext_resource type="PackedScene" uid="uid://cv8xo6fltm2ep" path="res://Scenes/Menus/HUD.tscn" id="19_w6eje"]
+[ext_resource type="Script" path="res://Scripts/Character/Player/PlayerDeathState.cs" id="20_df8kn"]
+
+[sub_resource type="Resource" id="Resource_cboxk"]
+script = ExtResource("2_r26ca")
+StatType = 0
+StatValue = 100.0
+
+[sub_resource type="Resource" id="Resource_u0p6j"]
+script = ExtResource("2_r26ca")
+StatType = 1
+StatValue = 10.0
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_scoyt"]
 
@@ -39,6 +52,36 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [ExtResource("7_t07e8"), ExtResource("6_x6ucm"), ExtResource("8_bndxu")]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StateMachine/AttackState")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"PerformHit"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_rj1gw"]
+resource_name = "Death"
+step = 0.142857
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.142857, 0.285714, 0.428571, 0.571429, 0.714286, 0.857143),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("7_fsoa7"), ExtResource("7_fsoa7"), ExtResource("14_tisbs"), ExtResource("14_tisbs"), ExtResource("14_tisbs"), ExtResource("14_tisbs"), ExtResource("14_tisbs")]
 }
 
 [sub_resource type="Animation" id="Animation_5k773"]
@@ -110,29 +153,37 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_n0yme"]
 _data = {
 "Attack": SubResource("Animation_14li8"),
+"Death": SubResource("Animation_rj1gw"),
 "Idle": SubResource("Animation_5k773"),
 "Jump": SubResource("Animation_p5slu"),
 "Move": SubResource("Animation_t35jx"),
 "RESET": SubResource("Animation_a65ei")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("AnimationPlayerNode", "Sprite2DNode", "StateMachineNode", "AudioPlayer") groups=["Player"]]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vx131"]
+size = Vector2(20, 38)
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("AnimationPlayerNode", "Sprite2DNode", "StateMachineNode", "AudioPlayer", "HurtboxNode", "HitboxNode", "HitboxShapeNode") groups=["Player"]]
 collision_layer = 2
 script = ExtResource("1_l2rlm")
 PlayerSpeed = 300.0
 JumpVelocity = -600.0
+stats = Array[Object]([SubResource("Resource_cboxk"), SubResource("Resource_u0p6j")])
 AnimationPlayerNode = NodePath("AnimationPlayer")
 Sprite2DNode = NodePath("Sprite2D")
 StateMachineNode = NodePath("StateMachine")
 AudioPlayer = NodePath("AudioStreamPlayer")
+HurtboxNode = NodePath("Hurtbox")
+HitboxNode = NodePath("Hitbox")
+HitboxShapeNode = NodePath("Hitbox/CollisionShape2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(14, -21)
 texture = SubResource("CompressedTexture2D_scoyt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(12, -5)
-scale = Vector2(1.8, 3.04)
+position = Vector2(11, -5)
+scale = Vector2(1.8, 3.16)
 shape = SubResource("RectangleShape2D_bxntq")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -145,7 +196,7 @@ scale = Vector2(0.5, 0.5)
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("currentState", "states") instance=ExtResource("13_l7ebq")]
 currentState = NodePath("IdleState")
-states = [NodePath("IdleState"), NodePath("MoveState"), NodePath("JumpState"), NodePath("AttackState")]
+states = [NodePath("IdleState"), NodePath("MoveState"), NodePath("JumpState"), NodePath("AttackState"), NodePath("DeathState")]
 
 [node name="IdleState" type="Node" parent="StateMachine"]
 script = ExtResource("9_slpt1")
@@ -156,13 +207,11 @@ script = ExtResource("10_82i2q")
 [node name="JumpState" type="Node" parent="StateMachine"]
 script = ExtResource("11_3sg2n")
 
-[node name="AttackState" type="Node" parent="StateMachine" node_paths=PackedStringArray("attackTimerNode")]
+[node name="AttackState" type="Node" parent="StateMachine"]
 script = ExtResource("12_b17sf")
-attackTimerNode = NodePath("Timer")
 
-[node name="Timer" type="Timer" parent="StateMachine/AttackState"]
-wait_time = 0.25
-one_shot = true
+[node name="DeathState" type="Node" parent="StateMachine"]
+script = ExtResource("20_df8kn")
 
 [node name="HUDCanvasLayer" type="CanvasLayer" parent="."]
 
@@ -175,3 +224,25 @@ offset_bottom = -5.0
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("19_mlnnq")
 volume_db = -12.0
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(11, -1)
+scale = Vector2(-1.80646, 0.947366)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -9)
+shape = SubResource("RectangleShape2D_vx131")
+disabled = true
+
+[node name="Hurtbox" type="Area2D" parent="."]
+position = Vector2(-2, 0)
+scale = Vector2(1.17603, 1)
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(11, -5)
+scale = Vector2(1.76, 3.19419)
+shape = SubResource("RectangleShape2D_bxntq")

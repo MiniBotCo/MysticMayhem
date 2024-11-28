@@ -37,15 +37,9 @@ public partial class PlayerIdleState : PlayerState
         characterNode.Flip();
     }
 
-
-
     public override void _Input(InputEvent @event)
     {
-        if (Input.IsActionJustPressed(GameConstants.INPUT_ATTACK))
-        {
-            //GD.Print("Player attack state - input detected");
-            characterNode.StateMachineNode.SwitchState<PlayerAttackState>();
-        }
+        CheckForAttackInput();
     }
 
     protected override void EnterState()

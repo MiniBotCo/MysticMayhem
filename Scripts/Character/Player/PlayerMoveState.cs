@@ -26,7 +26,7 @@ public partial class PlayerMoveState : PlayerState
 
         if (characterNode.direction == Vector2.Zero)
         {
-            
+
             characterNode.StateMachineNode.SwitchState<PlayerIdleState>();
             return;
         }
@@ -52,10 +52,7 @@ public partial class PlayerMoveState : PlayerState
 
     public override void _Input(InputEvent @event)
     {
-        if (Input.IsActionJustPressed(GameConstants.INPUT_ATTACK))
-        {
-            characterNode.StateMachineNode.SwitchState<PlayerAttackState>();
-        }
+        CheckForAttackInput();
     }
 
     protected override void EnterState()

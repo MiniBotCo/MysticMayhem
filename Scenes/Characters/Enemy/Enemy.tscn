@@ -1,6 +1,7 @@
-[gd_scene load_steps=21 format=3 uid="uid://bjupuljh4v708"]
+[gd_scene load_steps=47 format=3 uid="uid://bjupuljh4v708"]
 
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/Enemy.cs" id="1_s7n2v"]
+[ext_resource type="Script" path="res://Scripts/Resources/StatResource.cs" id="2_e64uy"]
 [ext_resource type="Texture2D" uid="uid://uf67ea6s75px" path="res://Assets/Sprites/Character/Enemy/Ghost.png" id="2_qnxvh"]
 [ext_resource type="Texture2D" uid="uid://c25ugshfk3ith" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Idle/Ghost_Idle1.png" id="3_dwpcu"]
 [ext_resource type="PackedScene" uid="uid://untwbv6c7xc2" path="res://Scenes/Characters/state_machine.tscn" id="4_pcvf8"]
@@ -9,9 +10,38 @@
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyIdleState.cs" id="5_olfrj"]
 [ext_resource type="Texture2D" uid="uid://dli36ptrvkvb3" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Attack/Ghost_Attack2.png" id="6_brtih"]
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyReturnState.cs" id="6_ksx3o"]
+[ext_resource type="Texture2D" uid="uid://xmt2cafh1rgt" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/smoke-Fx3_1.png" id="8_8dn2j"]
+[ext_resource type="Texture2D" uid="uid://dlgnr1le3nit6" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/smoke-Fx3_2.png" id="9_dgjpv"]
+[ext_resource type="Texture2D" uid="uid://hgbqnmova2p6" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/smoke-Fx3_3.png" id="10_ihcup"]
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyPatrolState.cs" id="10_rhu0y"]
+[ext_resource type="Texture2D" uid="uid://cfav761pelhv8" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/smoke-Fx3_4.png" id="11_331um"]
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyChaseState.cs" id="11_g8kic"]
 [ext_resource type="PackedScene" uid="uid://d057vb218xyid" path="res://Scenes/Spawnables/door_spawn.tscn" id="12_c71fo"]
+[ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyAttackState.cs" id="12_ibycl"]
+[ext_resource type="Texture2D" uid="uid://qem1ifkd6ry3" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/smoke-Fx3_5.png" id="12_uvkh3"]
+[ext_resource type="Texture2D" uid="uid://cgprsafjqkqai" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/smoke-Fx3_6.png" id="13_tq31l"]
+[ext_resource type="Texture2D" uid="uid://d4ef2nrmheepc" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/smoke-Fx3_7.png" id="14_ok17d"]
+[ext_resource type="Texture2D" uid="uid://dsu74jltgb0qg" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/smoke-Fx3_8.png" id="15_vspva"]
+[ext_resource type="Texture2D" uid="uid://byn0nxguso7ij" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/smoke-Fx3_9.png" id="16_u10ki"]
+[ext_resource type="Texture2D" uid="uid://crpfo8gphs7fr" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/smoke-Fx3_10.png" id="17_4upgs"]
+[ext_resource type="Texture2D" uid="uid://cvssndr2cuftu" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/smoke-Fx3_11.png" id="18_gay3b"]
+[ext_resource type="Texture2D" uid="uid://bi72hdq78aubf" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/smoke-Fx3_12.png" id="19_se3hq"]
+[ext_resource type="Texture2D" uid="uid://c0jjk4eoc85n0" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/smoke-Fx3_13.png" id="20_w5gmc"]
+[ext_resource type="Texture2D" uid="uid://bgd7fctm73kbj" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/smoke-Fx3_14.png" id="21_t7bt5"]
+[ext_resource type="Texture2D" uid="uid://cugdekkvosedx" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/smoke-Fx3_15.png" id="22_q3uvn"]
+[ext_resource type="Texture2D" uid="uid://bkrpc2ti7y2iy" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/smoke-Fx3_16.png" id="23_y7ca2"]
+[ext_resource type="Texture2D" uid="uid://0o0k0xpobn7p" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/smoke-Fx3_17.png" id="24_wq02y"]
+[ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyDeathState.cs" id="31_csr7q"]
+
+[sub_resource type="Resource" id="Resource_xfjbu"]
+script = ExtResource("2_e64uy")
+StatType = 0
+StatValue = 20.0
+
+[sub_resource type="Resource" id="Resource_jt6x1"]
+script = ExtResource("2_e64uy")
+StatType = 1
+StatValue = 5.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oa781"]
 radius = 15.0
@@ -19,7 +49,6 @@ height = 76.0
 
 [sub_resource type="Animation" id="Animation_g30ne"]
 resource_name = "Attack"
-loop_mode = 1
 step = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -32,6 +61,20 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [ExtResource("5_aw7f7"), ExtResource("6_brtih"), ExtResource("5_aw7f7"), ExtResource("6_brtih")]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../StateMachine/AttackState")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"PerformHit"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_x6bf4"]
@@ -66,38 +109,71 @@ tracks/0/keys = {
 "values": [ExtResource("2_qnxvh")]
 }
 
+[sub_resource type="Animation" id="Animation_ogewy"]
+resource_name = "Death"
+step = 0.0526316
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0555556, 0.105263, 0.157895, 0.210526, 0.263158, 0.315789, 0.368421, 0.421053, 0.473684, 0.526316, 0.578947, 0.631579, 0.684211, 0.736842, 0.789474, 0.842105, 0.894737, 0.947368),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("5_aw7f7"), ExtResource("8_8dn2j"), ExtResource("8_8dn2j"), ExtResource("9_dgjpv"), ExtResource("10_ihcup"), ExtResource("11_331um"), ExtResource("12_uvkh3"), ExtResource("13_tq31l"), ExtResource("14_ok17d"), ExtResource("15_vspva"), ExtResource("16_u10ki"), ExtResource("17_4upgs"), ExtResource("18_gay3b"), ExtResource("19_se3hq"), ExtResource("20_w5gmc"), ExtResource("21_t7bt5"), ExtResource("22_q3uvn"), ExtResource("23_y7ca2"), ExtResource("24_wq02y")]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_u6m5e"]
 _data = {
 "Attack": SubResource("Animation_g30ne"),
+"Death": SubResource("Animation_ogewy"),
 "Idle": SubResource("Animation_x6bf4"),
 "RESET": SubResource("Animation_h7ce0")
 }
 
 [sub_resource type="Curve2D" id="Curve2D_dtgxo"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -155, 1, 0, 0, 0, 0, 133, 0)
+"points": PackedVector2Array(0, 0, 0, 0, -171, -2, 0, 0, 0, 0, 152, -2)
 }
 point_count = 2
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_shqom"]
-vertices = PackedVector2Array(126.891, -34.0313, 126.102, 40.9297, -152.102, 39.0625, -152.891, -34.9609)
+vertices = PackedVector2Array(159.289, -36.0781, 161.68, 42.8516, -178.289, 38.1328, -180.672, -38.9063)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-163, -45, -162, 49, 136, 51, 137, -44)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-191, -49, -188, 48, 172, 53, 169, -46)])
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vgys7"]
-radius = 90.85
+radius = 124.036
 
-[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("spawner", "AnimationPlayerNode", "Sprite2DNode", "StateMachineNode", "PathNode", "Agent2DNode", "ChaseAreaNode")]
-collision_layer = 4
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2ddjq"]
+radius = 30.0
+height = 93.9998
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_johrx"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gkj3s"]
+radius = 9.35113
+height = 99.335
+
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("spawner", "AnimationPlayerNode", "Sprite2DNode", "StateMachineNode", "HurtboxNode", "HitboxNode", "HitboxShapeNode", "PathNode", "Agent2DNode", "ChaseAreaNode", "AttackAreaNode")]
+collision_layer = 5
+collision_mask = 3
 script = ExtResource("1_s7n2v")
 EnemySpeed = 100.0
 spawner = NodePath("Spawn")
+stats = Array[Object]([SubResource("Resource_xfjbu"), SubResource("Resource_jt6x1")])
 AnimationPlayerNode = NodePath("AnimationPlayer")
 Sprite2DNode = NodePath("Sprite2D")
 StateMachineNode = NodePath("StateMachine")
+HurtboxNode = NodePath("Hurtbox")
+HitboxNode = NodePath("Hitbox")
+HitboxShapeNode = NodePath("Hitbox/CollisionShape2D")
 PathNode = NodePath("Path2D")
 Agent2DNode = NodePath("NavigationAgent2D")
 ChaseAreaNode = NodePath("ChaseArea")
+AttackAreaNode = NodePath("AttackArea")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_qnxvh")
@@ -117,7 +193,7 @@ curve = SubResource("Curve2D_dtgxo")
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("currentState", "states") instance=ExtResource("4_pcvf8")]
 currentState = NodePath("IdleState")
-states = [NodePath("IdleState"), NodePath("ReturnState"), NodePath("PatrolState"), NodePath("ChaseState")]
+states = [NodePath("IdleState"), NodePath("ReturnState"), NodePath("PatrolState"), NodePath("ChaseState"), NodePath("AttackState"), NodePath("DeathState")]
 
 [node name="IdleState" type="Node" parent="StateMachine"]
 script = ExtResource("5_olfrj")
@@ -140,6 +216,12 @@ chaseTimerNode = NodePath("Timer")
 wait_time = 0.5
 autostart = true
 
+[node name="AttackState" type="Node" parent="StateMachine"]
+script = ExtResource("12_ibycl")
+
+[node name="DeathState" type="Node" parent="StateMachine"]
+script = ExtResource("31_csr7q")
+
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 debug_enabled = true
 
@@ -147,9 +229,36 @@ debug_enabled = true
 navigation_polygon = SubResource("NavigationPolygon_shqom")
 
 [node name="ChaseArea" type="Area2D" parent="."]
+collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ChaseArea"]
 shape = SubResource("CircleShape2D_vgys7")
 
+[node name="AttackArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+rotation = 1.56891
+shape = SubResource("CapsuleShape2D_2ddjq")
+
 [node name="Spawn" parent="." instance=ExtResource("12_c71fo")]
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+scale = Vector2(-1.88623, 1.79907)
+shape = SubResource("RectangleShape2D_johrx")
+disabled = true
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, 3)
+scale = Vector2(2.24572, 0.664419)
+shape = SubResource("CapsuleShape2D_gkj3s")

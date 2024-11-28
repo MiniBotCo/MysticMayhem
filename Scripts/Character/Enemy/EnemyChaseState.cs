@@ -4,42 +4,47 @@ using System.Linq;
 
 public partial class EnemyChaseState : EnemyState
 {
-    private Node2D target = null;
+    private CharacterBody2D target;
     [Export] private Timer chaseTimerNode;
     protected override void EnterState()
     {
-        //Should have a dedicated move animation for this
+        GD.Print("Now in the Chase State!");
         characterNode.AnimationPlayerNode.Play(GameConstants.ANIM_IDLE);
-
-        characterNode.ChaseAreaNode.BodyEntered += OnChaseAreaBodyEntered;
+        target = characterNode.ChaseAreaNode.GetOverlappingBodies().First() as CharacterBody2D;
+        GD.Print("Target is: " + target.Name);
 
         chaseTimerNode.Timeout += HandleTimeout;
+        characterNode.AttackAreaNode.BodyEntered += HandleAttackAreaBodyEntered;
+        characterNode.ChaseAreaNode.BodyExited += HandleChaseAreaBodyExited;
     }
 
     protected override void ExitState()
     {
         chaseTimerNode.Timeout -= HandleTimeout;
+        characterNode.AttackAreaNode.BodyEntered -= HandleAttackAreaBodyEntered;
+        characterNode.ChaseAreaNode.BodyExited -= HandleChaseAreaBodyExited;
     }
 
     public override void _PhysicsProcess(double delta)
     {
+        destination = target.GlobalPosition;
+        characterNode.Agent2DNode.TargetPosition = destination;
         Move();
     }
 
     private void HandleTimeout()
     {
-        if (target != null)
-        {
-            destination = target.GlobalPosition;
-            characterNode.Agent2DNode.TargetPosition = destination;
-        }
+        destination = target.GlobalPosition;
+        characterNode.Agent2DNode.TargetPosition = destination;
     }
 
-    private void OnChaseAreaBodyEntered(Node2D body)
+    private void HandleAttackAreaBodyEntered(Node2D body)
     {
-        if(body.IsInGroup("Player"))
-        {
-            target = body;
-        }
+        characterNode.StateMachineNode.SwitchState<EnemyAttackState>();
+    }
+
+    private void HandleChaseAreaBodyExited(Node2D body)
+    {
+        characterNode.StateMachineNode.SwitchState<EnemyReturnState>();
     }
 }
