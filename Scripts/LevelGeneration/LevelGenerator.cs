@@ -14,32 +14,32 @@ public partial class LevelGenerator : Node2D
     public Door Exit { get; set; } = null;
 
     [Export]
-    public PackedScene PlayerScene { get; set;} = null;
+    public Player Player { get; set;} = null;
 
     private FrameGenerator _frameGenerator;
     private PlatformGenerator _platformGenerator;
     private Spawner _spawner;
     private Chest _chest;
+    private EnemyGenerator _enemyGenerator;
 
 
-    private bool _inDoor = false;
+
     private List<TileMapLayer> _tileMapLayers;
     private List<Vector2I> _unusedTiles;
 
     
     // For debug purposes, remove for rinal release
     private TileMapLayer _debugTileMapLayer;
-    private Enemy _enemy;
-    private AnimationPlayer _animationPlayer;
 
+    
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        _enemy = GetNode<Enemy>("Enemy");
         // Initializing the child nodes
         _frameGenerator = GetNode<FrameGenerator>("FrameGenerator");
         _platformGenerator = GetNode<PlatformGenerator>("PlatformGenerator");
+        _enemyGenerator = GetNode<EnemyGenerator>("EnemyGenerator");
         _spawner = GetNode<Spawner>("Spawner");
 
         // For debug purposes, remove for rinal release
@@ -49,18 +49,14 @@ public partial class LevelGenerator : Node2D
         _unusedTiles = new List<Vector2I>();
 
         _chest = GetNode<Chest>("Chest");
-        _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 
         base._Ready();
-
-        // Creates the level
-        GenerateLevel();
     }
 
     /// <summary>
     /// Generates the level
     /// </summary>
-    public void GenerateLevel()
+    public async void GenerateLevel(int level)
     {
         // Randomizes the scene
         GD.Randomize();
@@ -89,11 +85,9 @@ public partial class LevelGenerator : Node2D
         _spawner.AddToSpawnList(Entrance);
         _spawner.AddToSpawnList(Exit);
         _spawner.AddToSpawnList(_chest);
-        _spawner.AddToSpawnList(_enemy);
 
-        // Signals for the exit door, used to exit the level
-        Exit.BodyEntered += OnExitBodyEntered;
-        Exit.BodyExited += OnExitBodyExited;
+        _enemyGenerator.GenerateEnemies(level, _spawner);
+        await ToSignal(_enemyGenerator, EnemyGenerator.SignalName.EnemiesGenerated);
 
         // Spawns the spawnable list
         _spawner.Spawn(_tileMapLayers, _unusedTiles);
@@ -111,39 +105,21 @@ public partial class LevelGenerator : Node2D
     /// <summary>
     /// Spawns the player at the entrance door
     /// </summary>
-    private async void SpawnPlayer()
+    private void SpawnPlayer()
     {
         if (Entrance != null)
         {
-            Node2D player = PlayerScene.Instantiate<Node2D>();
-            CallDeferred(Node.MethodName.AddChild, player);
-            await ToSignal(player, Node2D.SignalName.Ready);
-            player.Position = Entrance.Position + new Vector2(0, -32);
+            Player.Position = Entrance.Position + new Vector2(0, -32);
 
             Vector2I levelPixels = (Vector2I)(_frameGenerator.GetTileMapLayer().MapToLocal(LevelSize) + new Vector2(16, -16));
-            player.GetNode<Camera2D>("Camera2D").LimitBottom = levelPixels.Y;
-            player.GetNode<Camera2D>("Camera2D").LimitTop = 32;
-            player.GetNode<Camera2D>("Camera2D").LimitRight = levelPixels.X;
-            player.GetNode<Camera2D>("Camera2D").LimitLeft = 0;
+            Player.GetNode<Camera2D>("Camera2D").LimitBottom = levelPixels.Y;
+            Player.GetNode<Camera2D>("Camera2D").LimitTop = 32;
+            Player.GetNode<Camera2D>("Camera2D").LimitRight = levelPixels.X;
+            Player.GetNode<Camera2D>("Camera2D").LimitLeft = 0;
         }
     }
 
-    /// <summary>
-    /// Handles input, only used here for the exit door
-    /// </summary>
-    /// <param name="event">The input event</param>
-    public override async void _Input(InputEvent @event)
-    {
-        if(@event.IsActionPressed("EnterDoor") && _inDoor)
-        {
-            _animationPlayer.Play("ChangeScene");
-            await ToSignal(_animationPlayer, AnimationPlayer.SignalName.AnimationFinished);
-            // TODO make this switch to a transition scene
-            GetTree().ChangeSceneToFile("res://Scenes/level_generator.tscn");
-        }
-        
-        base._Input(@event);
-    }
+
 
     /// <summary>
     /// Returns an array of Vector2I containing all unused tiles within the level bounds
@@ -183,23 +159,7 @@ public partial class LevelGenerator : Node2D
         return unusedTiles;
     }
 
-    /// <summary>
-    /// Called when the Exit door has a body enter
-    /// </summary>
-    /// <param name="body">The body entered</param>
-    private void OnExitBodyEntered(Node2D body)
-    {
-        if (body.IsInGroup("Player")) _inDoor = true;
-    }
 
-    /// <summary>
-    /// Called when the Exit door has a body exit
-    /// </summary>
-    /// <param name="body">The body exited</param>
-    private void OnExitBodyExited(Node2D body)
-    {
-        if (body.IsInGroup("Player")) _inDoor = false;
-    }
 }
 
 

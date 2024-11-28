@@ -10,6 +10,7 @@ public partial class Player : Character
 	[Export(PropertyHint.Range, "-850,-50,25")] public float JumpVelocity = -450.0f;
 	[Export] public float Health = 20.0f;
 	[Export] public float Damage = 5.0f;
+	[Export] public int level = 0;
 
 	public Vector2 direction = new();
 
@@ -26,8 +27,7 @@ public partial class Player : Character
 		base._Ready();
 		_hud = GetNode<Control>("HUDCanvasLayer/HUD");
 		ApplyEffects();
-		UpdateHUD();
-		characterNode = GetOwner<Player>();
+		characterNode = this;
 	}
 
 
@@ -83,11 +83,12 @@ public partial class Player : Character
 		_effects.Add(effect);
 	}
 
-	private void UpdateHUD()
+	public void UpdateHUD()
 	{
 		_hud.GetNode<Label>("HBoxContainer/Health").Text = "Health: " + Health;
 		_hud.GetNode<Label>("HBoxContainer/Damage").Text = "Damage: " + Damage;
 		_hud.GetNode<Label>("HBoxContainer/Jump").Text = "Jump: " + JumpVelocity;
 		_hud.GetNode<Label>("HBoxContainer/Speed").Text = "Speed: " + PlayerSpeed;
+		_hud.GetNode<Label>("HBoxContainer2/Level").Text = "Level: " + level;
 	}
 }

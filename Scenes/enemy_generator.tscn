@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://daah1rx1gkw2g"]
+
+[ext_resource type="Script" path="res://Scripts/LevelGeneration/EnemyGenerator.cs" id="1_7b1dk"]
+
+[node name="EnemyGenerator" type="Node2D"]
+script = ExtResource("1_7b1dk")
