@@ -8,8 +8,6 @@ public partial class Player : Character
 	[ExportGroup("Player Stats")]
 	[Export(PropertyHint.Range, "50,800,25")] public float PlayerSpeed = 200.0f;
 	[Export(PropertyHint.Range, "-850,-50,25")] public float JumpVelocity = -450.0f;
-	[Export] public float Health = 20.0f;
-	[Export] public float Damage = 5.0f;
 	[Export] public int level = 0;
 
 	public Vector2 direction = new();
@@ -46,10 +44,10 @@ public partial class Player : Character
 			switch (effect.name)
 			{
 				case "health":
-					Health += effect.amount;
+					GetStatResource(Stat.Health).StatValue += effect.amount;
 					break;
 				case "damage":
-					Damage += effect.amount;
+					GetStatResource(Stat.Damage).StatValue += effect.amount;
 					break;
 				case "speed":
 					PlayerSpeed += effect.amount;
@@ -81,7 +79,7 @@ public partial class Player : Character
     {
         StatResource health = GetStatResource(Stat.Health);
         Character player = area.GetOwner<Character>();
-        health.StatValue -= player.GetStatResource(Stat.Damage).StatValue;
+        health.StatValue -= GetStatResource(Stat.Damage).StatValue;
 		UpdateHUD();
 
         GD.Print("Health is now: " + health.StatValue);
@@ -96,11 +94,11 @@ public partial class Player : Character
 	{
 		_effects.Add(effect);
 	}
-
+ 
 	public void UpdateHUD()
 	{
 		_hud.GetNode<Label>("HBoxContainer/Health").Text = "Health: " + GetStatResource(Stat.Health).StatValue;
-		_hud.GetNode<Label>("HBoxContainer/Damage").Text = "Damage: " + Damage;
+		_hud.GetNode<Label>("HBoxContainer/Damage").Text = "Damage: " + GetStatResource(Stat.Damage).StatValue;
 		_hud.GetNode<Label>("HBoxContainer/Jump").Text = "Jump: " + JumpVelocity;
 		_hud.GetNode<Label>("HBoxContainer/Speed").Text = "Speed: " + PlayerSpeed;
 		_hud.GetNode<Label>("HBoxContainer2/Level").Text = "Level: " + level;
