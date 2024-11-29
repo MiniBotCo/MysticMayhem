@@ -22,6 +22,9 @@ public partial class Player : Character
 	public AudioStreamWav landSound = GD.Load<AudioStreamWav>("res://Assets/Sfx/land.wav");
 	public AudioStreamWav swordSwingSound = GD.Load<AudioStreamWav>("res://Assets/Sfx/swordSwing.wav");
 
+    [Signal]
+    public delegate void DeathEventHandler();
+
 	public override void _Ready()
 	{
 		base._Ready();
@@ -74,6 +77,17 @@ public partial class Player : Character
 		//GD.Print("Stats: Health " + Health + " | Damage " + Damage + " | Speed " + PlayerSpeed + " | Jump Speed " + JumpVelocity); //TODO remove
 	}
 
+	protected override void HandleHurtboxEntered(Area2D area)
+    {
+        StatResource health = GetStatResource(Stat.Health);
+        Character player = area.GetOwner<Character>();
+        health.StatValue -= player.GetStatResource(Stat.Damage).StatValue;
+		UpdateHUD();
+
+        GD.Print("Health is now: " + health.StatValue);
+    }
+
+
 	/// <summary>
 	/// Adds an effect to the effects list
 	/// </summary>
@@ -85,7 +99,7 @@ public partial class Player : Character
 
 	public void UpdateHUD()
 	{
-		_hud.GetNode<Label>("HBoxContainer/Health").Text = "Health: " + Health;
+		_hud.GetNode<Label>("HBoxContainer/Health").Text = "Health: " + GetStatResource(Stat.Health).StatValue;
 		_hud.GetNode<Label>("HBoxContainer/Damage").Text = "Damage: " + Damage;
 		_hud.GetNode<Label>("HBoxContainer/Jump").Text = "Jump: " + JumpVelocity;
 		_hud.GetNode<Label>("HBoxContainer/Speed").Text = "Speed: " + PlayerSpeed;

@@ -79,7 +79,7 @@ public partial class Level : Node2D
         _exit.BodyEntered += OnExitBodyEntered;
         _exit.BodyExited += OnExitBodyExited;
 
-		_player.TreeExited += PlayerDeath;
+		_player.Death += PlayerDeath;
 
 		
 		_levelGenerator.GenerateLevel(level);

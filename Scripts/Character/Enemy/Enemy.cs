@@ -10,6 +10,15 @@ public partial class Enemy : Character, ISpawnable
 	{
 		base._Ready();
 	}
+	
+	protected virtual void HandleHurtboxEntered(Area2D area)
+    {
+        StatResource health = GetStatResource(Stat.Health);
+        Character player = area.GetOwner<Character>();
+        health.StatValue -= player.GetStatResource(Stat.Damage).StatValue;
+
+        GD.Print("Health is now: " + health.StatValue);
+    }
 
 	public override void _PhysicsProcess(double delta)
 	{

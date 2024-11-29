@@ -44,7 +44,7 @@ public partial class Character : CharacterBody2D
         Sprite2DNode.FlipH = isMovingLeft;
     }
 
-    private void HandleHurtboxEntered(Area2D area)
+    protected virtual void HandleHurtboxEntered(Area2D area)
     {
         StatResource health = GetStatResource(Stat.Health);
         Character player = area.GetOwner<Character>();
