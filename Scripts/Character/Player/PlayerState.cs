@@ -10,6 +10,7 @@ public abstract partial class PlayerState : CharacterState
 
         characterNode = GetOwner<Player>();
 
+        // Waits for the player to be ready before connecting to the health stat
         await ToSignal(characterNode, Node.SignalName.Ready);
         characterNode.GetStatResource(Stat.Health).OnZero += HandleZeroHealth;
     }

@@ -1,7 +1,6 @@
-[gd_scene load_steps=47 format=3 uid="uid://bjupuljh4v708"]
+[gd_scene load_steps=44 format=3 uid="uid://bjupuljh4v708"]
 
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/Enemy.cs" id="1_s7n2v"]
-[ext_resource type="Script" path="res://Scripts/Resources/StatResource.cs" id="2_e64uy"]
 [ext_resource type="Texture2D" uid="uid://uf67ea6s75px" path="res://Assets/Sprites/Character/Enemy/Ghost.png" id="2_qnxvh"]
 [ext_resource type="Texture2D" uid="uid://c25ugshfk3ith" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Idle/Ghost_Idle1.png" id="3_dwpcu"]
 [ext_resource type="PackedScene" uid="uid://untwbv6c7xc2" path="res://Scenes/Characters/state_machine.tscn" id="4_pcvf8"]
@@ -32,18 +31,6 @@
 [ext_resource type="Texture2D" uid="uid://bkrpc2ti7y2iy" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/smoke-Fx3_16.png" id="23_y7ca2"]
 [ext_resource type="Texture2D" uid="uid://0o0k0xpobn7p" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/smoke-Fx3_17.png" id="24_wq02y"]
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyDeathState.cs" id="31_csr7q"]
-
-[sub_resource type="Resource" id="Resource_xfjbu"]
-resource_local_to_scene = true
-script = ExtResource("2_e64uy")
-StatType = 0
-StatValue = 10.0
-
-[sub_resource type="Resource" id="Resource_jt6x1"]
-resource_local_to_scene = true
-script = ExtResource("2_e64uy")
-StatType = 1
-StatValue = 5.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oa781"]
 radius = 15.0
@@ -165,7 +152,7 @@ collision_mask = 3
 script = ExtResource("1_s7n2v")
 EnemySpeed = 100.0
 spawner = NodePath("Spawn")
-stats = [SubResource("Resource_xfjbu"), SubResource("Resource_jt6x1")]
+stats = []
 AnimationPlayerNode = NodePath("AnimationPlayer")
 Sprite2DNode = NodePath("Sprite2D")
 StateMachineNode = NodePath("StateMachine")

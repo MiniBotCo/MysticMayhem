@@ -10,8 +10,8 @@ public abstract partial class EnemyState : CharacterState
         base._Ready();
         characterNode = GetOwner<Enemy>();
 
+        // Waits for the enemy to be ready before connecting to the health stat
         await ToSignal(characterNode, Node.SignalName.Ready);
-
         characterNode.GetStatResource(Stat.Health).OnZero += HandleZeroHealth;
     }
 

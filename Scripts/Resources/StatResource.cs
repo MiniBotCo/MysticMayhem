@@ -22,6 +22,7 @@ public partial class StatResource : Resource
         }
     }
 
+    // Some constructors to be used when adding stat resources, default is health with a value of 100
     public StatResource()
     {
         StatType = Stat.Health;
