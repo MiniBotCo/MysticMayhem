@@ -5,10 +5,12 @@ public abstract partial class EnemyState : CharacterState
 {
     protected Enemy characterNode;
     protected Vector2 destination;
-    public override void _Ready()
+    public async override void _Ready()
     {
         base._Ready();
         characterNode = GetOwner<Enemy>();
+
+        await ToSignal(characterNode, Node.SignalName.Ready);
 
         characterNode.GetStatResource(Stat.Health).OnZero += HandleZeroHealth;
     }

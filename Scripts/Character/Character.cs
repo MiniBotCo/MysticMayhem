@@ -4,8 +4,9 @@ using System.Linq;
 
 public partial class Character : CharacterBody2D
 {
-    [Export] private StatResource[] stats = new StatResource[2];
+    [Export] protected StatResource[] stats;
     protected Character characterNode;
+    
     // Define gravity and other variables
     [Export] public float Gravity = 900.0f;
     [Export] public float JumpForce = -400.0f;
@@ -31,6 +32,7 @@ public partial class Character : CharacterBody2D
 
     public override void _Ready()
     {
+        stats = new StatResource[]{ new StatResource(Stat.Health, 100), new StatResource(Stat.Damage, 20)};
         HurtboxNode.AreaEntered += HandleHurtboxEntered;
     }
 
@@ -49,8 +51,6 @@ public partial class Character : CharacterBody2D
         StatResource health = GetStatResource(Stat.Health);
         Character player = area.GetOwner<Character>();
         health.StatValue -= player.GetStatResource(Stat.Damage).StatValue;
-
-        GD.Print("Health is now: " + health.StatValue);
     }
 
     public StatResource GetStatResource(Stat stat)

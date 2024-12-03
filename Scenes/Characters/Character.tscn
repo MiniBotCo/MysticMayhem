@@ -9,6 +9,7 @@
 scale = Vector2(0.1, 0.1)
 collision_layer = 2
 script = ExtResource("1_lbh1h")
+stats = []
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(6.44, 6.44)

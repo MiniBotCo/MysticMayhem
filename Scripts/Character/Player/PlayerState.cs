@@ -4,11 +4,13 @@ using Godot;
 public abstract partial class PlayerState : CharacterState
 {
     protected Player characterNode;
-    public override void _Ready()
+    public async override void _Ready()
     {
         base._Ready();
+
         characterNode = GetOwner<Player>();
 
+        await ToSignal(characterNode, Node.SignalName.Ready);
         characterNode.GetStatResource(Stat.Health).OnZero += HandleZeroHealth;
     }
 

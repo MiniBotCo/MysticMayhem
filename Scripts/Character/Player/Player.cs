@@ -31,8 +31,6 @@ public partial class Player : Character
 		characterNode = this;
 	}
 
-
-
 	/// <summary>
 	/// Applies the effects to the player
 	/// </summary>
@@ -81,8 +79,6 @@ public partial class Player : Character
         Character player = area.GetOwner<Character>();
         health.StatValue -= GetStatResource(Stat.Damage).StatValue;
 		UpdateHUD();
-
-        GD.Print("Health is now: " + health.StatValue);
     }
 
 

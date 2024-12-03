@@ -1,7 +1,6 @@
 using System;
 using Godot;
 
-[GlobalClass]
 public partial class StatResource : Resource
 {
     public Action OnZero;
@@ -21,5 +20,17 @@ public partial class StatResource : Resource
                 OnZero?.Invoke();
             }
         }
+    }
+
+    public StatResource()
+    {
+        StatType = Stat.Health;
+        _statValue = 100;
+    }
+
+    public StatResource(Stat statType, float statValue)
+    {
+        StatType = statType;
+        _statValue = statValue;
     }
 }

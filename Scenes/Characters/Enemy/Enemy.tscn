@@ -34,11 +34,13 @@
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyDeathState.cs" id="31_csr7q"]
 
 [sub_resource type="Resource" id="Resource_xfjbu"]
+resource_local_to_scene = true
 script = ExtResource("2_e64uy")
 StatType = 0
-StatValue = 20.0
+StatValue = 10.0
 
 [sub_resource type="Resource" id="Resource_jt6x1"]
+resource_local_to_scene = true
 script = ExtResource("2_e64uy")
 StatType = 1
 StatValue = 5.0
