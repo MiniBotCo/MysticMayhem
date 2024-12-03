@@ -8,6 +8,7 @@ public partial class EnemyPatrolState : EnemyState
     private int pointIndex = 0;
     protected override void EnterState()
     {
+        GD.Print("Entered patrol state");
         characterNode.AnimationPlayerNode.Play(GameConstants.ANIM_IDLE);
 
         pointIndex = 1;

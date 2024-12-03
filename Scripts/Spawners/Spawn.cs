@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 public partial class Spawn : Node
 {
+
+	[Signal] public delegate void EntitySpawnedEventHandler();
+
 	/// <summary>
 	/// Spawns an entity
 	/// </summary>

@@ -1,7 +1,7 @@
 using Godot;
 using System.Collections.Generic;
 
-public partial class DoorSpawn : Spawn
+public partial class EnemySpawn : Spawn
 {
     /// <summary>
     /// Spawns the Door and removes used cells from list of valid ones
@@ -49,6 +49,7 @@ public partial class DoorSpawn : Spawn
             }
 
 		}
+
 		return usedCells;
 	}
 

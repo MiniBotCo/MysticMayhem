@@ -25,3 +25,6 @@ stats = null
 
 [node name="FloatingEnemy" parent="." instance=ExtResource("4_1f1wr")]
 position = Vector2(-499.871, -284.979)
+
+[node name="Enemy2" parent="." instance=ExtResource("3_20fpa")]
+position = Vector2(184, -703)

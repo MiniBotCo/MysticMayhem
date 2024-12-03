@@ -15,7 +15,6 @@
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyPatrolState.cs" id="10_rhu0y"]
 [ext_resource type="Texture2D" uid="uid://cfav761pelhv8" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/smoke-Fx3_4.png" id="11_331um"]
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyChaseState.cs" id="11_g8kic"]
-[ext_resource type="PackedScene" uid="uid://d057vb218xyid" path="res://Scenes/Spawnables/door_spawn.tscn" id="12_c71fo"]
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyAttackState.cs" id="12_ibycl"]
 [ext_resource type="Texture2D" uid="uid://qem1ifkd6ry3" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/smoke-Fx3_5.png" id="12_uvkh3"]
 [ext_resource type="Texture2D" uid="uid://cgprsafjqkqai" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/smoke-Fx3_6.png" id="13_tq31l"]
@@ -31,6 +30,7 @@
 [ext_resource type="Texture2D" uid="uid://bkrpc2ti7y2iy" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/smoke-Fx3_16.png" id="23_y7ca2"]
 [ext_resource type="Texture2D" uid="uid://0o0k0xpobn7p" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/smoke-Fx3_17.png" id="24_wq02y"]
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyDeathState.cs" id="31_csr7q"]
+[ext_resource type="PackedScene" uid="uid://ctg2nmxp3xh7j" path="res://Scenes/Spawnables/enemy_spawn.tscn" id="31_q4ep3"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oa781"]
 radius = 15.0
@@ -122,16 +122,17 @@ _data = {
 "RESET": SubResource("Animation_h7ce0")
 }
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_n54jj"]
+vertices = PackedVector2Array(181.531, 3, -193.492, 3, -193.477, 2.95313, 181.438, 1.03906)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-203, -7, 191, -9, 192, 13, -204, 13)])
+parsed_geometry_type = 1
+
 [sub_resource type="Curve2D" id="Curve2D_dtgxo"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -171, -2, 0, 0, 0, 0, 152, -2)
+"points": PackedVector2Array(0, 0, 0, 0, -171, 0, 0, 0, 0, 0, 152, 0)
 }
 point_count = 2
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_shqom"]
-vertices = PackedVector2Array(159.289, -36.0781, 161.68, 42.8516, -178.289, 38.1328, -180.672, -38.9063)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-191, -49, -188, 48, 172, 53, 169, -46)])
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vgys7"]
 radius = 124.036
@@ -148,7 +149,6 @@ height = 99.335
 
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("spawner", "AnimationPlayerNode", "Sprite2DNode", "StateMachineNode", "HurtboxNode", "HitboxNode", "HitboxShapeNode", "PathNode", "Agent2DNode", "ChaseAreaNode", "AttackAreaNode")]
 collision_layer = 5
-collision_mask = 3
 script = ExtResource("1_s7n2v")
 EnemySpeed = 100.0
 spawner = NodePath("Spawn")
@@ -176,9 +176,6 @@ root_node = NodePath("../CollisionShape2D")
 libraries = {
 "": SubResource("AnimationLibrary_u6m5e")
 }
-
-[node name="Path2D" type="Path2D" parent="."]
-curve = SubResource("Curve2D_dtgxo")
 
 [node name="StateMachine" parent="." node_paths=PackedStringArray("currentState", "states") instance=ExtResource("4_pcvf8")]
 currentState = NodePath("IdleState")
@@ -215,7 +212,10 @@ script = ExtResource("31_csr7q")
 debug_enabled = true
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-navigation_polygon = SubResource("NavigationPolygon_shqom")
+navigation_polygon = SubResource("NavigationPolygon_n54jj")
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_dtgxo")
 
 [node name="ChaseArea" type="Area2D" parent="."]
 collision_layer = 0
@@ -231,8 +231,6 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
 rotation = 1.56891
 shape = SubResource("CapsuleShape2D_2ddjq")
-
-[node name="Spawn" parent="." instance=ExtResource("12_c71fo")]
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 4
@@ -251,3 +249,5 @@ collision_mask = 2
 position = Vector2(0, 3)
 scale = Vector2(2.24572, 0.664419)
 shape = SubResource("CapsuleShape2D_gkj3s")
+
+[node name="Spawn" parent="." instance=ExtResource("31_q4ep3")]

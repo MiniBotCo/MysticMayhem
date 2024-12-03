@@ -17,10 +17,9 @@ public abstract partial class EnemyState : CharacterState
 
     protected Vector2 GetPointGlobalPosition(int index)
     {
-        Vector2 localPos = characterNode.PathNode.Curve.GetPointPosition(index);
-        Vector2 globalPos = characterNode.PathNode.GlobalPosition;
-        return localPos + globalPos;
+        return characterNode.ToGlobal(characterNode.PathNode.Curve.GetPointPosition(index));
     }
+
     protected void Move()
     {
         characterNode.Agent2DNode.GetNextPathPosition();

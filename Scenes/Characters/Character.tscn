@@ -7,7 +7,8 @@
 
 [node name="Character" type="CharacterBody2D" groups=["Spawnable"]]
 scale = Vector2(0.1, 0.1)
-collision_layer = 2
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("1_lbh1h")
 stats = []
 
