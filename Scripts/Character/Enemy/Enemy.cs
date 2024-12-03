@@ -9,7 +9,7 @@ public partial class Enemy : Character, ISpawnable
     public override void _Ready()
     {
         base._Ready();
-		stats = new StatResource[]{new StatResource(Stat.Health, 40), new StatResource(Stat.Damage, 10)};
+		stats = new StatResource[]{new StatResource(Stat.Health, 40), new StatResource(Stat.Damage, 5)};
     }
 
     public override void _PhysicsProcess(double delta)

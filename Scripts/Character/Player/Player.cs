@@ -26,6 +26,10 @@ public partial class Player : Character
 	public override void _Ready()
 	{
 		base._Ready();
+
+        // Stats have to be placed here for now. I don't know why yet
+        stats = new StatResource[]{ new StatResource(Stat.Health, 100), new StatResource(Stat.Damage, 20)};
+
 		_hud = GetNode<Control>("HUDCanvasLayer/HUD");
 		ApplyEffects();
 		characterNode = this;
@@ -76,8 +80,8 @@ public partial class Player : Character
 	protected override void HandleHurtboxEntered(Area2D area)
     {
         StatResource health = GetStatResource(Stat.Health);
-        Character player = area.GetOwner<Character>();
-        health.StatValue -= GetStatResource(Stat.Damage).StatValue;
+        Character attacker = area.GetOwner<Character>();
+        health.StatValue -= attacker.GetStatResource(Stat.Damage).StatValue;
 		UpdateHUD();
     }
 

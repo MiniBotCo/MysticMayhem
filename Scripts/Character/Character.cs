@@ -32,8 +32,6 @@ public partial class Character : CharacterBody2D
 
     public override void _Ready()
     {
-        // Stats have to be placed here for now. I don't know why yet
-        stats = new StatResource[]{ new StatResource(Stat.Health, 100), new StatResource(Stat.Damage, 20)};
         HurtboxNode.AreaEntered += HandleHurtboxEntered;
     }
 
@@ -50,8 +48,8 @@ public partial class Character : CharacterBody2D
     protected virtual void HandleHurtboxEntered(Area2D area)
     {
         StatResource health = GetStatResource(Stat.Health);
-        Character player = area.GetOwner<Character>();
-        health.StatValue -= player.GetStatResource(Stat.Damage).StatValue;
+        Character attacker = area.GetOwner<Character>();
+        health.StatValue -= attacker.GetStatResource(Stat.Damage).StatValue;
     }
 
     public StatResource GetStatResource(Stat stat)
