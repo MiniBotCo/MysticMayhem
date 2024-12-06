@@ -23,6 +23,7 @@ public partial class Chest : Area2D, ISpawnable
 	private AnimationPlayer _animationPlayer; // Animation player
 	private Dictionary<Button, Effect> _slotEffects; // Holds the buttons and their associated effects
 	private Player _player; // Holds the player node, assigned once the player enters the chest's area
+	private Button _abilityButton; // The button to be pressed every 5th level to get an ability
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -33,11 +34,36 @@ public partial class Chest : Area2D, ISpawnable
 		_slotEffects = new Dictionary<Button, Effect>();
 		possibleEffects = new List<Effect>();
 
+		if (Level.level == 2)
+		{
+			_abilityButton = GetNode<Button>("Ability");
+			_abilityButton.Visible = true;
+		}
+
 		// Applies a random value to the stat for each button
 		foreach (Stat stat in Enum.GetValues(typeof(Stat)))
 		{
-			possibleEffects.Add(new Effect(stat, GD.RandRange(10, 50), true));
+			float value = 0;
+
+			switch (stat)
+			{
+				case Stat.Damage:
+					value = GD.RandRange(10, 50);
+					break;
+				case Stat.Health:
+					value = GD.RandRange(5, 10);
+					break;
+				case Stat.JumpSpeed:
+					value = GD.RandRange(-20, -10);
+					break;
+				case Stat.Speed:
+					value = GD.RandRange(5, 10);
+					break;
+			}
+			possibleEffects.Add(new Effect(stat, value, true));
 		}
+
+		Shuffle<Effect>.ShuffleList(possibleEffects);
 
 		// Loops through the buttons and assigns them effects, icons, tool tips, and connects their signals
 		for (int i = 0; i < _slots.GetChildCount(); i++)
@@ -65,7 +91,7 @@ public partial class Chest : Area2D, ISpawnable
 					break;
 				case Stat.JumpSpeed:
 					button.Icon = JumpTexture;
-					button.TooltipText = "Provides a jump boost of";
+					button.TooltipText = "Provides a jump boost of ";
 					break;
 			}
 

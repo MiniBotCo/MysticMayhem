@@ -1,0 +1,72 @@
+[gd_scene load_steps=6 format=3 uid="uid://g5j78ii6vgbr"]
+
+[ext_resource type="Script" path="res://Scripts/Objects/FireBall.cs" id="1_akum5"]
+[ext_resource type="Texture2D" uid="uid://cybxxvsr0nf42" path="res://Assets/Sprites/Objects/Items/FireBall.png" id="1_icgp4"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_lg18i"]
+friction = 0.0
+bounce = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o6we2"]
+radius = 16.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1adao"]
+radius = 19.0
+
+[node name="RigidBody2D" type="RigidBody2D"]
+collision_layer = 16
+physics_material_override = SubResource("PhysicsMaterial_lg18i")
+gravity_scale = 0.0
+linear_damp_mode = 1
+angular_damp_mode = 1
+script = ExtResource("1_akum5")
+
+[node name="ExplosionParticles" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 16
+lifetime = 0.4
+one_shot = true
+explosiveness = 0.7
+randomness = 0.31
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 150)
+initial_velocity_min = 97.22
+initial_velocity_max = 97.22
+scale_amount_min = 2.0
+scale_amount_max = 3.0
+color = Color(1, 0.683333, 0, 1)
+
+[node name="IdleParticles" type="CPUParticles2D" parent="."]
+lifetime = 0.4
+local_coords = true
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 60.0
+initial_velocity_max = 60.0
+orbit_velocity_min = 0.75
+orbit_velocity_max = 0.75
+scale_amount_min = 2.4
+scale_amount_max = 2.4
+color = Color(1, 0.683333, 0, 1)
+hue_variation_min = 1.0
+hue_variation_max = 1.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_icgp4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_o6we2")
+
+[node name="Lifetime" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("CircleShape2D_1adao")

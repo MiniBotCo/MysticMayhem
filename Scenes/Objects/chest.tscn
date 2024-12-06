@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bf6ostbu5y17d"]
+[gd_scene load_steps=20 format=3 uid="uid://bf6ostbu5y17d"]
 
 [ext_resource type="Texture2D" uid="uid://cpuw5yui7gtsc" path="res://Assets/Sprites/Objects/Chest/chest_closed.png" id="1_2s8oc"]
 [ext_resource type="Script" path="res://Scripts/Objects/Chest.cs" id="1_3rset"]
@@ -9,6 +9,7 @@
 [ext_resource type="Theme" uid="uid://bu0soecijui6w" path="res://Scenes/Menus/menu_theme.tres" id="6_owd3m"]
 [ext_resource type="PackedScene" uid="uid://wgdo17ddj15v" path="res://Scenes/Spawnables/chest_spawn.tscn" id="7_v4nni"]
 [ext_resource type="AudioStream" uid="uid://dcocw0caoir24" path="res://Assets/Sfx/openChest.wav" id="8_4y38s"]
+[ext_resource type="Texture2D" uid="uid://cybxxvsr0nf42" path="res://Assets/Sprites/Objects/Items/FireBall.png" id="10_663qv"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ith7t"]
 animations = [{
@@ -685,3 +686,14 @@ hue_variation_curve = SubResource("Curve_6xafj")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_4y38s")
+
+[node name="Ability" type="Button" parent="."]
+visible = false
+texture_filter = 1
+offset_left = -11.5
+offset_top = -53.0
+offset_right = 28.5
+offset_bottom = -13.0
+toggle_mode = true
+icon = ExtResource("10_663qv")
+flat = true

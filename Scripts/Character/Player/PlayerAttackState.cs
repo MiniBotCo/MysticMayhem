@@ -10,6 +10,11 @@ public partial class PlayerAttackState : PlayerState
         characterNode.AudioPlayer.Play();
         characterNode.AnimationPlayerNode.Play(GameConstants.ANIM_ATTACK);
         characterNode.AnimationPlayerNode.AnimationFinished += HandleAnimationFinished;
+
+        if (characterNode.CanCastFireball)
+        {
+            CastFireball();
+        }
     }
 
     protected override void ExitState()
@@ -73,5 +78,16 @@ public partial class PlayerAttackState : PlayerState
         characterNode.HitboxNode.Position = newPosition;
 
         characterNode.ToggleHitBox(false);
+    }
+
+    private async void CastFireball()
+    {
+        PackedScene fireballScene = GD.Load<PackedScene>("res://Scenes/Objects/fire_ball.tscn");
+        FireBall fireBall = fireballScene.Instantiate<FireBall>();
+        CallDeferred(Node.MethodName.AddChild, fireBall);
+        await ToSignal(fireBall, Node.SignalName.Ready);
+        fireBall.Start(characterNode.GlobalPosition,
+                        characterNode.GetAngleTo(characterNode.GetGlobalMousePosition()),
+                        characterNode.GetStatResource(Stat.Damage).StatValue);
     }
 }

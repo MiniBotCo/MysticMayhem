@@ -5,7 +5,7 @@ public partial class Level : Node2D
 {
 	[Export]
 	public PackedScene levelGeneratorScene { get; set; } = GD.Load<PackedScene>("res://Scenes/level_generator.tscn");
-	public int level = 0;
+	public static int level = 0;
 
 	private bool _inDoor = false;
     private AnimationPlayer _animationPlayer;

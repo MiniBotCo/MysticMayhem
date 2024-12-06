@@ -6,7 +6,9 @@ using System.Diagnostics.Contracts;
 public partial class Player : Character
 {
 	[ExportGroup("Player Stats")]
-	[Export] public int level = 0;
+	[Export] public int level = 1;
+
+	public bool CanCastFireball = true;
 
 	public Vector2 direction = new();
 
@@ -29,7 +31,7 @@ public partial class Player : Character
         stats = new StatResource[]
 		{
 			new StatResource(Stat.Health, 100),
-			new StatResource(Stat.Damage, 20),
+			new StatResource(Stat.Damage, 10),
 			new StatResource(Stat.Speed, 200),
 			new StatResource(Stat.JumpSpeed, -600)
 		};
@@ -62,7 +64,7 @@ public partial class Player : Character
 			if (!effect.permanent) _effects.Remove(effect);
 		}
 
-		//GD.Print("Stats: Health " + Health + " | Damage " + Damage + " | Speed " + PlayerSpeed + " | Jump Speed " + JumpVelocity); //TODO remove
+		//GD.Print("Stats: Health " + GetStatResource(Stat.Health).StatValue + " | Damage " + GetStatResource(Stat.Damage).StatValue + " | Speed " + GetStatResource(Stat.Speed).StatValue + " | Jump Speed " + GetStatResource(Stat.JumpSpeed).StatValue); //TODO remove
 	}
 
 	protected override void HandleHurtboxEntered(Area2D area)

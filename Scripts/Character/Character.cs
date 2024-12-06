@@ -4,12 +4,11 @@ using System.Linq;
 
 public partial class Character : CharacterBody2D
 {
-    [Export] protected StatResource[] stats;
+    protected StatResource[] stats;
     protected Character characterNode;
     
     // Define gravity and other variables
     [Export] public float Gravity = 900.0f;
-    [Export] public float JumpForce = -400.0f;
     [Export] public float MaxFallSpeed = 1500.0f;
 
     [ExportGroup("Required Nodes")]
@@ -47,9 +46,12 @@ public partial class Character : CharacterBody2D
 
     protected virtual void HandleHurtboxEntered(Area2D area)
     {
-        StatResource health = GetStatResource(Stat.Health);
-        Character attacker = area.GetOwner<Character>();
-        health.StatValue -= attacker.GetStatResource(Stat.Damage).StatValue;
+        if (area.GetParentOrNull<Character>() is Character)
+        {
+            StatResource health = GetStatResource(Stat.Health);
+            Character attacker = area.GetOwner<Character>();
+            health.StatValue -= attacker.GetStatResource(Stat.Damage).StatValue;
+        }
     }
 
     public StatResource GetStatResource(Stat stat)
