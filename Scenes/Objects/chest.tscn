@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bf6ostbu5y17d"]
+[gd_scene load_steps=19 format=3 uid="uid://bf6ostbu5y17d"]
 
 [ext_resource type="Texture2D" uid="uid://cpuw5yui7gtsc" path="res://Assets/Sprites/Objects/Chest/chest_closed.png" id="1_2s8oc"]
 [ext_resource type="Script" path="res://Scripts/Objects/Chest.cs" id="1_3rset"]
@@ -187,55 +187,55 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CPUParticles2D:emitting")
+tracks/1/path = NodePath("Slots/Slot1:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.4),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"times": PackedFloat32Array(0, 1.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(8, 0), Vector2(-52, -40)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Slots/Slot1:position")
+tracks/2/path = NodePath("Slots/Slot2:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 1.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(8, 0), Vector2(-52, -40)]
+"values": [Vector2(8, 0), Vector2(-12, -60)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Slots/Slot2:position")
+tracks/3/path = NodePath("Slots/Slot3:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0, 1.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(8, 0), Vector2(-12, -60)]
+"values": [Vector2(8, 0), Vector2(28, -40)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Slots/Slot3:position")
+tracks/4/path = NodePath("Slots/Slot1:scale")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0, 1.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(8, 0), Vector2(28, -40)]
+"values": [Vector2(0, 0), Vector2(1, 1)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Slots/Slot1:scale")
+tracks/5/path = NodePath("Slots/Slot2:scale")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -247,7 +247,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Slots/Slot2:scale")
+tracks/6/path = NodePath("Slots/Slot3:scale")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -259,19 +259,19 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Slots/Slot3:scale")
+tracks/7/path = NodePath("Slots/Slot1:visible")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0, 1.4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(1, 1)]
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("Slots/Slot1:visible")
+tracks/8/path = NodePath("Slots/Slot2:visible")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -283,7 +283,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("Slots/Slot2:visible")
+tracks/9/path = NodePath("Slots/Slot3:visible")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -295,19 +295,19 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("Slots/Slot3:visible")
+tracks/10/path = NodePath("Slots/Slot1:disabled")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("Slots/Slot1:disabled")
+tracks/11/path = NodePath("Slots/Slot2:disabled")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
@@ -319,7 +319,7 @@ tracks/11/keys = {
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("Slots/Slot2:disabled")
+tracks/12/path = NodePath("Slots/Slot3:disabled")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
@@ -331,7 +331,7 @@ tracks/12/keys = {
 tracks/13/type = "value"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("Slots/Slot3:disabled")
+tracks/13/path = NodePath(".:monitoring")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
@@ -343,34 +343,22 @@ tracks/13/keys = {
 tracks/14/type = "value"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath(".:monitoring")
+tracks/14/path = NodePath("AudioStreamPlayer:stream")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [ExtResource("8_4y38s")]
 }
 tracks/15/type = "value"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("AudioStreamPlayer:stream")
+tracks/15/path = NodePath("AudioStreamPlayer:playing")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("8_4y38s")]
-}
-tracks/16/type = "value"
-tracks/16/imported = false
-tracks/16/enabled = true
-tracks/16/path = NodePath("AudioStreamPlayer:playing")
-tracks/16/interp = 1
-tracks/16/loop_wrap = true
-tracks/16/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -394,55 +382,55 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CPUParticles2D:emitting")
+tracks/1/path = NodePath("Slots/Slot1:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.233333),
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"update": 0,
+"values": [Vector2(-60, -40)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Slots/Slot1:position")
+tracks/2/path = NodePath("Slots/Slot2:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-60, -40)]
+"values": [Vector2(-20, -60)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Slots/Slot2:position")
+tracks/3/path = NodePath("Slots/Slot3:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-20, -60)]
+"values": [Vector2(20, -40)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Slots/Slot3:position")
+tracks/4/path = NodePath("Slots/Slot1:scale")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(20, -40)]
+"values": [Vector2(1, 1)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Slots/Slot1:scale")
+tracks/5/path = NodePath("Slots/Slot2:scale")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -454,7 +442,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Slots/Slot2:scale")
+tracks/6/path = NodePath("Slots/Slot3:scale")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -466,19 +454,19 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Slots/Slot3:scale")
+tracks/7/path = NodePath("Slots/Slot1:visible")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
+"update": 1,
+"values": [false]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("Slots/Slot1:visible")
+tracks/8/path = NodePath("Slots/Slot2:visible")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -490,7 +478,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("Slots/Slot2:visible")
+tracks/9/path = NodePath("Slots/Slot3:visible")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -502,19 +490,19 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("Slots/Slot3:visible")
+tracks/10/path = NodePath("Slots/Slot1:disabled")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("Slots/Slot1:disabled")
+tracks/11/path = NodePath("Slots/Slot2:disabled")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
@@ -526,7 +514,7 @@ tracks/11/keys = {
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("Slots/Slot2:disabled")
+tracks/12/path = NodePath("Slots/Slot3:disabled")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
@@ -538,7 +526,7 @@ tracks/12/keys = {
 tracks/13/type = "value"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("Slots/Slot3:disabled")
+tracks/13/path = NodePath(".:monitoring")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
@@ -550,31 +538,31 @@ tracks/13/keys = {
 tracks/14/type = "value"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath(".:monitoring")
+tracks/14/path = NodePath("AudioStreamPlayer:stream")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [ExtResource("8_4y38s")]
 }
 tracks/15/type = "value"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("AudioStreamPlayer:stream")
+tracks/15/path = NodePath("AudioStreamPlayer:playing")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("8_4y38s")]
+"values": [false]
 }
 tracks/16/type = "value"
 tracks/16/imported = false
 tracks/16/enabled = true
-tracks/16/path = NodePath("AudioStreamPlayer:playing")
+tracks/16/path = NodePath("CPUParticles2D:emitting")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
@@ -584,12 +572,28 @@ tracks/16/keys = {
 "values": [false]
 }
 
+[sub_resource type="Animation" id="Animation_sbjlw"]
+resource_name = "Unlocked"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CPUParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wkjpw"]
 _data = {
 "Closing": SubResource("Animation_ru6ia"),
 "Open": SubResource("Animation_4rpn4"),
 "Opening": SubResource("Animation_8tsor"),
-"RESET": SubResource("Animation_3eqfy")
+"RESET": SubResource("Animation_3eqfy"),
+"Unlocked": SubResource("Animation_sbjlw")
 }
 
 [sub_resource type="Curve" id="Curve_6xafj"]
@@ -625,9 +629,9 @@ libraries = {
 [node name="Slot1" type="Button" parent="Slots"]
 visible = false
 texture_filter = 1
-offset_left = -52.0
-offset_top = -40.0
-offset_right = -12.0
+offset_left = 8.0
+offset_right = 48.0
+offset_bottom = 40.0
 theme = ExtResource("6_owd3m")
 disabled = true
 icon = ExtResource("6_lglvu")
@@ -636,10 +640,9 @@ flat = true
 [node name="Slot2" type="Button" parent="Slots"]
 visible = false
 texture_filter = 1
-offset_left = -12.0
-offset_top = -60.0
-offset_right = 28.0
-offset_bottom = -20.0
+offset_left = 8.0
+offset_right = 48.0
+offset_bottom = 40.0
 theme = ExtResource("6_owd3m")
 disabled = true
 toggle_mode = true
@@ -649,9 +652,9 @@ flat = true
 [node name="Slot3" type="Button" parent="Slots"]
 visible = false
 texture_filter = 1
-offset_left = 28.0
-offset_top = -40.0
-offset_right = 68.0
+offset_left = 8.0
+offset_right = 48.0
+offset_bottom = 40.0
 theme = ExtResource("6_owd3m")
 disabled = true
 toggle_mode = true

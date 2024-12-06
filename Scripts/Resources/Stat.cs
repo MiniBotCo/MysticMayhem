@@ -1,5 +1,7 @@
 public enum Stat
 {
     Health,
-    Damage
+    Damage,
+    Speed,
+    JumpSpeed
 }

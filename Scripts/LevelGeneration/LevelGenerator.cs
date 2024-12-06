@@ -8,13 +8,9 @@ public partial class LevelGenerator : Node2D
     [Export]
     public Vector2I LevelSize { get; set; } = new Vector2I(60, 40);
 
-    [Export]
-    public Door Entrance { get; set; } = null;
-    [Export]
-    public Door Exit { get; set; } = null;
-
-    [Export]
-    public Player Player { get; set;} = null;
+    public Door Entrance { get; set; }
+    public Door Exit { get; set; }
+    public Player Player { get; set;}
 
     private FrameGenerator _frameGenerator;
     private PlatformGenerator _platformGenerator;
@@ -36,6 +32,11 @@ public partial class LevelGenerator : Node2D
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        base._Ready();
+
+        Entrance = GetNode<Door>("Entrance");
+        Exit = GetNode<Door>("Exit");
+        Player = GetNode<Player>("Player");
         // Initializing the child nodes
         _frameGenerator = GetNode<FrameGenerator>("FrameGenerator");
         _platformGenerator = GetNode<PlatformGenerator>("PlatformGenerator");
@@ -50,7 +51,7 @@ public partial class LevelGenerator : Node2D
 
         _chest = GetNode<Chest>("Chest");
 
-        base._Ready();
+        _enemyGenerator.EnemiesDefeated += LevelComplete;
     }
 
     /// <summary>
@@ -60,6 +61,8 @@ public partial class LevelGenerator : Node2D
     {
         // Randomizes the scene
         GD.Randomize();
+
+        LevelSize += new Vector2I(GD.RandRange(-10, 5), GD.RandRange(-10, 5));
 
         // Creates a frame
         _frameGenerator.SetFrameSize(LevelSize);
@@ -157,6 +160,13 @@ public partial class LevelGenerator : Node2D
         Shuffle<Vector2I>.ShuffleList(unusedTiles);
 
         return unusedTiles;
+    }
+
+    private void LevelComplete()
+    {
+        GD.Print("Level complete!");
+        _chest.Unlock();
+        Exit.Unlock();
     }
 
 

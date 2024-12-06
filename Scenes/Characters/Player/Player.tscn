@@ -155,8 +155,6 @@ size = Vector2(20, 38)
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("AnimationPlayerNode", "Sprite2DNode", "StateMachineNode", "AudioPlayer", "HurtboxNode", "HitboxNode", "HitboxShapeNode") groups=["Player"]]
 collision_layer = 2
 script = ExtResource("1_l2rlm")
-PlayerSpeed = 300.0
-JumpVelocity = -600.0
 stats = []
 AnimationPlayerNode = NodePath("AnimationPlayer")
 Sprite2DNode = NodePath("Sprite2D")

@@ -21,11 +21,11 @@ public partial class PlayerJumpState : PlayerState
         characterNode.direction = Input.GetVector(GameConstants.INPUT_MOVE_LEFT, GameConstants.INPUT_MOVE_RIGHT, GameConstants.INPUT_JUMP, "ui_down");
         if (characterNode.direction != Vector2.Zero)
         {
-            characterNode.velocity.X = characterNode.direction.X * characterNode.PlayerSpeed;
+            characterNode.velocity.X = characterNode.direction.X * characterNode.GetStatResource(Stat.Speed).StatValue;
         }
         else
         {
-            characterNode.velocity.X = Mathf.MoveToward(characterNode.Velocity.X, 0, characterNode.PlayerSpeed);
+            characterNode.velocity.X = Mathf.MoveToward(characterNode.Velocity.X, 0, characterNode.GetStatResource(Stat.Speed).StatValue);
         }
 
         // Handle Jump.

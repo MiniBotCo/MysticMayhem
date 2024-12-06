@@ -49,7 +49,7 @@ public partial class Level : Node2D
     /// <param name="body">The body entered</param>
     private void OnExitBodyEntered(Node2D body)
     {
-        if (body.IsInGroup("Player")) _inDoor = true;
+        if (body.IsInGroup("Player") && !_exit.IsLocked()) _inDoor = true;
     }
 
     /// <summary>
@@ -58,7 +58,7 @@ public partial class Level : Node2D
     /// <param name="body">The body exited</param>
     private void OnExitBodyExited(Node2D body)
     {
-        if (body.IsInGroup("Player")) _inDoor = false;
+        if (body.IsInGroup("Player") && !_exit.IsLocked()) _inDoor = false;
     }
 
 	private async void AddLevelGenerator()

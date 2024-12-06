@@ -6,8 +6,6 @@ using System.Diagnostics.Contracts;
 public partial class Player : Character
 {
 	[ExportGroup("Player Stats")]
-	[Export(PropertyHint.Range, "50,800,25")] public float PlayerSpeed = 200.0f;
-	[Export(PropertyHint.Range, "-850,-50,25")] public float JumpVelocity = -450.0f;
 	[Export] public int level = 0;
 
 	public Vector2 direction = new();
@@ -28,7 +26,13 @@ public partial class Player : Character
 		base._Ready();
 
         // Stats have to be placed here for now. I don't know why yet
-        stats = new StatResource[]{ new StatResource(Stat.Health, 100), new StatResource(Stat.Damage, 20)};
+        stats = new StatResource[]
+		{
+			new StatResource(Stat.Health, 100),
+			new StatResource(Stat.Damage, 20),
+			new StatResource(Stat.Speed, 200),
+			new StatResource(Stat.JumpSpeed, -600)
+		};
 
 		_hud = GetNode<Control>("HUDCanvasLayer/HUD");
 		ApplyEffects();
@@ -43,23 +47,7 @@ public partial class Player : Character
 		List<Effect> nonPermanentEffects = new List<Effect>();
 		foreach (Effect effect in _effects)
 		{
-			switch (effect.name)
-			{
-				case "health":
-					GetStatResource(Stat.Health).StatValue += effect.amount;
-					break;
-				case "damage":
-					GetStatResource(Stat.Damage).StatValue += effect.amount;
-					break;
-				case "speed":
-					PlayerSpeed += effect.amount;
-					break;
-				case "jump":
-					JumpVelocity -= effect.amount;
-					break;
-				default:
-					break;
-			}
+			GetStatResource(effect.statResource.StatType).StatValue += effect.statResource.StatValue;
 
 			if (!effect.permanent)
 			{
@@ -99,8 +87,8 @@ public partial class Player : Character
 	{
 		_hud.GetNode<Label>("HBoxContainer/Health").Text = "Health: " + GetStatResource(Stat.Health).StatValue;
 		_hud.GetNode<Label>("HBoxContainer/Damage").Text = "Damage: " + GetStatResource(Stat.Damage).StatValue;
-		_hud.GetNode<Label>("HBoxContainer/Jump").Text = "Jump: " + JumpVelocity;
-		_hud.GetNode<Label>("HBoxContainer/Speed").Text = "Speed: " + PlayerSpeed;
+		_hud.GetNode<Label>("HBoxContainer/Jump").Text = "Jump: " + GetStatResource(Stat.JumpSpeed).StatValue;
+		_hud.GetNode<Label>("HBoxContainer/Speed").Text = "Speed: " + GetStatResource(Stat.Speed).StatValue;
 		_hud.GetNode<Label>("HBoxContainer2/Level").Text = "Level: " + level;
 	}
 }

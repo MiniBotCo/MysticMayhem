@@ -1,5 +1,4 @@
 using Godot;
-using Godot.NativeInterop;
 using System;
 using System.Collections.Generic;
 
@@ -18,24 +17,12 @@ public partial class Chest : Area2D, ISpawnable
 	// Spawner node
 	[Export]
     public Spawn spawner { get; set; }
-
-	// Holds if the chest is locked. TODO make locked by default and allow for unlocking by defeating enemies
-	private bool _locked { get; set;} = false;
-
-	// A list of possible effects
-	private List<Effect> possibleEffects;
-
-	// The selection options, refered to as slots because they are random
-	private Node2D _slots;
-
-	// Animation player
-	private AnimationPlayer _animationPlayer;
-
-	// Holds the buttons and their associated effects
-	private Dictionary<Button, Effect> _slotEffects;
-
-	// Holds the player node, assigned once the player enters the chest's area
-	private Player _player;
+	private bool _locked = true; // Holds if the chest is locked
+	private List<Effect> possibleEffects; // A list of possible effects
+	private Node2D _slots; 	// The selection options, refered to as slots because they are random
+	private AnimationPlayer _animationPlayer; // Animation player
+	private Dictionary<Button, Effect> _slotEffects; // Holds the buttons and their associated effects
+	private Player _player; // Holds the player node, assigned once the player enters the chest's area
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -44,46 +31,45 @@ public partial class Chest : Area2D, ISpawnable
 		_slots = GetNode<Node2D>("Slots");
 		_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		_slotEffects = new Dictionary<Button, Effect>();
+		possibleEffects = new List<Effect>();
 
-		// The list of possible effects, might be better moved to a seperate file at a later date
-		possibleEffects = new List<Effect>
-        {
-            new Effect("health", 4.0f, true),
-            new Effect("damage", 4.0f, true),
-            new Effect("speed", 5.0f, true),
-            new Effect("jump", 4.0f, true)
-        };
-
-		// Shuffles the effects
-		Shuffle<Effect>.ShuffleList(possibleEffects);
+		// Applies a random value to the stat for each button
+		foreach (Stat stat in Enum.GetValues(typeof(Stat)))
+		{
+			possibleEffects.Add(new Effect(stat, GD.RandRange(10, 50), true));
+		}
 
 		// Loops through the buttons and assigns them effects, icons, tool tips, and connects their signals
 		for (int i = 0; i < _slots.GetChildCount(); i++)
 		{
-			Button button = _slots.GetChild<Button>(i);
+			Button button = _slots.GetChild<Button>(i); // Gets the button corrosponding to the slot
+			Effect effect = possibleEffects[i%_slots.GetChildCount()]; // Gets the effect corrosponding to the slot
 			
-			_slotEffects.Add(button, possibleEffects[i%_slots.GetChildCount()]);
-			button.Pressed += () => OnButtonPressed(_slotEffects[button]);
+			_slotEffects.Add(button, effect); // Adds the button and its effect to the dictionary of slots
+			button.Pressed += () => OnButtonPressed(_slotEffects[button]); // Connects the button press signal
 
-			switch (possibleEffects[i%_slots.GetChildCount()].name)
+			// Sets the proper texture and tooltip
+			switch (effect.statResource.StatType)
 			{
-				case "health":
+				case Stat.Health:
 					button.Icon = HealthTexture;
-					button.TooltipText = "Provides a health boost";
+					button.TooltipText = "Provides a health boost of ";
 					break;
-				case "damage":
+				case Stat.Damage:
 					button.Icon = DamageTexture;
-					button.TooltipText = "Provides a damage boost";
+					button.TooltipText = "Provides a damage boost of ";
 					break;
-				case "speed":
+				case Stat.Speed:
 					button.Icon = SpeedTexture;
-					button.TooltipText = "Provides a speed boost";
+					button.TooltipText = "Provides a speed boost of ";
 					break;
-				case "jump":
+				case Stat.JumpSpeed:
 					button.Icon = JumpTexture;
-					button.TooltipText = "Provides a jump boost";
+					button.TooltipText = "Provides a jump boost of";
 					break;
 			}
+
+			button.TooltipText += effect.statResource.StatValue; // Adds the amount the effect provides to the tool tip
 		}
 
 		// Connects the body entered signal
@@ -116,5 +102,14 @@ public partial class Chest : Area2D, ISpawnable
 			_player.AddEffect(effect);
 			_animationPlayer.Play("Closing");
 		}
+	}
+
+	/// <summary>
+	/// Unlocks the chest and plays an animation
+	/// </summary>
+	public void Unlock()
+	{
+		_locked = false;
+		_animationPlayer.Play("Unlocked");
 	}
 }

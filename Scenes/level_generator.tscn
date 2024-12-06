@@ -128,11 +128,8 @@ _data = {
 "RESET": SubResource("Animation_y4qbj")
 }
 
-[node name="LevelGenerator" type="Node2D" node_paths=PackedStringArray("Entrance", "Exit", "Player")]
+[node name="LevelGenerator" type="Node2D"]
 script = ExtResource("1_dwtof")
-Entrance = NodePath("Entrance")
-Exit = NodePath("Exit")
-Player = NodePath("Player")
 
 [node name="FrameGenerator" parent="." instance=ExtResource("3_875ce")]
 

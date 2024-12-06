@@ -61,7 +61,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Closing",
-"speed": 15.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -70,6 +70,44 @@ animations = [{
 "loop": true,
 "name": &"Open",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_3bmoa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ldrgt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_k3r57")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_3iqyt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_vwxmi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_vk555")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_n65wu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_s10hh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_pgpr5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_d6jde")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_wn1ul")
+}],
+"loop": false,
+"name": &"Opening",
+"speed": 10.0
 }]
 
 [node name="Area2D" type="Area2D" node_paths=PackedStringArray("spawner") groups=["Spawnable"]]
@@ -78,7 +116,7 @@ script = ExtResource("12_forbl")
 spawner = NodePath("Spawn")
 metadata/_edit_lock_ = true
 
-[node name="Door" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_d1v8g")
 animation = &"Closing"

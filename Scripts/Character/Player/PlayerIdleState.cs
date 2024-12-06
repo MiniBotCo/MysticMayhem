@@ -26,7 +26,7 @@ public partial class PlayerIdleState : PlayerState
         {
             characterNode.AudioPlayer.Stream = characterNode.jumpSound;
             characterNode.AudioPlayer.Play();
-            characterNode.velocity.Y = characterNode.JumpVelocity;
+            characterNode.velocity.Y = characterNode.GetStatResource(Stat.JumpSpeed).StatValue;
             characterNode.StateMachineNode.SwitchState<PlayerJumpState>();
         }
 
