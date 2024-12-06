@@ -148,7 +148,7 @@ radius = 9.35113
 height = 99.335
 
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("spawner", "AnimationPlayerNode", "Sprite2DNode", "StateMachineNode", "HurtboxNode", "HitboxNode", "HitboxShapeNode", "PathNode", "Agent2DNode", "ChaseAreaNode", "AttackAreaNode")]
-collision_layer = 5
+collision_layer = 4
 script = ExtResource("1_s7n2v")
 EnemySpeed = 100.0
 spawner = NodePath("Spawn")
