@@ -10,6 +10,11 @@ public partial class PlayerJumpState : PlayerState
     {
         characterNode.velocity = characterNode.Velocity;
 
+        if (Input.IsActionJustPressed(GameConstants.INPUT_ATTACK) && characterNode.CanTrickShot)
+        {
+            CastTrickShot();
+        }
+
         // Add the gravity.
         if (!characterNode.IsOnFloor())
         {
@@ -53,5 +58,16 @@ public partial class PlayerJumpState : PlayerState
     {
         base.EnterState();
         characterNode.AnimationPlayerNode.Play(GameConstants.ANIM_JUMP);
+    }
+
+    private async void CastTrickShot()
+    {
+        PackedScene trickShotScene = GD.Load<PackedScene>("res://Scenes/Objects/trick_shot.tscn");
+        TrickShot trickShot = trickShotScene.Instantiate<TrickShot>();
+        CallDeferred(Node.MethodName.AddChild, trickShot);
+        await ToSignal(trickShot, Node.SignalName.Ready);
+        trickShot.Start(characterNode.GlobalPosition,
+                        characterNode.GetAngleTo(characterNode.GetGlobalMousePosition()),
+                        characterNode.GetStatResource(Stat.Damage).StatValue);
     }
 }

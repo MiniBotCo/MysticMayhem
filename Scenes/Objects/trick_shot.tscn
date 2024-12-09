@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bf2kopaxvhawm"]
 
-[ext_resource type="Script" path="res://Scripts/Objects/Items/TrickShot.cs" id="1_2xn4l"]
-[ext_resource type="Texture2D" uid="uid://cevmpxo6k4e6g" path="res://Assets/Sprites/Objects/Items/trickShot.png" id="1_fsufy"]
+[ext_resource type="Script" path="res://Scripts/Objects/TrickShot.cs" id="1_2xn4l"]
+[ext_resource type="Texture2D" uid="uid://cfhbpl7ldic8v" path="res://Assets/Sprites/Objects/Items/TrickShot.png" id="1_fsufy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nh16i"]
 size = Vector2(31, 8)

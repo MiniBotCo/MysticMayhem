@@ -8,7 +8,8 @@ public partial class Player : Character
 	[ExportGroup("Player Stats")]
 	[Export] public int level = 1;
 
-	public bool CanCastFireball = true;
+	public bool CanCastFireball = false;
+	public bool CanTrickShot = true;
 
 	public Vector2 direction = new();
 
@@ -33,7 +34,7 @@ public partial class Player : Character
 			new StatResource(Stat.Health, 100),
 			new StatResource(Stat.Damage, 10),
 			new StatResource(Stat.Speed, 200),
-			new StatResource(Stat.JumpSpeed, -600)
+			new StatResource(Stat.JumpSpeed, 600)
 		};
 
 		_hud = GetNode<Control>("HUDCanvasLayer/HUD");
@@ -50,6 +51,7 @@ public partial class Player : Character
 		foreach (Effect effect in _effects)
 		{
 			GetStatResource(effect.statResource.StatType).StatValue += effect.statResource.StatValue;
+			GD.Print("wa");
 
 			if (!effect.permanent)
 			{
@@ -64,7 +66,7 @@ public partial class Player : Character
 			if (!effect.permanent) _effects.Remove(effect);
 		}
 
-		//GD.Print("Stats: Health " + GetStatResource(Stat.Health).StatValue + " | Damage " + GetStatResource(Stat.Damage).StatValue + " | Speed " + GetStatResource(Stat.Speed).StatValue + " | Jump Speed " + GetStatResource(Stat.JumpSpeed).StatValue); //TODO remove
+		GD.Print("Stats: Health " + GetStatResource(Stat.Health).StatValue + " | Damage " + GetStatResource(Stat.Damage).StatValue + " | Speed " + GetStatResource(Stat.Speed).StatValue + " | Jump Speed " + GetStatResource(Stat.JumpSpeed).StatValue); //TODO remove
 	}
 
 	protected override void HandleHurtboxEntered(Area2D area)

@@ -3,35 +3,31 @@ using System;
 
 public partial class TrickShot : Area2D
 {
-    private bool _stuck = false;
 	private int _speed = 10;
-	private Node2D _stuckBody = null;
+	private float _damage = 10;
 
-    public void Start(Vector2 position, float direction)
+    public void Start(Vector2 position, float direction, float damage)
 	{
 		GlobalPosition = position;
 		Rotation = direction;
+		_damage = damage;
 		BodyEntered += OnBodyEntered;
 	}
 
     public override void _PhysicsProcess(double delta)
     {
         base._PhysicsProcess(delta);
-		
-		if (!_stuck)
-		{
-			Position += new Vector2((float)Math.Cos(Rotation), (float)Math.Sin(Rotation)) * _speed;
-		}
-		else if (_stuckBody != null)
-		{
-			GlobalPosition = _stuckBody.GlobalPosition + _stuckBody.ToLocal(GlobalPosition);
-		}
+
+		Position += new Vector2((float)Math.Cos(Rotation), (float)Math.Sin(Rotation)) * _speed;
     }
 
     public void OnBodyEntered(Node2D body)
 	{
-		_stuck = true;
-		SetDeferred(Area2D.PropertyName.Monitoring, false);
-		_stuckBody = body;
+		if (body is Character)
+        {
+            ((Character) body).GetStatResource(Stat.Health).StatValue -= _damage;
+        }
+
+		QueueFree();
 	}
 }

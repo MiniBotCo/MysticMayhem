@@ -34,10 +34,11 @@ public partial class Chest : Area2D, ISpawnable
 		_slotEffects = new Dictionary<Button, Effect>();
 		possibleEffects = new List<Effect>();
 
-		if (Level.level == 2)
+		if ((Level.level + 1) % 5 == 0)
 		{
 			_abilityButton = GetNode<Button>("Ability");
 			_abilityButton.Visible = true;
+			_abilityButton.Pressed += OnAbilityButtonPressed;
 		}
 
 		// Applies a random value to the stat for each button
@@ -54,7 +55,7 @@ public partial class Chest : Area2D, ISpawnable
 					value = GD.RandRange(5, 10);
 					break;
 				case Stat.JumpSpeed:
-					value = GD.RandRange(-20, -10);
+					value = GD.RandRange(-5, 20);
 					break;
 				case Stat.Speed:
 					value = GD.RandRange(5, 10);
@@ -127,6 +128,14 @@ public partial class Chest : Area2D, ISpawnable
 		{
 			_player.AddEffect(effect);
 			_animationPlayer.Play("Closing");
+		}
+	}
+
+	public void OnAbilityButtonPressed()
+	{
+		if (_player is Player)
+		{
+			GD.Print("Give ability");
 		}
 	}
 
