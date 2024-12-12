@@ -18,7 +18,6 @@ public partial class EnemyIdleState : EnemyState
 
     public override void _PhysicsProcess(double delta)
     {
-        GD.Print("In the Idle state");
         characterNode.StateMachineNode.SwitchState<EnemyReturnState>();
     }
 }

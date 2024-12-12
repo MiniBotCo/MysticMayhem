@@ -15,6 +15,8 @@ public partial class Level : Node2D
 	private Door _entrance;
 	private Player _player;
 
+	private bool _changingLevel = false;
+
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -29,8 +31,11 @@ public partial class Level : Node2D
     /// <param name="event">The input event</param>
     public override async void _Input(InputEvent @event)
     {
-        if(@event.IsActionPressed("EnterDoor") && _inDoor)
+		base._Input(@event);
+
+        if(@event.IsActionPressed("EnterDoor") && _inDoor && !_changingLevel)
         {
+			_changingLevel = true;
             _animationPlayer.Play("ChangeScene");
             await ToSignal(_animationPlayer, AnimationPlayer.SignalName.AnimationFinished);
             _levelGenerator.QueueFree();
@@ -39,8 +44,6 @@ public partial class Level : Node2D
 			_animationPlayer.Play("EnterScene");
 			await ToSignal(_animationPlayer, AnimationPlayer.SignalName.AnimationFinished);
         }
-        
-        base._Input(@event);
     }
 
 	/// <summary>
@@ -72,6 +75,7 @@ public partial class Level : Node2D
 		_player = _levelGenerator.Player;
 
 		level++;
+		GD.Print("New level: " + level);
 		if (level % 6 == 0) GameConstants.difficulty++;
 		_player.level = level;
 		_player.UpdateHUD();
@@ -83,6 +87,7 @@ public partial class Level : Node2D
 		_player.Death += PlayerDeath;
 
 		_levelGenerator.GenerateLevel(level);
+		_changingLevel = false;
 	}
 
 	private async void PlayerDeath()

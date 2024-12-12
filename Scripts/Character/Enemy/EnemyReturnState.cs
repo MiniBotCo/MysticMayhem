@@ -5,13 +5,11 @@ public partial class EnemyReturnState : EnemyState
 {
     public override void _Ready()
     {
-        GD.Print(destination);
         base._Ready();
     }
     protected override void EnterState()
     {
         destination = GetPointGlobalPosition(GD.RandRange(0, 1));
-        GD.Print("In enemy return state!");
         characterNode.AnimationPlayerNode.Play(GameConstants.ANIM_IDLE);
 
         characterNode.Agent2DNode.TargetPosition = destination;

@@ -8,10 +8,8 @@ public partial class EnemyChaseState : EnemyState
     [Export] private Timer chaseTimerNode;
     protected override void EnterState()
     {
-        GD.Print("Now in the Chase State!");
         characterNode.AnimationPlayerNode.Play(GameConstants.ANIM_IDLE);
         target = characterNode.ChaseAreaNode.GetOverlappingBodies().First() as CharacterBody2D;
-        GD.Print("Target is: " + target.Name);
 
         chaseTimerNode.Timeout += HandleTimeout;
         characterNode.AttackAreaNode.BodyEntered += HandleAttackAreaBodyEntered;

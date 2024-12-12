@@ -104,8 +104,9 @@ public partial class LevelGenerator : Node2D
     /// </summary>
     private void SpawnPlayer()
     {
-        if (Entrance != null && Player != null)
+        if (Entrance != null)
         {
+            GD.Print("Player Spawned");
             Player.Position = Entrance.Position + new Vector2(0, -32);
 
             Vector2I levelPixels = (Vector2I)(_frameGenerator.GetTileMapLayer().MapToLocal(LevelSize) + new Vector2(16, -16));

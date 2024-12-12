@@ -12,7 +12,6 @@ public partial class Enemy : Character, ISpawnable
     {
         base._Ready();
 		stats = new StatResource[]{new StatResource(Stat.Health, 40 * GameConstants.difficulty), new StatResource(Stat.Damage, 5  * GameConstants.difficulty)};
-		GD.Print(GetStatResource(Stat.Health).StatValue);
     }
 
     public override void _PhysicsProcess(double delta)
