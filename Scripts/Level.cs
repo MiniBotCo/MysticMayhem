@@ -5,7 +5,7 @@ public partial class Level : Node2D
 {
 	[Export]
 	public PackedScene levelGeneratorScene { get; set; } = GD.Load<PackedScene>("res://Scenes/level_generator.tscn");
-	public int level = 0;
+	public static int level = 0;
 
 	private bool _inDoor = false;
     private AnimationPlayer _animationPlayer;
@@ -40,6 +40,12 @@ public partial class Level : Node2D
             await ToSignal(_animationPlayer, AnimationPlayer.SignalName.AnimationFinished);
             _levelGenerator.QueueFree();
 			await ToSignal(_levelGenerator, Node.SignalName.TreeExited);
+
+			if (level == 19)
+			{
+				GetTree().ChangeSceneToFile("res://Scenes/Menus/win_screen.tscn");
+			}
+
 			AddLevelGenerator();
 			_animationPlayer.Play("EnterScene");
 			await ToSignal(_animationPlayer, AnimationPlayer.SignalName.AnimationFinished);
@@ -75,7 +81,11 @@ public partial class Level : Node2D
 		_player = _levelGenerator.Player;
 
 		level++;
-		GD.Print("New level: " + level);
+
+		GameStatistics.totalLevelsCleared++;
+		GameStatistics.finalLevel++;
+		if (level > GameStatistics.highestLevel) GameStatistics.highestLevel = level;
+
 		if (level % 6 == 0) GameConstants.difficulty++;
 		_player.level = level;
 		_player.UpdateHUD();
@@ -90,10 +100,9 @@ public partial class Level : Node2D
 		_changingLevel = false;
 	}
 
-	private async void PlayerDeath()
+	private void PlayerDeath()
 	{
-		_player.QueueFree();
-		await ToSignal(_player, Node.SignalName.TreeExited);
-		GetTree().ChangeSceneToFile("res://Scenes/Main Menu.tscn");
+		level = 0;
+		GetTree().ChangeSceneToFile("res://Scenes/Menus/death_screen.tscn");
 	}
 }

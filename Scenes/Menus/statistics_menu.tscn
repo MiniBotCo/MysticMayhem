@@ -1,0 +1,93 @@
+[gd_scene load_steps=4 format=3 uid="uid://btgaetv8o8xwx"]
+
+[ext_resource type="Script" path="res://Scripts/Menus/StatisticsMenu.cs" id="1_lkhnd"]
+[ext_resource type="Theme" uid="uid://bu0soecijui6w" path="res://Scenes/Menus/menu_theme.tres" id="2_7wecx"]
+[ext_resource type="Texture2D" uid="uid://cag1usafks4kb" path="res://Assets/Sprites/TileMaps/Block2.png" id="2_75lpt"]
+
+[node name="StatisticsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lkhnd")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 3000.0
+offset_bottom = 2000.0
+texture = ExtResource("2_75lpt")
+stretch_mode = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -130.0
+offset_top = -72.0
+offset_right = 130.0
+offset_bottom = 72.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="TItle" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_7wecx")
+theme_override_font_sizes/font_size = 36
+text = "Statistics"
+horizontal_alignment = 1
+
+[node name="HighestLevel" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_7wecx")
+theme_override_font_sizes/font_size = 27
+text = "Highest Level: "
+
+[node name="TotalLevelsCleared" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_7wecx")
+theme_override_font_sizes/font_size = 27
+text = "Total Levels Cleared: "
+
+[node name="EnemiesDefeated" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_7wecx")
+theme_override_font_sizes/font_size = 27
+text = "Enemies Defeated: "
+
+[node name="UpgradesGotten" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_7wecx")
+theme_override_font_sizes/font_size = 27
+text = "Upgrades Gotten: "
+
+[node name="Deaths" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_7wecx")
+theme_override_font_sizes/font_size = 27
+text = "Deaths: "
+
+[node name="ExitToMenu" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -174.0
+offset_top = -24.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("2_7wecx")
+theme_override_font_sizes/font_size = 27
+text = "Exit To Menu
+"

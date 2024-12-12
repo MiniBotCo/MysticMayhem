@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://iw6njh47t607"]
+[gd_scene load_steps=4 format=3 uid="uid://iw6njh47t607"]
 
 [ext_resource type="Script" path="res://Scripts/Menus/SettingsMenu.cs" id="1_d343c"]
 [ext_resource type="Theme" uid="uid://bu0soecijui6w" path="res://Scenes/Menus/menu_theme.tres" id="1_thq6e"]
+[ext_resource type="Texture2D" uid="uid://cag1usafks4kb" path="res://Assets/Sprites/TileMaps/Block2.png" id="2_s6ox8"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -11,6 +12,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_d343c")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 3000.0
+offset_bottom = 2000.0
+texture = ExtResource("2_s6ox8")
+stretch_mode = 1
 
 [node name="CenterBox" type="CenterContainer" parent="."]
 layout_mode = 1

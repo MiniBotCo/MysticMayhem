@@ -190,7 +190,7 @@ radius = 30.0
 height = 93.9998
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_johrx"]
-size = Vector2(28.0254, 20)
+size = Vector2(34.9904, 33.3506)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gkj3s"]
 radius = 9.35113
@@ -287,7 +287,7 @@ collision_layer = 4
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2(7.56885, 0)
+position = Vector2(1.00001, -0.999998)
 rotation = 3.14159
 scale = Vector2(1.88623, -1.79907)
 shape = SubResource("RectangleShape2D_johrx")

@@ -27,6 +27,9 @@ public partial class EnemyGenerator : Node2D
 	private void OnEnemyKilled()
 	{
 		enemies--;
+		GameStatistics.totalEnemiesDefeated++;
+		GameStatistics.enemiesDefeated++;
+
 		if (enemies <= 0)
 		{
 			EmitSignal(SignalName.EnemiesDefeated);

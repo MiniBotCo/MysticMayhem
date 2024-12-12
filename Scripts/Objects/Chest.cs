@@ -101,6 +101,8 @@ public partial class Chest : Area2D, ISpawnable
 	{
 		if (_player is Player) // <-- This looks bad, might be bad, but it makes sure the _player variable is acually the player and not something else or null
 		{
+			GameStatistics.totalUpgradesGotten++;
+			GameStatistics.upgradesGotten++;
 			_player.AddEffect(effect);
 			_animationPlayer.Play("Closing");
 		}
