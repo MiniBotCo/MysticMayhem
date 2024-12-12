@@ -259,7 +259,6 @@ script = ExtResource("12_ibycl")
 script = ExtResource("31_csr7q")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-debug_enabled = true
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_n54jj")
