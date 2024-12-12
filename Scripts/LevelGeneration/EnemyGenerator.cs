@@ -19,7 +19,7 @@ public partial class EnemyGenerator : Node2D
 			await ToSignal(enemy, Node.SignalName.Ready);
 
 			enemies++;
-			enemy.TreeExited += OnEnemyKilled;
+			enemy.Death += OnEnemyKilled;
 			spawner.AddToSpawnList(enemy);
 		}
 		EmitSignal(SignalName.EnemiesGenerated);

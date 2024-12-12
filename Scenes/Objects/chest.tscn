@@ -1,20 +1,31 @@
-[gd_scene load_steps=19 format=3 uid="uid://bf6ostbu5y17d"]
+[gd_scene load_steps=30 format=3 uid="uid://bf6ostbu5y17d"]
 
-[ext_resource type="Texture2D" uid="uid://cpuw5yui7gtsc" path="res://Assets/Sprites/Objects/Chest/chest_closed.png" id="1_2s8oc"]
 [ext_resource type="Script" path="res://Scripts/Objects/Chest.cs" id="1_3rset"]
-[ext_resource type="Texture2D" uid="uid://c374pbwpa8bu4" path="res://Assets/Sprites/Objects/Chest/chest2.png" id="2_fypp6"]
-[ext_resource type="Texture2D" uid="uid://salk63ra7gkf" path="res://Assets/Sprites/Objects/Chest/chest3.png" id="3_fsj2l"]
-[ext_resource type="Texture2D" uid="uid://c0jgn38ec53xf" path="res://Assets/Sprites/Objects/Chest/chest_open.png" id="4_q1vaq"]
+[ext_resource type="Texture2D" uid="uid://bldjce54rjqik" path="res://Assets/Sprites/Objects/Chest/ChestLock11.png" id="2_s6w84"]
+[ext_resource type="Texture2D" uid="uid://uo7e1yxp8bju" path="res://Assets/Sprites/Objects/Chest/ChestLock12.png" id="3_a2dln"]
+[ext_resource type="Texture2D" uid="uid://cyx8nyh7j2l7b" path="res://Assets/Sprites/Objects/Chest/ChestLock13.png" id="4_vumkv"]
+[ext_resource type="Texture2D" uid="uid://vjrgajaaeqpb" path="res://Assets/Sprites/Objects/Chest/ChestLock14.png" id="5_onuny"]
+[ext_resource type="Texture2D" uid="uid://im7iois6gfgo" path="res://Assets/Sprites/Objects/Chest/ChestLock15.png" id="6_bc0xx"]
 [ext_resource type="Texture2D" uid="uid://blxovxjyriy31" path="res://Assets/Sprites/Objects/Items/damage.png" id="6_lglvu"]
 [ext_resource type="Theme" uid="uid://bu0soecijui6w" path="res://Scenes/Menus/menu_theme.tres" id="6_owd3m"]
+[ext_resource type="Texture2D" uid="uid://tvpxxac6fxwl" path="res://Assets/Sprites/Objects/Chest/ChestLock1.png" id="7_tma15"]
 [ext_resource type="PackedScene" uid="uid://wgdo17ddj15v" path="res://Scenes/Spawnables/chest_spawn.tscn" id="7_v4nni"]
 [ext_resource type="AudioStream" uid="uid://dcocw0caoir24" path="res://Assets/Sfx/openChest.wav" id="8_4y38s"]
+[ext_resource type="Texture2D" uid="uid://b8ixb5ojuc62r" path="res://Assets/Sprites/Objects/Chest/ChestLock2.png" id="8_g2rtl"]
+[ext_resource type="Texture2D" uid="uid://d0dacps3w7qyg" path="res://Assets/Sprites/Objects/Chest/ChestLock3.png" id="9_e8yp0"]
+[ext_resource type="Texture2D" uid="uid://bf2pktyo1wpy4" path="res://Assets/Sprites/Objects/Chest/ChestLock4.png" id="10_8ktwc"]
+[ext_resource type="Texture2D" uid="uid://g23osrgxvbb8" path="res://Assets/Sprites/Objects/Chest/ChestLock5.png" id="11_tge5c"]
+[ext_resource type="Texture2D" uid="uid://dwwrdbh2h8lls" path="res://Assets/Sprites/Objects/Chest/ChestLock6.png" id="12_knkj0"]
+[ext_resource type="Texture2D" uid="uid://d0u1tqxlosr4n" path="res://Assets/Sprites/Objects/Chest/ChestLock7.png" id="13_th0l8"]
+[ext_resource type="Texture2D" uid="uid://cx8328tj8ofrn" path="res://Assets/Sprites/Objects/Chest/ChestLock8.png" id="14_s4i0l"]
+[ext_resource type="Texture2D" uid="uid://dtnlr3w6amsoq" path="res://Assets/Sprites/Objects/Chest/ChestLock9.png" id="15_bm8rg"]
+[ext_resource type="Texture2D" uid="uid://bxa2n5lrdfrx1" path="res://Assets/Sprites/Objects/Chest/ChestLock10.png" id="16_3w2wr"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ith7t"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_2s8oc")
+"texture": ExtResource("7_tma15")
 }],
 "loop": true,
 "name": &"closed",
@@ -22,20 +33,61 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_2s8oc")
+"texture": ExtResource("2_s6w84")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_fypp6")
+"texture": ExtResource("3_a2dln")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_fsj2l")
+"texture": ExtResource("4_vumkv")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_q1vaq")
+"texture": ExtResource("5_onuny")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_bc0xx")
 }],
 "loop": false,
 "name": &"opening",
-"speed": 5.0
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_tma15")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_g2rtl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_e8yp0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_8ktwc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_tge5c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_knkj0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_th0l8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_s4i0l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_bm8rg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_3w2wr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_s6w84")
+}],
+"loop": true,
+"name": &"unlocking",
+"speed": 8.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j7g45"]
@@ -46,19 +98,19 @@ resource_name = "Closing"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/path = NodePath("Slots/Slot1:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.6, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [3, 2, 1, 0]
+"values": [true]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Slots/Slot1:disabled")
+tracks/1/path = NodePath("Slots/Slot2:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -70,7 +122,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Slots/Slot2:disabled")
+tracks/2/path = NodePath("Slots/Slot3:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -82,23 +134,23 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Slots/Slot3:disabled")
+tracks/3/path = NodePath("Slots/Slot1:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0),
+"times": PackedFloat32Array(0.3),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Slots/Slot1:visible")
+tracks/4/path = NodePath("Slots/Slot2:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0.3),
+"times": PackedFloat32Array(0.6),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
@@ -106,11 +158,11 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Slots/Slot2:visible")
+tracks/5/path = NodePath("Slots/Slot3:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0.6),
+"times": PackedFloat32Array(0.866667),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
@@ -118,14 +170,26 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Slots/Slot3:visible")
+tracks/6/path = NodePath("AnimatedSprite2D:frame")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0.866667),
+"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("AnimatedSprite2D:animation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"closed"]
 }
 
 [sub_resource type="Animation" id="Animation_4rpn4"]
@@ -179,10 +243,10 @@ tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.233333, 0.366667),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.233333, 0.366667, 0.533333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3]
+"values": [0, 1, 2, 3, 4]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -351,6 +415,18 @@ tracks/14/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("AnimatedSprite2D:animation")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"opening"]
 }
 
 [sub_resource type="Animation" id="Animation_3eqfy"]
@@ -547,9 +623,22 @@ tracks/15/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("AnimatedSprite2D:animation")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"closed"]
+}
 
 [sub_resource type="Animation" id="Animation_sbjlw"]
 resource_name = "Unlocked"
+length = 2.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -557,10 +646,34 @@ tracks/0/path = NodePath("CPUParticles2D:emitting")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
+"times": PackedFloat32Array(0.933333),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"unlocking"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.266667, 0.4, 0.566667, 0.7, 0.833333, 0.966667, 1.1, 1.23333, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wkjpw"]
@@ -586,7 +699,7 @@ spawner = NodePath("ChestSpawn")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_ith7t")
-animation = &"opening"
+animation = &"closed"
 offset = Vector2(8, -8)
 metadata/_edit_lock_ = true
 
@@ -605,9 +718,9 @@ libraries = {
 [node name="Slot1" type="Button" parent="Slots"]
 visible = false
 texture_filter = 1
-offset_left = -60.0
-offset_top = -40.0
-offset_right = -20.0
+offset_left = 8.0
+offset_right = 48.0
+offset_bottom = 40.0
 theme = ExtResource("6_owd3m")
 disabled = true
 icon = ExtResource("6_lglvu")
@@ -616,10 +729,9 @@ flat = true
 [node name="Slot2" type="Button" parent="Slots"]
 visible = false
 texture_filter = 1
-offset_left = -20.0
-offset_top = -60.0
-offset_right = 20.0
-offset_bottom = -20.0
+offset_left = 8.0
+offset_right = 48.0
+offset_bottom = 40.0
 theme = ExtResource("6_owd3m")
 disabled = true
 toggle_mode = true
@@ -629,9 +741,9 @@ flat = true
 [node name="Slot3" type="Button" parent="Slots"]
 visible = false
 texture_filter = 1
-offset_left = 20.0
-offset_top = -40.0
-offset_right = 60.0
+offset_left = 8.0
+offset_right = 48.0
+offset_bottom = 40.0
 theme = ExtResource("6_owd3m")
 disabled = true
 toggle_mode = true

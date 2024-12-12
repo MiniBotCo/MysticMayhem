@@ -1,10 +1,11 @@
-[gd_scene load_steps=32 format=3 uid="uid://b71wwwq6jo2yi"]
+[gd_scene load_steps=33 format=3 uid="uid://b71wwwq6jo2yi"]
 
 [ext_resource type="Script" path="res://Scripts/Character/Player/Player.cs" id="1_l2rlm"]
 [ext_resource type="Texture2D" uid="uid://bd3upfojwluw1" path="res://Assets/Sprites/Character/Player/Warrior/Animation_Attack/GigaWarriorStandingAttack2.png" id="6_x6ucm"]
 [ext_resource type="Texture2D" uid="uid://c0c8wsf7sh3v6" path="res://Assets/Sprites/Character/Player/Warrior/Animation_Move/WarriorWalk1.png" id="7_2jrpj"]
 [ext_resource type="Texture2D" uid="uid://c0b8yp3ibdflq" path="res://Assets/Sprites/Character/Player/Warrior/Animation_Idle/WarriorIdle1.png" id="7_fsoa7"]
 [ext_resource type="Texture2D" uid="uid://bg308eqqrmfjk" path="res://Assets/Sprites/Character/Player/Warrior/Animation_Attack/GigaWarriorStandingAttack3.png" id="7_t07e8"]
+[ext_resource type="AudioStream" uid="uid://bifcxuwvdku00" path="res://Assets/Sfx/playerDeath.wav" id="7_ucotv"]
 [ext_resource type="Texture2D" uid="uid://b0sn3s8ftnm1m" path="res://Assets/Sprites/Character/Player/Warrior/Animation_Move/WarriorWalk2.png" id="8_5fev3"]
 [ext_resource type="Texture2D" uid="uid://bbn3d63oucg1e" path="res://Assets/Sprites/Character/Player/Warrior/Animation_Attack/GigaWarriorStandingAttack4.png" id="8_bndxu"]
 [ext_resource type="Texture2D" uid="uid://s4k6rsw0vxdb" path="res://Assets/Sprites/Character/Player/Warrior/Animation_Idle/WarriorIdle2.png" id="8_xo0l2"]
@@ -59,6 +60,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_rj1gw"]
 resource_name = "Death"
+length = 3.5
 step = 0.142857
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -71,6 +73,30 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [ExtResource("7_fsoa7"), ExtResource("7_fsoa7"), ExtResource("14_tisbs"), ExtResource("14_tisbs"), ExtResource("14_tisbs"), ExtResource("14_tisbs"), ExtResource("14_tisbs")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer:stream")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("7_ucotv")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_5k773"]
@@ -137,6 +163,30 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [SubResource("CompressedTexture2D_scoyt")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AudioStreamPlayer:stream")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("19_mlnnq")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_n0yme"]
@@ -209,6 +259,7 @@ offset_bottom = -5.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("19_mlnnq")
+volume_db = -15.0
 
 [node name="Hitbox" type="Area2D" parent="."]
 position = Vector2(11, -1)

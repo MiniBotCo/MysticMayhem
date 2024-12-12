@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://d4ac36yvqe1vx"]
+[gd_scene load_steps=9 format=3 uid="uid://d4ac36yvqe1vx"]
 
 [ext_resource type="Script" path="res://Scripts/Level.cs" id="1_y1qan"]
 [ext_resource type="Texture2D" uid="uid://c5repxrx8jbpm" path="res://Assets/Sprites/background.png" id="2_2edqs"]
 [ext_resource type="AudioStream" uid="uid://br3mds3nirag6" path="res://Assets/Sfx/exitLevel.wav" id="3_clge4"]
+[ext_resource type="AudioStream" uid="uid://c3gbj2lh2ubqn" path="res://Assets/Music/FunkyBeatsToKillMonstersTo.wav" id="4_a7dma"]
 
 [sub_resource type="Animation" id="Animation_rwb1e"]
 resource_name = "ChangeScene"
@@ -113,8 +114,11 @@ script = ExtResource("1_y1qan")
 motion_scale = Vector2(0.5, 0.5)
 
 [node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
-offset_right = 2257.0
-offset_bottom = 1354.0
+texture_filter = 1
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 2078.0
+offset_bottom = 1071.0
 texture = ExtResource("2_2edqs")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -133,3 +137,8 @@ mouse_force_pass_scroll_events = false
 color = Color(1, 1, 1, 0)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_a7dma")
+volume_db = -9.0
+autoplay = true

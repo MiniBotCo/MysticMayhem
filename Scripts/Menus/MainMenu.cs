@@ -16,7 +16,7 @@ public partial class MainMenu : Control
 
 		_startGame.Pressed += OnStartGamePressed;
 		_settings.Pressed += OnSettingsPressed;
-		_exitGame.Pressed += OnSettingsPressed;
+		_exitGame.Pressed += OnQuitPressed;
 	}
 
 	private void OnStartGamePressed()

@@ -36,8 +36,10 @@ public partial class Chest : Area2D, ISpawnable
 		// Applies a random value to the stat for each button
 		foreach (Stat stat in Enum.GetValues(typeof(Stat)))
 		{
-			possibleEffects.Add(new Effect(stat, GD.RandRange(10, 50), true));
+			possibleEffects.Add(new Effect(stat, GD.RandRange(5, 15), true));
 		}
+
+		Shuffle<Effect>.ShuffleList(possibleEffects);
 
 		// Loops through the buttons and assigns them effects, icons, tool tips, and connects their signals
 		for (int i = 0; i < _slots.GetChildCount(); i++)
@@ -65,7 +67,7 @@ public partial class Chest : Area2D, ISpawnable
 					break;
 				case Stat.JumpSpeed:
 					button.Icon = JumpTexture;
-					button.TooltipText = "Provides a jump boost of";
+					button.TooltipText = "Provides a jump boost of ";
 					break;
 			}
 

@@ -36,7 +36,7 @@ public partial class PlayerMoveState : PlayerState
         {
             characterNode.AudioPlayer.Stream = characterNode.jumpSound;
             characterNode.AudioPlayer.Play();
-            characterNode.velocity.Y = characterNode.GetStatResource(Stat.JumpSpeed).StatValue;
+            characterNode.velocity.Y = -characterNode.GetStatResource(Stat.JumpSpeed).StatValue;
         }
 
         if (!characterNode.IsOnFloor())

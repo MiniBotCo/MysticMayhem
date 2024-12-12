@@ -82,12 +82,13 @@ public partial class Level : Node2D
 
 		_player.Death += PlayerDeath;
 
-		
 		_levelGenerator.GenerateLevel(level);
 	}
 
-	private void PlayerDeath()
+	private async void PlayerDeath()
 	{
+		_player.QueueFree();
+		await ToSignal(_player, Node.SignalName.TreeExited);
 		GetTree().ChangeSceneToFile("res://Scenes/Main Menu.tscn");
 	}
 }

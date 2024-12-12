@@ -1,34 +1,33 @@
-[gd_scene load_steps=44 format=3 uid="uid://bjupuljh4v708"]
+[gd_scene load_steps=43 format=3 uid="uid://bjupuljh4v708"]
 
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/Enemy.cs" id="1_s7n2v"]
 [ext_resource type="Texture2D" uid="uid://uf67ea6s75px" path="res://Assets/Sprites/Character/Enemy/Ghost.png" id="2_qnxvh"]
 [ext_resource type="Texture2D" uid="uid://c25ugshfk3ith" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Idle/Ghost_Idle1.png" id="3_dwpcu"]
 [ext_resource type="PackedScene" uid="uid://untwbv6c7xc2" path="res://Scenes/Characters/state_machine.tscn" id="4_pcvf8"]
 [ext_resource type="Texture2D" uid="uid://byuyjwvykdpl5" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Idle/Ghost_Idle2.png" id="4_s8jux"]
+[ext_resource type="Texture2D" uid="uid://co0jk131ksp7t" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/GD1.png" id="5_4lql4"]
 [ext_resource type="Texture2D" uid="uid://c5dcgr43rd0nl" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Attack/Ghost_Attack1.png" id="5_aw7f7"]
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyIdleState.cs" id="5_olfrj"]
 [ext_resource type="Texture2D" uid="uid://dli36ptrvkvb3" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Attack/Ghost_Attack2.png" id="6_brtih"]
+[ext_resource type="Texture2D" uid="uid://dknyddgva3ijr" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/GD2.png" id="6_g5nia"]
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyReturnState.cs" id="6_ksx3o"]
-[ext_resource type="Texture2D" uid="uid://xmt2cafh1rgt" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/smoke-Fx3_1.png" id="8_8dn2j"]
-[ext_resource type="Texture2D" uid="uid://dlgnr1le3nit6" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/smoke-Fx3_2.png" id="9_dgjpv"]
-[ext_resource type="Texture2D" uid="uid://hgbqnmova2p6" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/smoke-Fx3_3.png" id="10_ihcup"]
+[ext_resource type="Texture2D" uid="uid://cwbyewffuapqj" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/GD3.png" id="7_oaj22"]
+[ext_resource type="Texture2D" uid="uid://bjk45kou0gqm" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/GD5.png" id="8_x10hb"]
+[ext_resource type="Texture2D" uid="uid://calrv0e67q8pr" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/GD6.png" id="9_55bcq"]
+[ext_resource type="Texture2D" uid="uid://d0sxa4ylmwino" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/GD7.png" id="10_q1ogt"]
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyPatrolState.cs" id="10_rhu0y"]
-[ext_resource type="Texture2D" uid="uid://cfav761pelhv8" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/smoke-Fx3_4.png" id="11_331um"]
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyChaseState.cs" id="11_g8kic"]
+[ext_resource type="Texture2D" uid="uid://bfry3254ivnq3" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/GD8.png" id="11_mxw5d"]
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyAttackState.cs" id="12_ibycl"]
-[ext_resource type="Texture2D" uid="uid://qem1ifkd6ry3" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/smoke-Fx3_5.png" id="12_uvkh3"]
-[ext_resource type="Texture2D" uid="uid://cgprsafjqkqai" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/smoke-Fx3_6.png" id="13_tq31l"]
-[ext_resource type="Texture2D" uid="uid://d4ef2nrmheepc" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/smoke-Fx3_7.png" id="14_ok17d"]
-[ext_resource type="Texture2D" uid="uid://dsu74jltgb0qg" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/smoke-Fx3_8.png" id="15_vspva"]
-[ext_resource type="Texture2D" uid="uid://byn0nxguso7ij" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/smoke-Fx3_9.png" id="16_u10ki"]
-[ext_resource type="Texture2D" uid="uid://crpfo8gphs7fr" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/smoke-Fx3_10.png" id="17_4upgs"]
-[ext_resource type="Texture2D" uid="uid://cvssndr2cuftu" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/smoke-Fx3_11.png" id="18_gay3b"]
-[ext_resource type="Texture2D" uid="uid://bi72hdq78aubf" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/smoke-Fx3_12.png" id="19_se3hq"]
-[ext_resource type="Texture2D" uid="uid://c0jjk4eoc85n0" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/smoke-Fx3_13.png" id="20_w5gmc"]
-[ext_resource type="Texture2D" uid="uid://bgd7fctm73kbj" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/smoke-Fx3_14.png" id="21_t7bt5"]
-[ext_resource type="Texture2D" uid="uid://cugdekkvosedx" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/smoke-Fx3_15.png" id="22_q3uvn"]
-[ext_resource type="Texture2D" uid="uid://bkrpc2ti7y2iy" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/smoke-Fx3_16.png" id="23_y7ca2"]
-[ext_resource type="Texture2D" uid="uid://0o0k0xpobn7p" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/smoke-Fx3_17.png" id="24_wq02y"]
+[ext_resource type="Texture2D" uid="uid://12xntmwh5fh6" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/GD9.png" id="12_mb760"]
+[ext_resource type="Texture2D" uid="uid://dtoxqyjrq3yai" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/GD10.png" id="13_olwti"]
+[ext_resource type="Texture2D" uid="uid://wojnqs8dke1" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/GD11.png" id="14_nhfrh"]
+[ext_resource type="Texture2D" uid="uid://n0nuc0kq6dbt" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/GD12.png" id="15_crsid"]
+[ext_resource type="Texture2D" uid="uid://bx02fyupu1yxu" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/GD15.png" id="16_l80gl"]
+[ext_resource type="Texture2D" uid="uid://srb86xi86peo" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/GD16.png" id="17_rdbxp"]
+[ext_resource type="Texture2D" uid="uid://sjaxbpskgxcq" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/GD17.png" id="18_1qk2l"]
+[ext_resource type="Texture2D" uid="uid://d2rnhtt6jn7mx" path="res://Assets/Sprites/Character/Enemy/GreenGhost/Animation_Death/GD18.png" id="19_x7tna"]
+[ext_resource type="AudioStream" uid="uid://c686auqxymwx0" path="res://Assets/Sfx/ghostDeath.wav" id="20_ibe08"]
 [ext_resource type="Script" path="res://Scripts/Character/Enemy/EnemyDeathState.cs" id="31_csr7q"]
 [ext_resource type="PackedScene" uid="uid://ctg2nmxp3xh7j" path="res://Scenes/Spawnables/enemy_spawn.tscn" id="31_q4ep3"]
 
@@ -68,6 +67,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_ogewy"]
 resource_name = "Death"
+length = 1.6
 step = 0.0526316
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -76,10 +76,34 @@ tracks/0/path = NodePath("../Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0555556, 0.105263, 0.157895, 0.210526, 0.263158, 0.315789, 0.368421, 0.421053, 0.473684, 0.526316, 0.578947, 0.631579, 0.684211, 0.736842, 0.789474, 0.842105, 0.894737, 0.947368),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.105263, 0.210526, 0.315789, 0.421053, 0.526316, 0.631579, 0.736842, 0.842105, 0.947368, 1.05263, 1.15789, 1.26316, 1.36842, 1.47368),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("5_aw7f7"), ExtResource("8_8dn2j"), ExtResource("8_8dn2j"), ExtResource("9_dgjpv"), ExtResource("10_ihcup"), ExtResource("11_331um"), ExtResource("12_uvkh3"), ExtResource("13_tq31l"), ExtResource("14_ok17d"), ExtResource("15_vspva"), ExtResource("16_u10ki"), ExtResource("17_4upgs"), ExtResource("18_gay3b"), ExtResource("19_se3hq"), ExtResource("20_w5gmc"), ExtResource("21_t7bt5"), ExtResource("22_q3uvn"), ExtResource("23_y7ca2"), ExtResource("24_wq02y")]
+"values": [ExtResource("5_4lql4"), ExtResource("6_g5nia"), ExtResource("7_oaj22"), ExtResource("8_x10hb"), ExtResource("9_55bcq"), ExtResource("10_q1ogt"), ExtResource("11_mxw5d"), ExtResource("12_mb760"), ExtResource("13_olwti"), ExtResource("14_nhfrh"), ExtResource("15_crsid"), ExtResource("16_l80gl"), ExtResource("17_rdbxp"), ExtResource("18_1qk2l"), ExtResource("19_x7tna")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../AudioStreamPlayer:stream")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("20_ibe08")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../AudioStreamPlayer:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_x6bf4"]
@@ -112,6 +136,30 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [ExtResource("2_qnxvh")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../AudioStreamPlayer:stream")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../AudioStreamPlayer:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_u6m5e"]
@@ -252,3 +300,6 @@ scale = Vector2(2.24572, 0.664419)
 shape = SubResource("CapsuleShape2D_gkj3s")
 
 [node name="Spawn" parent="." instance=ExtResource("31_q4ep3")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -16.652

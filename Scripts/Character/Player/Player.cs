@@ -31,7 +31,7 @@ public partial class Player : Character
 			new StatResource(Stat.Health, 100),
 			new StatResource(Stat.Damage, 20),
 			new StatResource(Stat.Speed, 200),
-			new StatResource(Stat.JumpSpeed, -600)
+			new StatResource(Stat.JumpSpeed, 600)
 		};
 
 		_hud = GetNode<Control>("HUDCanvasLayer/HUD");

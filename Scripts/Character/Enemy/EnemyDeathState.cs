@@ -3,20 +3,16 @@ using System;
 
 public partial class EnemyDeathState : EnemyState
 {
-    protected override void EnterState()
+    protected async override void EnterState()
     {
         characterNode.AnimationPlayerNode.Play(GameConstants.ANIM_DEATH);
-        characterNode.AnimationPlayerNode.AnimationFinished += HandleAnimationFinished;
+        await ToSignal(characterNode.AnimationPlayerNode, AnimationPlayer.SignalName.AnimationFinished);
+        characterNode.EmitSignal(Enemy.SignalName.Death);
+        characterNode.QueueFree();
     }
 
     protected override void ExitState()
     {
-        characterNode.AnimationPlayerNode.AnimationFinished -= HandleAnimationFinished;
-    }
-
-    private void HandleAnimationFinished(StringName animName)
-    {
-        characterNode.QueueFree();
     }
 
 }

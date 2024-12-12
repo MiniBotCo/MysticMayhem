@@ -40,7 +40,7 @@ public partial class FrameGenerator : Node2D
     /// <param name="size">Size to eb set to</param>
     public void SetFrameSize(Vector2I size)
     {
-        FrameSize = size;
+        FrameSize = size + new Vector2I(0, 1);
     }
 
     /// <summary>

@@ -18,16 +18,12 @@ public partial class LevelGenerator : Node2D
     private Chest _chest;
     private EnemyGenerator _enemyGenerator;
 
-
-
     private List<TileMapLayer> _tileMapLayers;
     private List<Vector2I> _unusedTiles;
 
     
     // For debug purposes, remove for rinal release
     private TileMapLayer _debugTileMapLayer;
-
-    
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -61,8 +57,6 @@ public partial class LevelGenerator : Node2D
     {
         // Randomizes the scene
         GD.Randomize();
-
-        LevelSize += new Vector2I(GD.RandRange(-10, 5), GD.RandRange(-10, 5));
 
         // Creates a frame
         _frameGenerator.SetFrameSize(LevelSize);
@@ -110,7 +104,7 @@ public partial class LevelGenerator : Node2D
     /// </summary>
     private void SpawnPlayer()
     {
-        if (Entrance != null)
+        if (Entrance != null && Player != null)
         {
             Player.Position = Entrance.Position + new Vector2(0, -32);
 
@@ -164,12 +158,11 @@ public partial class LevelGenerator : Node2D
 
     private void LevelComplete()
     {
-        GD.Print("Level complete!");
+        GetNode<AudioStreamPlayer>("AudioStreamPlayer").Stream = GD.Load<AudioStreamWav>("res://Assets/Sfx/levelComplete.wav");
+        GetNode<AudioStreamPlayer>("AudioStreamPlayer").Play();
         _chest.Unlock();
         Exit.Unlock();
     }
-
-
 }
 
 

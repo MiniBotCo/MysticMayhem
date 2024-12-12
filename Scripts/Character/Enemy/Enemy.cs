@@ -5,6 +5,8 @@ public partial class Enemy : Character, ISpawnable
 {
 	[Export(PropertyHint.Range, "50,800,25")] public float EnemySpeed = 150.0f;
 	[Export] public Spawn spawner { get; set; }
+	
+	[Signal] public delegate void DeathEventHandler();
 
     public override void _Ready()
     {
