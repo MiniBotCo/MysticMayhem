@@ -91,4 +91,9 @@ public partial class Player : Character
 		_hud.GetNode<Label>("HBoxContainer/Speed").Text = "Speed: " + GetStatResource(Stat.Speed).StatValue;
 		_hud.GetNode<Label>("HBoxContainer2/Level").Text = "Level: " + level;
 	}
+
+	public void ClearEffects()
+	{
+		_effects.Clear();
+	}
 }

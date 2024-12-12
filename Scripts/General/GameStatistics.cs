@@ -1,5 +1,8 @@
 public class GameStatistics
 {
+    // Values
+    public static int difficulty = 1;
+    
     // Stats
     public static int highestLevel = 0;
     public static int totalLevelsCleared = 0;

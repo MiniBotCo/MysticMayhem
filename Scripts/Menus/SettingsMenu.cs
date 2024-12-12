@@ -19,7 +19,7 @@ public partial class SettingsMenu : Control
 
 		_volume.Value = AudioServer.GetBusVolumeDb(AudioServer.GetBusIndex("Master"));
 
-		_difficulty.Value = GameConstants.difficulty;
+		_difficulty.Value = GameStatistics.difficulty;
 
 		if(DisplayServer.WindowGetMode() == DisplayServer.WindowMode.Fullscreen)
 		{
@@ -45,7 +45,7 @@ public partial class SettingsMenu : Control
 
 	private void ChangeDifficulty(double difficulty)
 	{
-		GameConstants.difficulty = (int) difficulty;
+		GameStatistics.difficulty = (int) difficulty;
 	}
 
 	private void ToggleFullScreen(bool fullScreened)

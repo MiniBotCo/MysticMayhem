@@ -9,6 +9,7 @@ public partial class PlayerDeathState : PlayerState
 		characterNode.AnimationPlayerNode.Play(GameConstants.ANIM_DEATH);
 		await ToSignal(characterNode.AnimationPlayerNode, AnimationPlayer.SignalName.AnimationFinished);
 		characterNode.EmitSignal(Player.SignalName.Death);
+		characterNode.ClearEffects();
 		characterNode.QueueFree();
 	}
 

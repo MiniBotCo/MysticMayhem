@@ -86,7 +86,6 @@ public partial class Level : Node2D
 		GameStatistics.finalLevel++;
 		if (level > GameStatistics.highestLevel) GameStatistics.highestLevel = level;
 
-		if (level % 6 == 0) GameConstants.difficulty++;
 		_player.level = level;
 		_player.UpdateHUD();
 
