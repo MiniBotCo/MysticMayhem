@@ -86,7 +86,6 @@ public partial class Level : Node2D
 		GameStatistics.finalLevel++;
 		if (level > GameStatistics.highestLevel) GameStatistics.highestLevel = level;
 
-		_player.level = level;
 		_player.UpdateHUD();
 
 		// Signals for the exit door, used to exit the level

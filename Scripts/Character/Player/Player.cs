@@ -5,9 +5,6 @@ using System.Diagnostics.Contracts;
 
 public partial class Player : Character
 {
-	[ExportGroup("Player Stats")]
-	[Export] public int level = 0;
-
 	public Vector2 direction = new();
 
 
@@ -89,7 +86,7 @@ public partial class Player : Character
 		_hud.GetNode<Label>("HBoxContainer/Damage").Text = "Damage: " + GetStatResource(Stat.Damage).StatValue;
 		_hud.GetNode<Label>("HBoxContainer/Jump").Text = "Jump: " + GetStatResource(Stat.JumpSpeed).StatValue;
 		_hud.GetNode<Label>("HBoxContainer/Speed").Text = "Speed: " + GetStatResource(Stat.Speed).StatValue;
-		_hud.GetNode<Label>("HBoxContainer2/Level").Text = "Level: " + level;
+		_hud.GetNode<Label>("HBoxContainer2/Level").Text = "Level: " + Level.level;
 	}
 
 	public void ClearEffects()
