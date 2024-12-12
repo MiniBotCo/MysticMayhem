@@ -72,6 +72,7 @@ public partial class Level : Node2D
 		_player = _levelGenerator.Player;
 
 		level++;
+		if (level % 6 == 0) GameConstants.difficulty++;
 		_player.level = level;
 		_player.UpdateHUD();
 

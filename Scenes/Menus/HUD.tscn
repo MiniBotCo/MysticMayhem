@@ -75,7 +75,7 @@ theme = ExtResource("1_1j4ng")
 [node name="HBoxContainer2" type="HBoxContainer" parent="."]
 layout_direction = 3
 layout_mode = 0
-offset_right = 40.0
+offset_right = 90.0
 offset_bottom = 40.0
 
 [node name="Level" type="Label" parent="HBoxContainer2"]

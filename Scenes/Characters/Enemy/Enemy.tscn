@@ -152,7 +152,6 @@ collision_layer = 4
 script = ExtResource("1_s7n2v")
 EnemySpeed = 100.0
 spawner = NodePath("Spawn")
-stats = []
 AnimationPlayerNode = NodePath("AnimationPlayer")
 Sprite2DNode = NodePath("Sprite2D")
 StateMachineNode = NodePath("StateMachine")

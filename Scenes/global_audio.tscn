@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dioo626x0kox1"]
+
+[ext_resource type="Script" path="res://Scripts/General/GlobalAudio.cs" id="1_oi282"]
+
+[node name="Node" type="Node"]
+script = ExtResource("1_oi282")

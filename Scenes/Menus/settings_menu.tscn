@@ -1,0 +1,118 @@
+[gd_scene load_steps=3 format=3 uid="uid://iw6njh47t607"]
+
+[ext_resource type="Script" path="res://Scripts/Menus/SettingsMenu.cs" id="1_d343c"]
+[ext_resource type="Theme" uid="uid://bu0soecijui6w" path="res://Scenes/Menus/menu_theme.tres" id="1_thq6e"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_d343c")
+
+[node name="CenterBox" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 646.0
+grow_horizontal = 2
+theme = ExtResource("1_thq6e")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterBox"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Title" type="Label" parent="CenterBox/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CenterBox/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Label" type="Label" parent="CenterBox/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 27
+text = "Volume"
+horizontal_alignment = 1
+
+[node name="VolumeSlider" type="HSlider" parent="CenterBox/VBoxContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+theme = ExtResource("1_thq6e")
+min_value = -20.0
+max_value = 20.0
+tick_count = 40
+
+[node name="HSeparator2" type="HSeparator" parent="CenterBox/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="CenterBox/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 27
+text = "Difficulty"
+horizontal_alignment = 1
+
+[node name="DifficultySlider" type="HSlider" parent="CenterBox/VBoxContainer"]
+layout_mode = 2
+min_value = 1.0
+max_value = 5.0
+value = 1.0
+tick_count = 5
+
+[node name="HSeparator3" type="HSeparator" parent="CenterBox/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterBox/VBoxContainer"]
+layout_mode = 2
+
+[node name="FullScreen" type="CheckBox" parent="CenterBox/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label3" type="Label" parent="CenterBox/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "FullScreen"
+horizontal_alignment = 1
+
+[node name="HSeparator4" type="HSeparator" parent="CenterBox/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CenterBox/VBoxContainer"]
+layout_mode = 2
+
+[node name="BorderlessWindow" type="CheckBox" parent="CenterBox/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label3" type="Label" parent="CenterBox/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Borderless WIndowed"
+horizontal_alignment = 1
+
+[node name="HSeparator5" type="HSeparator" parent="CenterBox/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -24.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 2
+
+[node name="ExitButton" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_thq6e")
+text = "Exit to Main Menu"
